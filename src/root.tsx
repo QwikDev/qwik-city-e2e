@@ -1,0 +1,16 @@
+import { QwikCityProvider, RouterOutlet } from "@builder.io/qwik-city";
+import { RouterHead } from "./components/router-head/router-head";
+
+export default function Root() {
+  return (
+    <QwikCityProvider>
+      <head>
+        <meta charSet="utf-8" />
+        <RouterHead />
+      </head>
+      <body>
+        <RouterOutlet />
+      </body>
+    </QwikCityProvider>
+  );
+}

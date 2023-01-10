@@ -1,0 +1,53 @@
+{
+  "name": "qwik-city-e2e",
+  "private": true,
+  "scripts": {
+    "build.client": "vite build",
+    "build.cloudflare": "npm run build.client && vite build -c adaptors/cloudflare-pages/vite.config.ts",
+    "build.express": "vite build -c adaptors/express/vite.config.ts",
+    "build.netlify": "npm run build.client && vite build -c adaptors/netlify-edge/vite.config.ts",
+    "build.vercel": "npm run build.client && vite build -c adaptors/vercel-edge/vite.config.ts",
+    "build.preview": "vite build --ssr src/entry.preview.tsx",
+    "build.types": "tsc --incremental --noEmit",
+    "dev": "vite --mode ssr",
+    "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
+    "fmt": "prettier --write .",
+    "fmt.check": "prettier --check .",
+    "netlify.deploy": "netlify deploy",
+    "netlify.dev": "netlify dev",
+    "preview": "qwik build preview && vite preview --open",
+    "deploy.netlify": "netlify deploy",
+    "deploy.vercel": "vercel deploy",
+    "serve.cloudflare": "wrangler pages dev ./dist",
+    "serve.cloudflare.debug": "node --inspect-brk ./node_modules/.bin/wrangler pages dev ./dist",
+    "serve.express": "node .express/entry.express.js",
+    "serve.express.debug": "node --inspect-brk .express/entry.express.js",
+    "start": "vite --open --mode ssr",
+    "test.express": "npm run build.client && npm run build.express && npm run serve.express",
+    "qwik": "qwik"
+  },
+  "devDependencies": {
+    "@builder.io/qwik": "BuilderIO/qwik-build#429f39310bf5c9a4747cda6234d377306888e067",
+    "@builder.io/qwik-city": "BuilderIO/qwik-city-build#04d46e30a1ace18887baf53da9bcae8127d2fd62",
+    "@playwright/test": "^1.29.2",
+    "@types/compression": "^1.7.2",
+    "@types/eslint": "8.4.10",
+    "@types/express": "^4.17.14",
+    "@types/node": "latest",
+    "@typescript-eslint/eslint-plugin": "5.48.1",
+    "@typescript-eslint/parser": "5.48.1",
+    "compression": "^1.7.4",
+    "express": "^4.18.2",
+    "netlify-cli": "^12.0.11",
+    "node-fetch": "3.3.0",
+    "prettier": "2.8.2",
+    "typescript": "4.9.4",
+    "vercel": "^28.4.17",
+    "vite": "4.0.4",
+    "vite-tsconfig-paths": "4.0.3",
+    "wrangler": "latest"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
