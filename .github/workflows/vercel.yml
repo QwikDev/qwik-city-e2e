@@ -21,9 +21,7 @@ jobs:
         run: npm install ci
 
       - name: Deploy
-        run: npm run deploy.vercel
-        env:
-          VERCEL_QWIK_CITY_E2E_TOKEN: ${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
+        run: npm run deploy.vercel -- --token=${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
 
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
