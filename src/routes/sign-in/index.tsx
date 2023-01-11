@@ -1,5 +1,10 @@
 import { component$ } from "@builder.io/qwik";
-import { action$, DocumentHead, RequestHandler } from "@builder.io/qwik-city";
+import {
+  action$,
+  DocumentHead,
+  Form,
+  RequestHandler,
+} from "@builder.io/qwik-city";
 import { isUserAuthenticated, signIn } from "~/auth/auth";
 
 export const onGet: RequestHandler = async ({ redirect, cookie }) => {
@@ -22,27 +27,58 @@ export const signinAction = action$(
   }
 );
 
+export const resetPasswordAction = action$(async (formData) => {
+  console.warn("resetPasswordAction", formData.get("email"));
+});
+
 export default component$(() => {
+  const signIn = signinAction.use();
+  const resetPassword = resetPasswordAction.use();
+
   return (
     <>
       <h1>Sign In</h1>
 
-      <form data-test="sign-in">
+      <Form action={signIn} data-test="sign-in">
+        {signIn.value?.message && (
+          <p style="color:red">{signIn.value.message}</p>
+        )}
         <p>
-          <span>Username:</span>
-          <input name="sign-in-username" />
+          <span>Username: </span>
+          <input name="username" type="text" autoComplete="username" required />
         </p>
         <p>
-          <span>Password:</span>
-          <input name="sign-in-password" type="password" />
+          <span>Password: </span>
+          <input
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            required
+          />
         </p>
         <p>
-          <button data-test="sign-in">Sign In</button>
+          <button type="submit">Sign In</button>
         </p>
-        <p>(Username: qwik, Password: div)</p>
-      </form>
+        <p>(Username: qwik, Password: dev)</p>
+      </Form>
 
       <hr />
+
+      <h2>Reset Password</h2>
+
+      <form
+        method="post"
+        action={resetPassword.actionPath}
+        data-test="reset-password"
+      >
+        <p>
+          <span>Email: </span>
+          <input name="email" type="text" required />
+        </p>
+        <p>
+          <button data-test-reset-password>Reset Password</button>
+        </p>
+      </form>
     </>
   );
 });

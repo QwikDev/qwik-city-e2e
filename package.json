@@ -23,12 +23,12 @@
     "serve.express": "node .express/entry.express.js",
     "serve.express.debug": "node --inspect-brk .express/entry.express.js",
     "start": "vite --open --mode ssr",
-    "test.express": "npm run build.client && npm run build.express && npm run serve.express",
+    "test.express": "playwright test tests --config playwright.express.config.ts",
     "qwik": "qwik"
   },
   "devDependencies": {
-    "@builder.io/qwik": "BuilderIO/qwik-build#429f39310bf5c9a4747cda6234d377306888e067",
-    "@builder.io/qwik-city": "BuilderIO/qwik-city-build#04d46e30a1ace18887baf53da9bcae8127d2fd62",
+    "@builder.io/qwik": "BuilderIO/qwik-build#226e1d7",
+    "@builder.io/qwik-city": "BuilderIO/qwik-city-build#e43e825",
     "@playwright/test": "^1.29.2",
     "@types/compression": "^1.7.2",
     "@types/eslint": "8.4.10",

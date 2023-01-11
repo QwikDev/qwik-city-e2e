@@ -5,11 +5,11 @@ export default component$(() => {
   return (
     <div>
       <h1>Homepage</h1>
-      <p>The meta-framework for Qwik.</p>
+      <p>Server testing</p>
     </div>
   );
 });
 
 export const head: DocumentHead = {
-  title: "Welcome to Qwik City E2E",
+  title: "Homepage",
 };

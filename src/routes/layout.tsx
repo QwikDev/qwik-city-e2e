@@ -1,12 +1,11 @@
 import { component$, Slot } from "@builder.io/qwik";
 import { RequestHandler, loader$ } from "@builder.io/qwik-city";
-import { Menu } from "~/components/menu/menu";
+import { Footer } from "~/components/footer/footer";
 import { isUserAuthenticated } from "../auth/auth";
 
 export const rootLoader = loader$(() => {
   return {
     serverTime: new Date().toISOString(),
-    nodeVersion: process.version,
   };
 });
 
@@ -20,11 +19,11 @@ export default component$(() => {
   return (
     <main>
       <Slot />
-      <Menu />
+      <Footer />
     </main>
   );
 });
 
 export const onRequest: RequestHandler = ({ headers }) => {
-  headers.set("X-Robots-Tag", "noindex, nofollow");
+  headers.set("x-robots-tag", "noindex, nofollow");
 };
