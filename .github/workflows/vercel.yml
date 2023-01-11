@@ -20,11 +20,13 @@ jobs:
       - name: Install NPM Dependencies
         run: npm install ci
 
+      - name: Deploy
+        run: npm run deploy.vercel
+        env:
+          VERCEL_QWIK_CITY_E2E_TOKEN: ${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
+
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
-
-      - name: Deploy to Vercel
-        run: npm run deploy.vercel
 
       - name: Test
         run: npm run test.vercel

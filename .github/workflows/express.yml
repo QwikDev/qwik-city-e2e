@@ -26,7 +26,7 @@ jobs:
       - name: Build Client
         run: npm run build.client
 
-      - name: Build Express Server
+      - name: Build Server
         run: npm run build.express
 
       - name: Test
