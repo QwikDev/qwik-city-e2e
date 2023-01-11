@@ -1,4 +1,4 @@
-name: Express
+name: Vercel
 
 on:
   push:
@@ -23,11 +23,8 @@ jobs:
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
 
-      - name: Build Client
-        run: npm run build.client
-
-      - name: Build Express Server
-        run: npm run build.express
+      - name: Deploy to Vercel
+        run: npm run deploy.vercel
 
       - name: Test
-        run: npm run test.express
+        run: npm run test.vercel

@@ -17,13 +17,14 @@
     "netlify.dev": "netlify dev",
     "preview": "qwik build preview && vite preview --open",
     "deploy.netlify": "netlify deploy",
-    "deploy.vercel": "vercel deploy",
+    "deploy.vercel": "vercel deploy --prod",
     "serve.cloudflare": "wrangler pages dev ./dist",
     "serve.cloudflare.debug": "node --inspect-brk ./node_modules/.bin/wrangler pages dev ./dist",
     "serve.express": "node .express/entry.express.js",
     "serve.express.debug": "node --inspect-brk .express/entry.express.js",
     "start": "vite --open --mode ssr",
     "test.express": "playwright test tests --config playwright.express.config.ts",
+    "test.vercel": "playwright test tests --config playwright.vercel.config.ts",
     "qwik": "qwik"
   },
   "devDependencies": {
