@@ -15,10 +15,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: "npm"
 
       - name: Install NPM Dependencies
-        run: npm install ci
+        run: npm install i
 
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
