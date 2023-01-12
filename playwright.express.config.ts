@@ -6,7 +6,7 @@ const config: PlaywrightTestConfig = {
 
   webServer: {
     command: "npm run serve.express",
-    port: 3000,
+    port: 3002,
   },
 };
 

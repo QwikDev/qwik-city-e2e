@@ -7,6 +7,7 @@ export const onRequest: RequestHandler = ({
   json,
   html,
   send,
+  text,
   getWritableStream,
   status,
 }) => {
@@ -14,32 +15,47 @@ export const onRequest: RequestHandler = ({
 
   if (format === "csv") {
     status(203);
-    headers.set("Content-Type", "text/plain");
+    headers.set("Content-Type", "text/plain; charset=utf-8");
     const { writable, readable } = new TextEncoderStream();
     readable.pipeTo(getWritableStream());
     const stream = writable.getWriter();
+    stream.write(`stream`);
     setTimeout(() => {
-      stream.write(csvLine(0));
+      stream.write(`0`);
       setTimeout(() => {
-        stream.write(csvLine(1));
+        stream.write(`1`);
         setTimeout(() => {
-          stream.write(csvLine(2));
+          stream.write(`2`);
           stream.close();
-        }, 500);
-      }, 500);
-    }, 500);
+        }, 100);
+      }, 100);
+    }, 100);
     return;
   }
 
   if (format === "text") {
-    headers.set("Content-Type", "text/plain");
-    send(202, format + " " + request.method + " " + new Date().toISOString());
+    text(202, format + " " + request.method);
     return;
   }
 
   if (format === "html") {
-    html(201, format + " " + request.method + " " + new Date().toISOString());
+    html(201, format + " " + request.method);
     return;
+  }
+
+  if (format === "response") {
+    try {
+      const response = new Response("responsebody", {
+        status: 201,
+        headers: {
+          "content-type": "text/plain; charset=utf-8",
+        },
+      });
+      send(response);
+      return;
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   json(200, {
@@ -48,11 +64,3 @@ export const onRequest: RequestHandler = ({
     url: request.url,
   });
 };
-
-function csvLine(num: number) {
-  let l = String(num);
-  while (l.length < 18000) {
-    l += "," + new Date().toISOString();
-  }
-  return l + "\n";
-}

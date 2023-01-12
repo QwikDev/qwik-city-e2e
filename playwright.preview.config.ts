@@ -4,11 +4,10 @@ import commonConfig from "./playwright.config";
 const config: PlaywrightTestConfig = {
   ...commonConfig,
 
-  use: {
-    baseURL: "https://qwik-city-e2e.vercel.app/",
+  webServer: {
+    command: "npm run serve.preview",
+    port: 3001,
   },
-
-  webServer: undefined,
 };
 
 export default config;

@@ -1,11 +1,11 @@
-name: Vercel
+name: Vercel Server
 
 on:
   push:
 
 jobs:
   test:
-    name: Test
+    name: Test Vercel Server
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,7 +20,7 @@ jobs:
       - name: Install NPM Dependencies
         run: npm install ci
 
-      - name: Deploy
+      - name: Deploy to Vercel
         run: npm run deploy.vercel -- --token=${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -29,5 +29,5 @@ jobs:
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
 
-      - name: Test
+      - name: Test Vercel Server
         run: npm run test.vercel

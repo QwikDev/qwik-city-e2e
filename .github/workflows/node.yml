@@ -1,11 +1,11 @@
-name: Express
+name: Node Servers
 
 on:
   push:
 
 jobs:
   test:
-    name: Test
+    name: Test Node Servers
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,11 +23,20 @@ jobs:
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
 
-      - name: Build Client
+      - name: Test Dev Server
+        run: npm run test.dev
+
+      - name: Build Client for all Servers
         run: npm run build.client
 
-      - name: Build Server
+      - name: Build Vite Preview Server
+        run: npm run build.preview
+
+      - name: Test Vite Preview Server
+        run: npm run test.preview
+
+      - name: Build Express Server
         run: npm run build.express
 
-      - name: Test
+      - name: Test Express Server
         run: npm run test.express
