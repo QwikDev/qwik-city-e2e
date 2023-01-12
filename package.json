@@ -28,8 +28,8 @@
     "qwik": "qwik"
   },
   "devDependencies": {
-    "@builder.io/qwik": "BuilderIO/qwik-build#72145630a8c4a02a779532c5e2e2590fb52946bc",
-    "@builder.io/qwik-city": "file:./node_modules_fake/qwik-city",
+    "@builder.io/qwik": "BuilderIO/qwik-build#a275433daac57cf1463e35a8b04496951669ede4",
+    "@builder.io/qwik-city": "BuilderIO/qwik-city-build#9e8235182cd14b99888c65583464f1eea8b36677",
     "@playwright/test": "^1.29.2",
     "@types/compression": "^1.7.2",
     "@types/eslint": "8.4.10",
