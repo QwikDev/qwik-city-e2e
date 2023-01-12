@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@builder.io/qwik": "BuilderIO/qwik-build#72145630a8c4a02a779532c5e2e2590fb52946bc",
-    "@builder.io/qwik-city": "BuilderIO/qwik-city-build#ae90edba8976b56d65a926c1e257130ee35e3d27",
+    "@builder.io/qwik-city": "file:./node_modules_fake/qwik-city",
     "@playwright/test": "^1.29.2",
     "@types/compression": "^1.7.2",
     "@types/eslint": "8.4.10",
