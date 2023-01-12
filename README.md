@@ -42,3 +42,7 @@ The [package.json](https://github.com/BuilderIO/qwik-city-e2e/blob/main/package.
 ### Vercel Edge
 
 https://qwik-city-e2e.vercel.app/
+
+#### Known Issues
+
+- `new Response('', { status: 201 }).status` always returns `200`

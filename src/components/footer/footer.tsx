@@ -26,6 +26,10 @@ export const Footer = component$(() => {
           </Link>
         )}
         <span> - </span>
+        <Link href="/endpoints/" data-test="footer-homepage">
+          Endpoints
+        </Link>
+        <span> - </span>
         <Link href="/" data-test="footer-homepage">
           Homepage
         </Link>

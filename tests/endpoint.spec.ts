@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
-test("Endpoint json() response", async ({ page: api }) => {
-  const rsp = (await api.goto("/api/data.json"))!;
+test("Endpoint json()", async ({ page }) => {
+  const rsp = (await page.goto("/endpoints/data.json"))!;
   expect(rsp.status()).toBe(200);
   expect(rsp.headers()["content-type"]).toBe("application/json; charset=utf-8");
 
@@ -9,17 +9,8 @@ test("Endpoint json() response", async ({ page: api }) => {
   expect(data.method).toBe("GET");
 });
 
-test("html() response", async ({ page: api }) => {
-  const rsp = (await api.goto("/api/data.json?format=html"))!;
-  expect(rsp.status()).toBe(201);
-  expect(rsp.headers()["content-type"]).toBe("text/html; charset=utf-8");
-
-  const data = await rsp.text();
-  expect(data).toBe("html GET");
-});
-
-test("text() response", async ({ page: api }) => {
-  const rsp = (await api.goto("/api/data.json?format=text"))!;
+test("Endpoint text()", async ({ page }) => {
+  const rsp = (await page.goto("/endpoints/data.txt"))!;
   expect(rsp.status()).toBe(202);
   expect(rsp.headers()["content-type"]).toBe("text/plain; charset=utf-8");
 
@@ -27,8 +18,17 @@ test("text() response", async ({ page: api }) => {
   expect(data).toBe("text GET");
 });
 
-test("getWritableStream() response", async ({ page: api }) => {
-  const rsp = (await api.goto("/api/data.json?format=csv"))!;
+test("Endpoint html()", async ({ page }) => {
+  const rsp = (await page.goto("/endpoints/data.html"))!;
+  expect(rsp.status()).toBe(201);
+  expect(rsp.headers()["content-type"]).toBe("text/html; charset=utf-8");
+
+  const data = await rsp.text();
+  expect(data).toBe("html GET");
+});
+
+test("Endpoint getWritableStream()", async ({ page }) => {
+  const rsp = (await page.goto("/endpoints/stream.csv"))!;
   expect(rsp.status()).toBe(203);
   expect(rsp.headers()["content-type"]).toBe("text/plain; charset=utf-8");
 
@@ -36,11 +36,15 @@ test("getWritableStream() response", async ({ page: api }) => {
   expect(data).toBe("stream012");
 });
 
-test("send(new Response())", async ({ page: api }) => {
-  const rsp = (await api.goto("/api/data.json?format=response"))!;
-  expect(rsp.status()).toBe(201);
+test("send(new Response())", async ({ page }) => {
+  const rsp = (await page.goto("/endpoints/response.txt"))!;
   expect(rsp.headers()["content-type"]).toBe("text/plain; charset=utf-8");
 
   const data = await rsp.text();
-  expect(data).toBe("responsebody");
+  expect(data).toBe("responsetext");
+});
+
+test("Endpoint redirect()", async ({ page }) => {
+  await page.goto("/endpoints/redirect?url=/");
+  await expect(page.locator("h1")).toContainText("Homepage");
 });
