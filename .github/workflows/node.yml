@@ -22,8 +22,11 @@ jobs:
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
 
-      - name: Test Dev Server
-        run: npm run test.dev
+      - name: Test Dev Server MPA
+        run: npm run test.dev.mpa
+
+      - name: Test Dev Server SPA
+        run: npm run test.dev.spa
 
       - name: Build Client for all Servers
         run: npm run build.client
@@ -31,11 +34,17 @@ jobs:
       - name: Build Vite Preview Server
         run: npm run build.preview
 
-      - name: Test Vite Preview Server
-        run: npm run test.preview
+      - name: Test Vite Preview Server MPA
+        run: npm run test.preview.mpa
+
+      - name: Test Vite Preview Server SPA
+        run: npm run test.preview.spa
 
       - name: Build Express Server
         run: npm run build.express
 
-      - name: Test Express Server
-        run: npm run test.express
+      - name: Test Express Server MPA
+        run: npm run test.express.mpa
+
+      - name: Test Express Server SPA
+        run: npm run test.express.spa

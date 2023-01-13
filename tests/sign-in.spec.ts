@@ -1,7 +1,8 @@
 import { expect, test } from "@playwright/test";
+import { appNavigationClick } from "./utils";
 
 test("sign-in", async ({ page }) => {
-  const rsp = (await page.goto("/sign-in"))!;
+  const rsp = (await page.goto("/sign-in/"))!;
   expect(rsp.status()).toBe(200);
 
   await expect(page.locator("h1")).toContainText("Sign In");
@@ -15,21 +16,30 @@ test("sign-in", async ({ page }) => {
   const password = signInForm.locator(`input[name="password"]`);
   await password.type("idk");
 
-  const submit = signInForm.locator(`button[type="submit"]`);
+  const loginSubmit = signInForm.locator(`button[type="submit"]`);
 
   // invalid sign-in
-  const [invalidSubmit] = await Promise.all([
-    page.waitForNavigation(),
-    submit.click(),
-  ]);
-  expect(invalidSubmit!.status()).toBe(403);
+  const invalidSubmit = await appNavigationClick({
+    page,
+    clickElm: loginSubmit,
+    waitForPathResponse: "/sign-in/",
+  });
+  expect(invalidSubmit.status).toBe(403);
+  expect(invalidSubmit.method).toBe("POST");
 
   // valid sign-in
+  await username.fill("");
   await username.type("qwik");
+
+  await password.fill("");
   await password.type("dev");
 
   // go to dashboard
-  await Promise.all([page.waitForNavigation(), submit.click()]);
+  await appNavigationClick({
+    page,
+    clickElm: loginSubmit,
+    waitForPathResponse: "/dashboard/",
+  });
   await expect(page.locator("h1")).toContainText("Dashboard");
 
   // go to sign-in, while signed-in, and should redirect back to dashboard

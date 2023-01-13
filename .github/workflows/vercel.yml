@@ -28,5 +28,8 @@ jobs:
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
 
-      - name: Test Vercel Server
-        run: npm run test.vercel
+      - name: Test Vercel Server MPA
+        run: npm run test.vercel.mpa
+
+      - name: Test Vercel Server SPA
+        run: npm run test.vercel.spa
