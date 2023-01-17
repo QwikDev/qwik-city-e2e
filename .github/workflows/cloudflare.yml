@@ -26,6 +26,9 @@ jobs:
       - name: Build Cloudflare
         run: npm run build.cloudflare
 
+      - name: Print Build
+        run: tree functions
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@1
         with:

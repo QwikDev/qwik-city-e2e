@@ -23,6 +23,9 @@ jobs:
       - name: Build Netlify
         run: npm run build.netlify
 
+      - name: Print Build
+        run: tree .netlify
+
       - name: Remove functions dir
         # this is a hack because both cloudflare and netlify
         # use the "functions" directory, and it's committed for cloudflare
