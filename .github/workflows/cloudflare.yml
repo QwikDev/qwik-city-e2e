@@ -39,7 +39,7 @@ jobs:
         run: npx playwright install chromium --with-deps
 
       - name: Test Cloudflare Server MPA
-        run: npm run test.vercel.mpa
+        run: npm run test.cloudflare.mpa
 
       - name: Test Cloudflare Server SPA
-        run: npm run test.vercel.spa
+        run: npm run test.cloudflare.spa
