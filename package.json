@@ -21,6 +21,8 @@
     "serve.express.debug": "node --inspect-brk .express/entry.express.js",
     "serve.preview": "vite preview --port 3001",
     "start": "vite --open --mode ssr",
+    "test.cloudflare.mpa": "APP=mpa playwright test tests --config playwright.cloudflare.config.ts",
+    "test.cloudflare.spa": "APP=spa playwright test tests --config playwright.cloudflare.config.ts",
     "test.dev.mpa": "APP=mpa playwright test tests --config playwright.config.ts",
     "test.dev.spa": "APP=spa playwright test tests --config playwright.config.ts",
     "test.express.mpa": "APP=mpa playwright test tests --config playwright.express.config.ts",
