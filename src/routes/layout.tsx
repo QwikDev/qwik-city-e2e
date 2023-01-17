@@ -5,7 +5,7 @@ import {
   useStyles$,
 } from "@builder.io/qwik";
 import { RequestHandler, loader$ } from "@builder.io/qwik-city";
-import { Footer } from "~/components/footer/footer";
+import { Footer } from "../components/footer/footer";
 import { isUserAuthenticated } from "../auth/auth";
 
 export const rootLoader = loader$(() => {

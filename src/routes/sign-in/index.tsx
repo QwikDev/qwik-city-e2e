@@ -5,7 +5,7 @@ import {
   Form,
   RequestHandler,
 } from "@builder.io/qwik-city";
-import { isUserAuthenticated, signIn } from "~/auth/auth";
+import { isUserAuthenticated, signIn } from "../../auth/auth";
 
 export const onGet: RequestHandler = async ({ redirect, cookie }) => {
   if (await isUserAuthenticated(cookie)) {
