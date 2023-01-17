@@ -21,7 +21,7 @@ jobs:
           node-version: 18
 
       - name: Install NPM Dependencies
-        run: npm install i
+        run: npm install
 
       - name: Build Cloudflare
         run: npm run build.cloudflare

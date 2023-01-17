@@ -1,9 +1,20 @@
+# Netlify
+.netlify
+
+# Cloudflare
+/server
+functions/**/*.js
+
+# Vercel
+.vercel
+
+# Express
+.express
+
 # Build
 /dist
 /lib
 /lib-types
-/server
-/.express
 
 # Development
 node_modules

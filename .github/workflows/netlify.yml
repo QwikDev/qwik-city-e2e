@@ -1,0 +1,41 @@
+name: Netlify Server
+
+on:
+  push:
+
+jobs:
+  test:
+    name: Test Netlify Server
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install NPM Dependencies
+        run: npm install i
+
+      - name: Build Netlify
+        run: npm run build.netlify
+
+      - name: Deploy to Netlify
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --dir=site --functions=functions
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+      - name: Install Playwright
+        run: npx playwright install chromium --with-deps
+
+      - name: Test Netlify Server MPA
+        run: npm run test.netlify.mpa
+
+      - name: Test Netlify Server SPA
+        run: npm run test.netlify.spa

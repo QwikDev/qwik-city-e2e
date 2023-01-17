@@ -17,7 +17,7 @@ jobs:
           node-version: 18
 
       - name: Install NPM Dependencies
-        run: npm install i
+        run: npm install
 
       - name: Deploy to Vercel
         run: npm run deploy.vercel -- --token=${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
