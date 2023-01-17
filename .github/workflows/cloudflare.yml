@@ -33,7 +33,6 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: qwik-city-e2e
           directory: dist
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
