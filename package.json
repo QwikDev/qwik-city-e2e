@@ -12,7 +12,7 @@
     "dev": "vite --mode ssr --port 3000",
     "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force --port 3000",
     "dev.netlify": "netlify dev",
-    "deploy.netlify": "netlify deploy --prod",
+    "deploy.netlify": "netlify deploy --prod --build",
     "deploy.vercel": "vercel deploy --prod",
     "serve.cloudflare": "wrangler pages dev ./dist",
     "serve.cloudflare.debug": "node --inspect-brk ./node_modules/.bin/wrangler pages dev ./dist",
