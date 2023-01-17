@@ -11,8 +11,7 @@
     "build.types": "tsc --incremental --noEmit",
     "dev": "vite --mode ssr --port 3000",
     "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force --port 3000",
-    "fmt": "prettier --write .",
-    "fmt.check": "prettier --check .",
+    "dev.netlify": "netlify dev",
     "deploy.netlify": "netlify deploy",
     "deploy.vercel": "vercel deploy --prod",
     "serve.cloudflare": "wrangler pages dev ./dist",
@@ -20,7 +19,6 @@
     "serve.express": "node .express/entry.express.js",
     "serve.express.debug": "node --inspect-brk .express/entry.express.js",
     "serve.preview": "vite preview --port 3001",
-    "start": "vite --open --mode ssr",
     "test.cloudflare.mpa": "APP=mpa playwright test tests --config playwright.cloudflare.config.ts",
     "test.cloudflare.spa": "APP=spa playwright test tests --config playwright.cloudflare.config.ts",
     "test.dev.mpa": "APP=mpa playwright test tests --config playwright.config.ts",
@@ -33,7 +31,8 @@
     "test.preview.spa": "APP=spa playwright test tests --config playwright.preview.config.ts",
     "test.vercel.mpa": "APP=mpa playwright test tests --config playwright.vercel.config.ts",
     "test.vercel.spa": "APP=spa playwright test tests --config playwright.vercel.config.ts",
-    "qwik": "qwik"
+    "qwik": "qwik",
+    "fmt": "prettier --write ."
   },
   "devDependencies": {
     "@builder.io/qwik": "BuilderIO/qwik-build#a275433daac57cf1463e35a8b04496951669ede4",
