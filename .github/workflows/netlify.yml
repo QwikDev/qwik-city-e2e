@@ -23,10 +23,15 @@ jobs:
       - name: Build Netlify
         run: npm run build.netlify
 
+      - name: Remove functions dir
+        # this is a hack because both cloudflare and netlify
+        # use the "functions" directory, and it's committed for cloudflare
+        run: rm -r functions
+
       - name: Deploy to Netlify
         uses: netlify/actions/cli@master
         with:
-          args: deploy --prod --functions=.netlify/
+          args: deploy --prod
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
