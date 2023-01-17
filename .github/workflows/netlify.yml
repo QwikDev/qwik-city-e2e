@@ -23,7 +23,10 @@ jobs:
       - name: Build Netlify
         run: npm run build.netlify
 
-      - name: Print Build
+      - name: Print dist Build
+        run: tree dist
+
+      - name: Print .netlify Build
         run: tree .netlify
 
       - name: Remove functions dir
