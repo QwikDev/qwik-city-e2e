@@ -6,3 +6,18 @@ test("static", async ({ page }) => {
 
   await expect(page.locator("h1")).toContainText("Static");
 });
+
+test("static index.html", async ({ page }) => {
+  const rsp = (await page.goto("/static/index.html"))!;
+  expect(rsp.status()).toBe(200);
+
+  await expect(page.locator("h1")).toContainText("Static");
+});
+
+test("static q-data.json", async ({ page }) => {
+  const rsp = (await page.goto("/static/q-data.json"))!;
+  expect(rsp.status()).toBe(200);
+
+  const json = await rsp.json();
+  expect(json.isStatic).toBe(true);
+});

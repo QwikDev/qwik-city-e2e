@@ -33,6 +33,10 @@ export const Footer = component$(() => {
           Static
         </Link>
         <span> - </span>
+        <Link href="/static/idk/" data-test="footer-custom-404">
+          Custom 404
+        </Link>
+        <span> - </span>
         <Link href="/" data-test="footer-homepage">
           Homepage
         </Link>
