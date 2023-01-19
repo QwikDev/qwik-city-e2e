@@ -1,9 +1,8 @@
 import { component$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
-import { rootLoader, userLoader } from "../../routes/layout";
+import { userLoader } from "../../routes/layout";
 
 export const Footer = component$(() => {
-  const rootData = rootLoader.use();
   const userData = userLoader.use();
 
   return (
@@ -30,11 +29,14 @@ export const Footer = component$(() => {
           Endpoints
         </Link>
         <span> - </span>
+        <Link href="/static/" data-test="footer-static">
+          Static
+        </Link>
+        <span> - </span>
         <Link href="/" data-test="footer-homepage">
           Homepage
         </Link>
       </p>
-      <p>{rootData.value.serverTime}</p>
     </footer>
   );
 });

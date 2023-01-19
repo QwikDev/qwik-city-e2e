@@ -1,18 +1,14 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { rootLoader } from "./layout";
 
 export default component$(() => {
-  const rootData = rootLoader.use();
   return (
     <div>
-      <h1>Homepage</h1>
-      <p>Server testing</p>
-      <p>{rootData.value.serverTime}</p>
+      <h1>Static</h1>
     </div>
   );
 });
 
 export const head: DocumentHead = {
-  title: "Homepage",
+  title: "Static",
 };
