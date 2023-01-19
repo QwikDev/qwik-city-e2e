@@ -34,8 +34,8 @@
     "qwik": "qwik"
   },
   "devDependencies": {
-    "@builder.io/qwik": "BuilderIO/qwik-build#a275433daac57cf1463e35a8b04496951669ede4",
-    "@builder.io/qwik-city": "BuilderIO/qwik-city-build#9e8235182cd14b99888c65583464f1eea8b36677",
+    "@builder.io/qwik": "BuilderIO/qwik-build#eb7fc147f19bc0c5cc45423059c08217e597f04f",
+    "@builder.io/qwik-city": "BuilderIO/qwik-city-build#17128202947e6cff1d068a20d2a2e6ff9098f769",
     "@playwright/test": "^1.29.2",
     "@types/compression": "^1.7.2",
     "@types/express": "^4.17.14",
