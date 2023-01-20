@@ -1,28 +1,11 @@
 import { component$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
-import { userLoader } from "../../routes/layout";
 
 export const Footer = component$(() => {
-  const userData = userLoader.use();
-
   return (
     <footer>
       <hr />
       <ul>
-        {userData.value.isAuthenticated ? (
-          <>
-            <li>
-              <Link href="/dashboard/">Dashboard</Link>
-            </li>
-            <li>
-              <Link href="/sign-out/">Sign out</Link>
-            </li>
-          </>
-        ) : (
-          <li>
-            <Link href="/sign-in/">Sign In</Link>
-          </li>
-        )}
         <li>
           <Link href="/endpoints/">Endpoints</Link>
         </li>

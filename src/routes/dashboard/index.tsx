@@ -1,10 +1,15 @@
 import { component$ } from "@builder.io/qwik";
-import { DocumentHead } from "@builder.io/qwik-city";
+import { DocumentHead, Link } from "@builder.io/qwik-city";
 
 export default component$(() => {
   return (
     <>
       <h1>Dashboard</h1>
+      <ul>
+        <li>
+          <Link href="/sign-out/">Sign out</Link>
+        </li>
+      </ul>
     </>
   );
 });
