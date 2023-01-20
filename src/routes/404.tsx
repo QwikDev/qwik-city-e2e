@@ -4,11 +4,11 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 export default component$(() => {
   return (
     <div>
-      <h1>Static Directory 404</h1>
+      <h1>Root Directory 404</h1>
     </div>
   );
 });
 
 export const head: DocumentHead = {
-  title: "Static Directory 404",
+  title: "Root Directory 404",
 };

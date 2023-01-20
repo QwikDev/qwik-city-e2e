@@ -4,7 +4,7 @@ import { RequestHandler } from "@builder.io/qwik-city";
 export default component$(() => {
   return (
     <div>
-      <h1>Catch All</h1>
+      <h1>Catchall</h1>
     </div>
   );
 });

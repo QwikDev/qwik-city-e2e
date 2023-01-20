@@ -8,39 +8,40 @@ export const Footer = component$(() => {
   return (
     <footer>
       <hr />
-      <p>
+      <ul>
         {userData.value.isAuthenticated ? (
           <>
-            <Link href="/dashboard" data-test="footer-dashboard">
-              Dashboard
-            </Link>
-            <span> - </span>
-            <Link href="/sign-out" data-test="footer-sign-out">
-              Sign out
-            </Link>
+            <li>
+              <Link href="/dashboard/">Dashboard</Link>
+            </li>
+            <li>
+              <Link href="/sign-out/">Sign out</Link>
+            </li>
           </>
         ) : (
-          <Link href="/sign-in/" data-test="footer-sign-in">
-            Sign In
-          </Link>
+          <li>
+            <Link href="/sign-in/">Sign In</Link>
+          </li>
         )}
-        <span> - </span>
-        <Link href="/endpoints/" data-test="footer-homepage">
-          Endpoints
-        </Link>
-        <span> - </span>
-        <Link href="/static/" data-test="footer-static">
-          Static
-        </Link>
-        <span> - </span>
-        <Link href="/static/idk/" data-test="footer-custom-404">
-          Custom 404
-        </Link>
-        <span> - </span>
-        <Link href="/" data-test="footer-homepage">
-          Homepage
-        </Link>
-      </p>
+        <li>
+          <Link href="/endpoints/">Endpoints</Link>
+        </li>
+        <li>
+          <Link href="/static/">Static</Link>
+        </li>
+        <li>
+          <Link href="/idk/">Root Directory 404</Link>
+        </li>
+        <li>
+          <Link href="/static/idk/">Static Directory 404</Link>
+        </li>
+        <li>
+          <Link href="/catchall/">Catchall</Link>
+        </li>
+        <li>
+          <Link href="/">Homepage</Link>
+        </li>
+      </ul>
     </footer>
   );
 });
