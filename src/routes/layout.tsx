@@ -22,25 +22,37 @@ export const userLoader = loader$(async ({ cookie }) => {
 
 export default component$(() => {
   useStyles$(`
+    body {
+      margin: 0;
+    }
+    main {
+      padding: 20px;
+    }
     html[data-app] body:before { 
       content: "";
       position: fixed;
-      top: 10px;
+      top: 20px;
       right: 10px;
       padding: 3px;
       border-radius: 5px;
-      font-size:10px;
-      min-width: 30px;
+      font-size:14px;
+      min-width: 50px;
       text-align: center;
       font-family: monospace;
     }
     html[data-app="spa"] body:before { 
       content: "SPA";
-      background: #0000FF40;
+      background: #0000FF50;
+    }
+    html[data-app="spa"] body {
+      border-top: 10px solid #0000FF50;
     }
     html[data-app="mpa"] body:before { 
       content: "MPA";
-      background: #00FF0040;
+      background: #00FF0070;
+    }
+    html[data-app="mpa"] body {
+      border-top: 10px solid #00FF0070;
     }
   `);
 

@@ -7,7 +7,6 @@ export default component$(() => {
   return (
     <div>
       <h1>Homepage</h1>
-      <p>Server testing</p>
       <p>{rootData.value.serverTime}</p>
     </div>
   );
