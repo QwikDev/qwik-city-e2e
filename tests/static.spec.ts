@@ -21,3 +21,8 @@ test("static q-data.json", async ({ page }) => {
   const json = await rsp.json();
   expect(json.isStatic).toBe(true);
 });
+
+test("public static asset, favicon.svg", async ({ page }) => {
+  const rsp = (await page.goto("/favicon.svg"))!;
+  expect(rsp.status()).toBe(200);
+});
