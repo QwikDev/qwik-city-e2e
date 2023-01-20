@@ -21,6 +21,9 @@ const config: PlaywrightTestConfig = {
       },
     },
   ],
+  metadata: {
+    server: "dev",
+  },
   webServer: {
     command: "npm run dev",
     port: 3000,

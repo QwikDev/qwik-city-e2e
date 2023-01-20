@@ -4,6 +4,10 @@ import commonConfig from "./playwright.config";
 const config: PlaywrightTestConfig = {
   ...commonConfig,
 
+  metadata: {
+    server: "vercel",
+  },
+
   use: {
     baseURL: "https://qwik-city-e2e.vercel.app/",
   },

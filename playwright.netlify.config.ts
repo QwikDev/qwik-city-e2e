@@ -4,6 +4,10 @@ import commonConfig from "./playwright.config";
 const config: PlaywrightTestConfig = {
   ...commonConfig,
 
+  metadata: {
+    server: "netlify",
+  },
+
   use: {
     baseURL: "https://qwik-city-e2e.netlify.app/",
   },
