@@ -39,7 +39,7 @@ export const Footer = component$(() => {
           <Link href="/catchall/">Catchall</Link>
         </li>
         <li>
-          <Link href="/endpoints">No trailing Slash redirected</Link>
+          <Link href="/endpoints">No trailing slash - redirected</Link>
         </li>
         <li>
           <Link href="/">Homepage</Link>

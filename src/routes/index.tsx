@@ -5,10 +5,10 @@ import { rootLoader } from "./layout";
 export default component$(() => {
   const rootData = rootLoader.use();
   return (
-    <div>
+    <>
       <h1>Homepage</h1>
       <p>{rootData.value.serverTime}</p>
-    </div>
+    </>
   );
 });
 
