@@ -28,6 +28,9 @@ export default component$(() => {
           <a href="/endpoints/stream.csv">/endpoints/stream.csv</a>
         </li>
       </ul>
+      <p>
+        <img src="/endpoints/image.png" />
+      </p>
     </div>
   );
 });

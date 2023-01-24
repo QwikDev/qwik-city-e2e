@@ -9,7 +9,6 @@ export default component$(() => {
     <>
       <h1>Homepage</h1>
       <p>{rootData.value.serverTime}</p>
-      <img src="/endpoints/image.png" />
       <ul>
         {userData.value.isAuthenticated ? (
           <>

@@ -39,7 +39,7 @@ test("static q-data.json", async ({ page }, { config }) => {
   }
 });
 
-test("public static asset, favicon.svg", async ({ page }) => {
-  const rsp = (await page.goto("/favicon.svg"))!;
+test("public static asset, favicon.ico", async ({ page }) => {
+  const rsp = (await page.goto("/favicon.ico"))!;
   expect(rsp.status()).toBe(200);
 });

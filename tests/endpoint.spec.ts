@@ -48,3 +48,10 @@ test("Endpoint redirect()", async ({ page }) => {
   await page.goto("/endpoints/redirect?url=/");
   await expect(page.locator("h1")).toContainText("Homepage");
 });
+
+test("Endpoint <img>", async ({ page }) => {
+  await page.goto("/endpoints/", { waitUntil: "networkidle" });
+  const img = page.locator("img");
+  await expect(img).toHaveJSProperty("clientWidth", 172);
+  await expect(img).toHaveJSProperty("clientHeight", 178);
+});

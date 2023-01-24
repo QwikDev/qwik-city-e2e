@@ -13,12 +13,6 @@ test("index", async ({ page }) => {
   await expect(page.locator("footer")).toHaveCount(1);
 });
 
-test("index <img>", async ({ page }) => {
-  await page.goto("/");
-  await expect(page.locator("img")).toHaveJSProperty("clientWidth", 172);
-  await expect(page.locator("img")).toHaveJSProperty("clientHeight", 178);
-});
-
 test("index q-data.json", async ({ page }) => {
   const rsp = (await page.goto("/q-data.json"))!;
   expect(rsp.status()).toBe(200);
