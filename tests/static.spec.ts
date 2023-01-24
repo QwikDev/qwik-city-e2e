@@ -5,7 +5,13 @@ test("static", async ({ page }, { config }) => {
   expect(rsp.status()).toBe(200);
 
   await expect(page.locator("h1")).toContainText("Static");
-  if (config.metadata.server !== "dev") {
+
+  if (
+    config.metadata.server === "dev" ||
+    config.metadata.server === "preview"
+  ) {
+    await expect(page.locator("html")).toHaveAttribute("q:render", "ssr");
+  } else {
     await expect(page.locator("html")).toHaveAttribute(
       "q:render",
       "static-ssr"
@@ -14,7 +20,10 @@ test("static", async ({ page }, { config }) => {
 });
 
 test("static index.html", async ({ page }, { config }) => {
-  if (config.metadata.server !== "dev") {
+  if (
+    config.metadata.server !== "dev" &&
+    config.metadata.server !== "preview"
+  ) {
     const rsp = (await page.goto("/static/index.html"))!;
     expect(rsp.status()).toBe(200);
 
@@ -28,7 +37,10 @@ test("static index.html", async ({ page }, { config }) => {
 });
 
 test("static q-data.json", async ({ page }, { config }) => {
-  if (config.metadata.server !== "dev") {
+  if (
+    config.metadata.server !== "dev" &&
+    config.metadata.server !== "preview"
+  ) {
     const rsp = (await page.goto("/static/q-data.json"))!;
     expect(rsp.status()).toBe(200);
 
