@@ -29,7 +29,9 @@ export default component$(() => {
         </li>
       </ul>
       <p>
-        <img src="/endpoints/image.png" />
+        <a href="/endpoints/image.png" target="_blank">
+          <img src="/endpoints/image.png" />
+        </a>
       </p>
     </div>
   );
