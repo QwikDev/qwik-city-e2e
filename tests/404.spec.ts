@@ -4,8 +4,11 @@ test("nested directory 404", async ({ page }, { config }) => {
   const rsp = (await page.goto("/static/idk/"))!;
   expect(rsp.status()).toBe(404);
 
-  if (config.metadata.server === "dev") {
-    // dev server does not run custom 404 pages
+  if (
+    config.metadata.server === "dev" ||
+    config.metadata.server === "preview"
+  ) {
+    // dev/preview server does not run custom 404 pages
     return;
   }
 
@@ -16,8 +19,11 @@ test("root directory 404", async ({ page }, { config }) => {
   const rsp = (await page.goto("/idk/"))!;
   expect(rsp.status()).toBe(404);
 
-  if (config.metadata.server === "dev") {
-    // dev server does not run custom 404 pages
+  if (
+    config.metadata.server === "dev" ||
+    config.metadata.server === "preview"
+  ) {
+    // dev/preview server does not run custom 404 pages
     return;
   }
 
