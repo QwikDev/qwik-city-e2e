@@ -1,12 +1,12 @@
 import { RequestHandler } from "@builder.io/qwik-city";
 
 export const onGet: RequestHandler = async ({
-  request,
   getWritableStream,
   headers,
   cacheControl,
 }) => {
-  const url = new URL("/example.png", request.url);
+  const url =
+    "https://upload.wikimedia.org/wikipedia/commons/e/e5/NetscapeLogo_6.png";
   const req = await fetch(url);
   req.headers.forEach((value, key) => {
     headers.append(key, value);
