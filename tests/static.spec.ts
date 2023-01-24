@@ -6,10 +6,9 @@ test("static", async ({ page }, { config }) => {
 
   await expect(page.locator("h1")).toContainText("Static");
 
-  if (
-    config.metadata.server === "dev" ||
-    config.metadata.server === "preview"
-  ) {
+  if (config.metadata.server === "dev") {
+    await expect(page.locator("html")).toHaveAttribute("q:render", "ssr-dev");
+  } else if (config.metadata.server === "preview") {
     await expect(page.locator("html")).toHaveAttribute("q:render", "ssr");
   } else {
     await expect(page.locator("html")).toHaveAttribute(
