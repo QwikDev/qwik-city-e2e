@@ -1,5 +1,5 @@
 /** @jsxImportSource react */
-import * as React from "react";
+// import * as React from "react";
 import { qwikify$ } from "@builder.io/qwik-react";
 import {
   Box,
@@ -77,7 +77,7 @@ export const MUIOutlinedCard = qwikify$(
     return (
       <Box sx={{ minWidth: 275 }}>
         <Card variant="outlined">
-          <React.Fragment>
+          <>
             <CardContent>
               <Typography
                 sx={{ fontSize: 14 }}
@@ -94,7 +94,7 @@ export const MUIOutlinedCard = qwikify$(
             <CardActions>
               <Button size="small">Learn More</Button>
             </CardActions>
-          </React.Fragment>
+          </>
         </Card>
       </Box>
     );
