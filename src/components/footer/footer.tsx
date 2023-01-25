@@ -25,6 +25,9 @@ export const Footer = component$(() => {
           <Link href="/endpoints">No trailing slash - redirected</Link>
         </li>
         <li>
+          <Link href="/react/">Qwik React</Link>
+        </li>
+        <li>
           <Link href="/">Homepage</Link>
         </li>
       </ul>
