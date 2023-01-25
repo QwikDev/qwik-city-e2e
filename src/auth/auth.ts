@@ -8,12 +8,10 @@ export const isUserAuthenticated = async (cookie: Cookie) => {
 };
 
 export const signIn = async (
-  formData: FormData,
+  username: string,
+  password: string,
   cookie: Cookie
 ): Promise<AuthResult> => {
-  const username = formData.get("username");
-  const password = formData.get("password");
-
   if (username == "qwik" && password == "dev") {
     // super secret username/password (Testing purposes only, DO NOT DO THIS!!)
     cookie.set(AUTHTOKEN_NAME, Math.round(Math.random() * 9999999), {

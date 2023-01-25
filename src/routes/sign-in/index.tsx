@@ -14,8 +14,8 @@ export const onGet: RequestHandler = async ({ redirect, cookie }) => {
 };
 
 export const signinAction = action$(
-  async (formData, { cookie, redirect, fail }) => {
-    const result = await signIn(formData, cookie);
+  async ({ username, password }, { cookie, redirect, fail }) => {
+    const result = await signIn(username as string, password as string, cookie);
 
     if (result.status === "signed-in") {
       throw redirect(301, "/dashboard/");
@@ -27,8 +27,8 @@ export const signinAction = action$(
   }
 );
 
-export const resetPasswordAction = action$(async (formData) => {
-  console.warn("resetPasswordAction", formData.get("email"));
+export const resetPasswordAction = action$(async () => {
+  console.warn("resetPasswordAction");
 });
 
 export default component$(() => {
@@ -40,9 +40,7 @@ export default component$(() => {
       <h1>Sign In</h1>
 
       <Form action={signIn} data-test="sign-in">
-        {signIn.value?.message && (
-          <p style="color:red">{signIn.value.message}</p>
-        )}
+        {signIn.fail?.message && <p style="color:red">{signIn.fail.message}</p>}
         <p>
           <span>Username: </span>
           <input name="username" type="text" autoComplete="username" required />
