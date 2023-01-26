@@ -18,6 +18,11 @@ export default component$(() => {
             <li>
               <Link href="/sign-out/">Sign out</Link>
             </li>
+            <li>
+              <Link href="/sign-in/">
+                Sign In (should redirect to dashboard)
+              </Link>
+            </li>
           </>
         ) : (
           <li>

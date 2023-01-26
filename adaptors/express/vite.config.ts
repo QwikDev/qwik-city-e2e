@@ -12,6 +12,12 @@ export default extendConfig(baseConfig, () => {
       outDir: ".express",
       minify: false,
     },
-    plugins: [expressAdaptor()],
+    plugins: [
+      expressAdaptor({
+        ssg: {
+          include: ["/static/*"],
+        },
+      }),
+    ],
   };
 });
