@@ -20,9 +20,9 @@ export const onGet: RequestHandler = async ({
     headers.append(key, value);
   });
   cacheControl({
-    maxAge: 30,
+    maxAge: 10,
     public: true,
-    staleWhileRevalidate: 30,
+    staleWhileRevalidate: 10,
   });
   await req.body?.pipeTo(getWritableStream());
 };
