@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import { DocumentHead, Link } from "@builder.io/qwik-city";
+import { DocumentHead, Link, loader$ } from "@builder.io/qwik-city";
 import { rootLoader, userLoader } from "./layout";
 
 export default component$(() => {

@@ -7,6 +7,9 @@ export const Footer = component$(() => {
       <hr />
       <ul>
         <li>
+          <Link href="/env/">Env</Link>
+        </li>
+        <li>
           <Link href="/endpoints/">Endpoints</Link>
         </li>
         <li>
