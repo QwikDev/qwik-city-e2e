@@ -11,6 +11,7 @@ export const getEnv = loader$(({env}) => {
 
 export default component$(() => {
   const env = getEnv.use();
+  const importMeta = import.meta.env.VITE_HELLO_WORLD;
   return (
     <>
       <h1>Environment variables</h1>
@@ -18,7 +19,7 @@ export default component$(() => {
         <li>env.value.platform: {env.value.platform}</li>
         <li>env.value.importMetaEnv: {env.value.importMetaEnv}</li>
         <li>env.value.processEnv: {env.value.processEnv}</li>
-        <li>import.meta.env.VITE_HELLO_WORLD: {import.meta.env.VITE_HELLO_WORLD}</li>
+        <li>importmeta.env.VITE_HELLO_WORLD: {importMeta}</li>
         <li>process.env.HELLO_WORLD: {process.env.HELLO_WORLD}</li>
       </ul>
     </>
