@@ -42,3 +42,5 @@ https://qwik-city-e2e.vercel.app/
     npm run build.preview
     npm run serve.preview
     http://127.0.0.1:3002/
+
+![qwik](https://user-images.githubusercontent.com/452425/215130494-f3d2d4b4-0d24-4f86-8f40-7c4cbea21be6.png)
