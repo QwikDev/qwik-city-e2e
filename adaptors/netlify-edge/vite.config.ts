@@ -14,7 +14,9 @@ export default extendConfig(baseConfig, () => {
     },
     plugins: [
       netifyEdgeAdaptor({
-        staticGenerate: true,
+        ssg: {
+          include: ["/static/*"],
+        },
       }),
     ],
   };

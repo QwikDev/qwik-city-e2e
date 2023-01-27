@@ -14,7 +14,9 @@ export default extendConfig(baseConfig, () => {
     },
     plugins: [
       vercelEdgeAdaptor({
-        staticGenerate: true,
+        ssg: {
+          include: ["/static/*"],
+        },
       }),
     ],
   };

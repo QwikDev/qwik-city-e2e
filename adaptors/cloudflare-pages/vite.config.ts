@@ -13,7 +13,9 @@ export default extendConfig(baseConfig, () => {
     },
     plugins: [
       cloudflarePagesAdaptor({
-        staticGenerate: true,
+        ssg: {
+          include: ["/static/*"],
+        },
       }),
     ],
   };
