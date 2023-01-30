@@ -46,11 +46,11 @@ function vercelEdgeAdaptor(opts = {}) {
       if (opts.outputConfig !== false) {
         const vercelOutputConfig = {
           routes: [
+            { handle: "filesystem" },
             {
               src: basePathname + ".*",
               dest: "/_qwik-city",
             },
-            { handle: "filesystem" },
           ],
           version: 3,
         };
@@ -62,7 +62,7 @@ function vercelEdgeAdaptor(opts = {}) {
       const vcConfigPath = join(serverOutDir, ".vc-config.json");
       const vcConfig = {
         runtime: "edge",
-        entrypoint: opts.vcConfigEntryPoint || "entry.vercel-edge.js",
+        entrypoint: opts.vcConfigEntryPoint || "entry.vercel-edge.mjs",
         envVarsInUse: opts.vcConfigEnvVarsInUse,
       };
       await fs.promises.writeFile(
