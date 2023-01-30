@@ -4,6 +4,9 @@ import baseConfig from "../../vite.config";
 
 export default extendConfig(baseConfig, () => {
   return {
+    define: {
+      "process.env.NODE_ENV": '"production"',
+    },
     build: {
       ssr: true,
       rollupOptions: {
