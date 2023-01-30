@@ -62,7 +62,7 @@ function vercelEdgeAdaptor(opts = {}) {
       const vcConfigPath = join(serverOutDir, ".vc-config.json");
       const vcConfig = {
         runtime: "edge",
-        entrypoint: opts.vcConfigEntryPoint || "entry.vercel-edge.mjs",
+        entrypoint: opts.vcConfigEntryPoint || "entry.vercel-edge.js",
         envVarsInUse: opts.vcConfigEnvVarsInUse,
       };
       await fs.promises.writeFile(
