@@ -1,15 +1,22 @@
 // packages/qwik-city/middleware/netlify-edge/index.ts
 import {
   mergeHeadersCookies,
-  requestHandler
+  requestHandler,
 } from "../request-handler/index.mjs";
 import { getNotFound } from "@qwik-city-not-found-paths";
 import { isStaticPath } from "@qwik-city-static-paths";
 function createQwikCity(opts) {
+  console.log("createQwikCity(opts)", opts);
+
   async function onNetlifyEdgeRequest(request, context) {
     try {
+      console.log("onNetlifyEdgeRequest(request, context)");
       const url = new URL(request.url);
-      if (isStaticPath(request.method, url) || url.pathname.startsWith("/.netlify")) {
+      console.log("url", url.href);
+      if (
+        isStaticPath(request.method, url) ||
+        url.pathname.startsWith("/.netlify")
+      ) {
         return context.next();
       }
       const serverRequestEv = {
@@ -22,12 +29,12 @@ function createQwikCity(opts) {
           const { readable, writable } = new TransformStream();
           const response = new Response(readable, {
             status,
-            headers: mergeHeadersCookies(headers, cookies)
+            headers: mergeHeadersCookies(headers, cookies),
           });
           resolve(response);
           return writable;
         },
-        platform: context
+        platform: context,
       };
       const handledResponse = await requestHandler(serverRequestEv, opts);
       if (handledResponse) {
@@ -39,18 +46,22 @@ function createQwikCity(opts) {
       const notFoundHtml = getNotFound(url.pathname);
       return new Response(notFoundHtml, {
         status: 404,
-        headers: { "Content-Type": "text/html; charset=utf-8", "X-Not-Found": url.pathname }
+        headers: {
+          "Content-Type": "text/html; charset=utf-8",
+          "X-Not-Found": url.pathname,
+        },
       });
     } catch (e) {
       console.error(e);
       return new Response(String(e || "Error"), {
         status: 500,
-        headers: { "Content-Type": "text/plain; charset=utf-8", "X-Error": "netlify-edge" }
+        headers: {
+          "Content-Type": "text/plain; charset=utf-8",
+          "X-Error": "netlify-edge",
+        },
       });
     }
   }
   return onNetlifyEdgeRequest;
 }
-export {
-  createQwikCity
-};
+export { createQwikCity };
