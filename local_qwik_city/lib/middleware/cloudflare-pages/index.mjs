@@ -1,7 +1,7 @@
 // packages/qwik-city/middleware/cloudflare-pages/index.ts
 import {
   mergeHeadersCookies,
-  requestHandler
+  requestHandler,
 } from "../request-handler/index.mjs";
 import { getNotFound } from "@qwik-city-not-found-paths";
 import { isStaticPath } from "@qwik-city-static-paths";
@@ -13,7 +13,11 @@ function createQwikCity(opts) {
       if (isStaticPath(request.method, url)) {
         return next();
       }
-      const useCache = url.hostname !== "127.0.0.1" && url.hostname !== "localhost" && url.port === "" && request.method === "GET";
+      const useCache =
+        url.hostname !== "127.0.0.1" &&
+        url.hostname !== "localhost" &&
+        url.port === "" &&
+        request.method === "GET";
       const cacheKey = new Request(url.href, request);
       const cache = useCache ? await caches.open("custom:qwikcity") : null;
       if (cache) {
@@ -30,18 +34,18 @@ function createQwikCity(opts) {
         env: {
           get(key) {
             return env[key];
-          }
+          },
         },
         getWritableStream: (status, headers, cookies, resolve) => {
           const { readable, writable } = new TransformStream();
           const response = new Response(readable, {
             status,
-            headers: mergeHeadersCookies(headers, cookies)
+            headers: mergeHeadersCookies(headers, cookies),
           });
           resolve(response);
           return writable;
         },
-        platform: env
+        platform: env,
       };
       const handledResponse = await requestHandler(serverRequestEv, opts);
       if (handledResponse) {
@@ -56,13 +60,19 @@ function createQwikCity(opts) {
       const notFoundHtml = getNotFound(url.pathname);
       return new Response(notFoundHtml, {
         status: 404,
-        headers: { "Content-Type": "text/html; charset=utf-8", "X-Not-Found": url.pathname }
+        headers: {
+          "Content-Type": "text/html; charset=utf-8",
+          "X-Not-Found": url.pathname,
+        },
       });
     } catch (e) {
       console.error(e);
       return new Response(String(e || "Error"), {
         status: 500,
-        headers: { "Content-Type": "text/plain; charset=utf-8", "X-Error": "cloudflare-pages" }
+        headers: {
+          "Content-Type": "text/plain; charset=utf-8",
+          "X-Error": "cloudflare-pages",
+        },
       });
     }
   }
@@ -75,7 +85,7 @@ var TextEncoderStream = class {
     this.readable = {
       pipeTo: (writableStream) => {
         this._writer = writableStream.getWriter();
-      }
+      },
     };
     this.writable = {
       getWriter: () => {
@@ -90,12 +100,10 @@ var TextEncoderStream = class {
             }
           },
           close: () => this._writer.close(),
-          ready: resolved
+          ready: resolved,
         };
-      }
+      },
     };
   }
 };
-export {
-  createQwikCity
-};
+export { createQwikCity };

@@ -66,14 +66,14 @@ var COLOR_500 = "#713fc2";
 var SAMESITE = {
   lax: "Lax",
   none: "None",
-  strict: "Strict"
+  strict: "Strict",
 };
 var UNIT = {
   seconds: 1,
   minutes: 1 * 60,
   hours: 1 * 60 * 60,
   days: 1 * 60 * 60 * 24,
-  weeks: 1 * 60 * 60 * 24 * 7
+  weeks: 1 * 60 * 60 * 24 * 7,
 };
 var createSetCookieValue = (cookieName, cookieValue, options) => {
   const c = [`${cookieName}=${cookieValue}`];
@@ -84,7 +84,10 @@ var createSetCookieValue = (cookieName, cookieValue, options) => {
     c.push(`Max-Age=${options.maxAge}`);
   } else if (Array.isArray(options.maxAge)) {
     c.push(`Max-Age=${options.maxAge[0] * UNIT[options.maxAge[1]]}`);
-  } else if (typeof options.expires === "number" || typeof options.expires == "string") {
+  } else if (
+    typeof options.expires === "number" ||
+    typeof options.expires == "string"
+  ) {
     c.push(`Expires=${options.expires}`);
   } else if (options.expires instanceof Date) {
     c.push(`Expires=${options.expires.toUTCString()}`);
@@ -138,7 +141,7 @@ var Cookie = class {
       },
       number() {
         return Number(value);
-      }
+      },
     };
   }
   getAll() {
@@ -151,8 +154,15 @@ var Cookie = class {
     return !!this[REQ_COOKIE][cookieName];
   }
   set(cookieName, cookieValue, options = {}) {
-    const resolvedValue = typeof cookieValue === "string" ? cookieValue : encodeURIComponent(JSON.stringify(cookieValue));
-    this[RES_COOKIE][cookieName] = createSetCookieValue(cookieName, resolvedValue, options);
+    const resolvedValue =
+      typeof cookieValue === "string"
+        ? cookieValue
+        : encodeURIComponent(JSON.stringify(cookieValue));
+    this[RES_COOKIE][cookieName] = createSetCookieValue(
+      cookieName,
+      resolvedValue,
+      options
+    );
   }
   delete(name, options) {
     this.set(name, "deleted", { ...options, maxAge: 0 });
@@ -161,7 +171,7 @@ var Cookie = class {
     return Object.values(this[RES_COOKIE]);
   }
 };
-REQ_COOKIE, _a = RES_COOKIE;
+REQ_COOKIE, (_a = RES_COOKIE);
 var mergeHeadersCookies = (headers, cookies) => {
   const cookieHeaders = cookies.headers();
   if (cookieHeaders.length > 0) {
@@ -175,10 +185,8 @@ var mergeHeadersCookies = (headers, cookies) => {
 };
 
 // packages/qwik-city/middleware/request-handler/redirect-handler.ts
-var AbortMessage = class {
-};
-var RedirectMessage = class extends AbortMessage {
-};
+var AbortMessage = class {};
+var RedirectMessage = class extends AbortMessage {};
 
 // packages/qwik-city/runtime/src/constants.ts
 var MODULE_CACHE = /* @__PURE__ */ new WeakMap();
@@ -192,7 +200,12 @@ function validateSerializable(val) {
   }
 }
 function isSerializable(val) {
-  if (val == null || typeof val === "string" || typeof val === "boolean" || typeof val === "number") {
+  if (
+    val == null ||
+    typeof val === "string" ||
+    typeof val === "boolean" ||
+    typeof val === "number"
+  ) {
     return true;
   }
   if (Array.isArray(val)) {
@@ -245,11 +258,18 @@ var isVirtualElement = (value) => {
 };
 
 // packages/qwik/src/core/util/log.ts
-var STYLE = qDev ? `background: #564CE0; color: white; padding: 2px 3px; border-radius: 2px; font-size: 0.8em;` : "";
+var STYLE = qDev
+  ? `background: #564CE0; color: white; padding: 2px 3px; border-radius: 2px; font-size: 0.8em;`
+  : "";
 var logError = (message, ...optionalParams) => {
   const err = message instanceof Error ? message : createError(message);
   const messageStr = err.stack || err.message;
-  console.error("%cQWIK ERROR", STYLE, messageStr, ...printParams(optionalParams));
+  console.error(
+    "%cQWIK ERROR",
+    STYLE,
+    messageStr,
+    ...printParams(optionalParams)
+  );
   return err;
 };
 var createError = (message) => {
@@ -260,7 +280,11 @@ var createError = (message) => {
   return err;
 };
 var filterStack = (stack, offset = 0) => {
-  return stack.split("\n").slice(offset).filter((l) => !l.includes("/node_modules/@builder.io/qwik")).join("\n");
+  return stack
+    .split("\n")
+    .slice(offset)
+    .filter((l) => !l.includes("/node_modules/@builder.io/qwik"))
+    .join("\n");
 };
 var logErrorAndStop = (message, ...optionalParams) => {
   const err = logError(message, ...optionalParams);
@@ -289,12 +313,18 @@ var printParams = (optionalParams) => {
 var printElement = (el) => {
   var _a2;
   const ctx = tryGetContext(el);
-  const isServer2 = /* @__PURE__ */ (() => typeof process !== "undefined" && !!process.versions && !!process.versions.node)();
+  const isServer2 = /* @__PURE__ */ (() =>
+    typeof process !== "undefined" &&
+    !!process.versions &&
+    !!process.versions.node)();
   return {
     tagName: el.tagName,
-    renderQRL: (_a2 = ctx == null ? void 0 : ctx.$componentQrl$) == null ? void 0 : _a2.getSymbol(),
+    renderQRL:
+      (_a2 = ctx == null ? void 0 : ctx.$componentQrl$) == null
+        ? void 0
+        : _a2.getSymbol(),
     element: isServer2 ? void 0 : el,
-    ctx: isServer2 ? void 0 : ctx
+    ctx: isServer2 ? void 0 : ctx,
   };
 };
 
@@ -377,7 +407,7 @@ For more information see: https://qwik.builder.io/docs/components/lifecycle/#use
       // 30
       "QRLs can not be dynamically resolved, because it does not have a chunk path",
       // 31
-      "The JSX ref attribute must be a Signal"
+      "The JSX ref attribute must be a Signal",
       // 32
     ];
     return `Code(${code}): ${MAP[code] ?? ""}`;
@@ -409,7 +439,11 @@ var createPlatform = () => {
   return {
     isServer: false,
     importSymbol(containerEl, url, symbolName) {
-      const urlDoc = toUrl(containerEl.ownerDocument, containerEl, url).toString();
+      const urlDoc = toUrl(
+        containerEl.ownerDocument,
+        containerEl,
+        url
+      ).toString();
       const urlCopy = new URL(urlDoc);
       urlCopy.hash = "";
       urlCopy.search = "";
@@ -437,7 +471,7 @@ var createPlatform = () => {
     },
     chunkForSymbol() {
       return void 0;
-    }
+    },
   };
 };
 var findSymbol = (module, symbol) => {
@@ -469,15 +503,13 @@ var isServer = () => {
 // packages/qwik/src/core/error/assert.ts
 function assertDefined(value, text, ...parts) {
   if (qDev) {
-    if (value != null)
-      return;
+    if (value != null) return;
     throw logErrorAndStop(text, ...parts);
   }
 }
 function assertTrue(value1, text, ...parts) {
   if (qDev) {
-    if (value1 === true)
-      return;
+    if (value1 === true) return;
     throw logErrorAndStop(text, ...parts);
   }
 }
@@ -501,7 +533,10 @@ if (qDev) {
 
 // packages/qwik/src/core/qrl/qrl.ts
 var serializeQRL = (qrl, opts = {}) => {
-  assertTrue(qSerialize, "In order to serialize a QRL, qSerialize must be true");
+  assertTrue(
+    qSerialize,
+    "In order to serialize a QRL, qSerialize must be true"
+  );
   assertQrl(qrl);
   let symbol = qrl.$symbol$;
   let chunk = qrl.$chunk$;
@@ -550,10 +585,16 @@ var parseQRL = (qrl, containerEl) => {
   const chunk = qrl.substring(0, chunkEndIdx);
   const symbolStartIdx = hashIdx == endIdx ? hashIdx : hashIdx + 1;
   const symbolEndIdx = captureIdx;
-  const symbol = symbolStartIdx == symbolEndIdx ? "default" : qrl.substring(symbolStartIdx, symbolEndIdx);
+  const symbol =
+    symbolStartIdx == symbolEndIdx
+      ? "default"
+      : qrl.substring(symbolStartIdx, symbolEndIdx);
   const captureStartIdx = captureIdx;
   const captureEndIdx = endIdx;
-  const capture = captureStartIdx === captureEndIdx ? EMPTY_ARRAY : qrl.substring(captureStartIdx + 1, captureEndIdx - 1).split(" ");
+  const capture =
+    captureStartIdx === captureEndIdx
+      ? EMPTY_ARRAY
+      : qrl.substring(captureStartIdx + 1, captureEndIdx - 1).split(" ");
   const iQrl = createQRL(chunk, symbol, null, null, capture, null, null);
   if (containerEl) {
     iQrl.$setContainer$(containerEl);
@@ -583,12 +624,13 @@ function setLocale(locale) {
 var _context;
 var tryGetInvokeContext = () => {
   if (!_context) {
-    const context = typeof document !== "undefined" && document && document.__q_context__;
+    const context =
+      typeof document !== "undefined" && document && document.__q_context__;
     if (!context) {
       return void 0;
     }
     if (isArray(context)) {
-      return document.__q_context__ = newInvokeContextFromTuple(context);
+      return (document.__q_context__ = newInvokeContextFromTuple(context));
     }
     return context;
   }
@@ -608,7 +650,9 @@ var invoke = (context, fn, ...args) => {
 var newInvokeContextFromTuple = (context) => {
   const element = context[0];
   const container = element.closest(QContainerSelector);
-  const locale = (container == null ? void 0 : container.getAttribute(QLocaleAttr)) || void 0;
+  const locale =
+    (container == null ? void 0 : container.getAttribute(QLocaleAttr)) ||
+    void 0;
   locale && setLocale(locale);
   return newInvokeContext(locale, void 0, element, context[1], context[2]);
 };
@@ -624,7 +668,7 @@ var newInvokeContext = (locale, hostElement, element, event, url) => {
     $renderCtx$: void 0,
     $subscriber$: void 0,
     $waitOn$: void 0,
-    $locale$: locale
+    $locale$: locale,
   };
   seal(ctx);
   return ctx;
@@ -656,7 +700,8 @@ var SignalImpl = class {
   }
   get value() {
     var _a2;
-    const sub = (_a2 = tryGetInvokeContext()) == null ? void 0 : _a2.$subscriber$;
+    const sub =
+      (_a2 = tryGetInvokeContext()) == null ? void 0 : _a2.$subscriber$;
     if (sub) {
       this[QObjectManagerSymbol].$addSub$([0, sub, void 0]);
     }
@@ -752,9 +797,13 @@ var JSXNodeImpl = class {
                 let explanation = "";
                 if (typeObj === "object") {
                   if (child == null ? void 0 : child.constructor) {
-                    explanation = `it's an instance of "${child == null ? void 0 : child.constructor.name}".`;
+                    explanation = `it's an instance of "${
+                      child == null ? void 0 : child.constructor.name
+                    }".`;
                   } else {
-                    explanation = `it's a object literal: ${printObjectLiteral(child)} `;
+                    explanation = `it's a object literal: ${printObjectLiteral(
+                      child
+                    )} `;
                   }
                 } else if (typeObj === "function") {
                   explanation += `it's a function named "${child.name}".`;
@@ -770,7 +819,11 @@ var JSXNodeImpl = class {
           }
           const keys = {};
           flatChildren.forEach((child) => {
-            if (isJSXNode(child) && !isString(child.type) && child.key != null) {
+            if (
+              isJSXNode(child) &&
+              !isString(child.type) &&
+              child.key != null
+            ) {
               if (keys[child.key]) {
                 const err = createJSXError(
                   `Multiple JSX sibling nodes with the same key.
@@ -832,7 +885,9 @@ In order to disable content escaping use '<script dangerouslySetInnerHTML={conte
   }
 };
 var printObjectLiteral = (obj) => {
-  return `{ ${Object.keys(obj).map((key) => `"${key}"`).join(", ")} }`;
+  return `{ ${Object.keys(obj)
+    .map((key) => `"${key}"`)
+    .join(", ")} }`;
 };
 var isJSXNode = (n) => {
   if (qDev) {
@@ -853,7 +908,11 @@ var isValidJSXChild = (node) => {
     return true;
   } else if (node === SkipRender) {
     return true;
-  } else if (isString(node) || typeof node === "number" || typeof node === "boolean") {
+  } else if (
+    isString(node) ||
+    typeof node === "number" ||
+    typeof node === "boolean"
+  ) {
     return true;
   } else if (isJSXNode(node)) {
     return true;
@@ -881,8 +940,8 @@ var createJSXError = (message, node) => {
     loc: {
       file: id,
       column: node.dev.columnNumber,
-      line: node.dev.lineNumber
-    }
+      line: node.dev.lineNumber,
+    },
   });
   error.stack = `JSXError: ${message}
 ${filterStack(node.dev.stack, 1)}`;
@@ -964,7 +1023,7 @@ var createCollector = (containerState) => {
     $elements$: [],
     $qrls$: [],
     $deferElements$: [],
-    $promises$: []
+    $promises$: [],
   };
 };
 var collectDeferElement = (el, collector) => {
@@ -1044,7 +1103,7 @@ var resolvePromise = (promise) => {
     (value) => {
       const v = {
         resolved: true,
-        value
+        value,
       };
       promise[PROMISE_VALUE] = v;
       return value;
@@ -1052,7 +1111,7 @@ var resolvePromise = (promise) => {
     (value) => {
       const v = {
         resolved: false,
-        value
+        value,
       };
       promise[PROMISE_VALUE] = v;
       return value;
@@ -1173,7 +1232,7 @@ var _createResourceReturn = (opts) => {
     _error: void 0,
     _state: "pending",
     _timeout: (opts == null ? void 0 : opts.timeout) ?? -1,
-    _cache: 0
+    _cache: 0,
   };
   return resource;
 };
@@ -1200,8 +1259,7 @@ var parseResourceReturn = (data) => {
     result.loading = false;
   } else if (first === "1") {
     result._state = "pending";
-    result.value = new Promise(() => {
-    });
+    result.value = new Promise(() => {});
     result.loading = true;
   } else if (first === "2") {
     result._state = "rejected";
@@ -1228,7 +1286,7 @@ var QRLSerializer = {
   },
   serialize: (obj, getObjId) => {
     return serializeQRL(obj, {
-      $getObjId$: getObjId
+      $getObjId$: getObjId,
     });
   },
   prepare: (data, containerState) => {
@@ -1239,7 +1297,7 @@ var QRLSerializer = {
       qrl.$captureRef$ = qrl.$capture$.map(getObject);
       qrl.$capture$ = null;
     }
-  }
+  },
 };
 var WatchSerializer = {
   prefix: "",
@@ -1258,7 +1316,7 @@ var WatchSerializer = {
     if (watch.$resource$) {
       watch.$resource$ = getObject(watch.$resource$);
     }
-  }
+  },
 };
 var ResourceSerializer = {
   prefix: "",
@@ -1283,21 +1341,21 @@ var ResourceSerializer = {
       resource._error = getObject(resource._error);
       resource.value = p;
     }
-  }
+  },
 };
 var URLSerializer = {
   prefix: "",
   test: (v) => v instanceof URL,
   serialize: (obj) => obj.href,
   prepare: (data) => new URL(data),
-  fill: void 0
+  fill: void 0,
 };
 var DateSerializer = {
   prefix: "",
   test: (v) => v instanceof Date,
   serialize: (obj) => obj.toISOString(),
   prepare: (data) => new Date(data),
-  fill: void 0
+  fill: void 0,
 };
 var RegexSerializer = {
   prefix: "\x07",
@@ -1309,7 +1367,7 @@ var RegexSerializer = {
     const flags = data.slice(0, space);
     return new RegExp(source, flags);
   },
-  fill: void 0
+  fill: void 0,
 };
 var ErrorSerializer = {
   prefix: "",
@@ -1322,7 +1380,7 @@ var ErrorSerializer = {
     err.stack = void 0;
     return err;
   },
-  fill: void 0
+  fill: void 0,
 };
 var DocumentSerializer = {
   prefix: "",
@@ -1331,7 +1389,7 @@ var DocumentSerializer = {
   prepare: (_, _c, doc) => {
     return doc;
   },
-  fill: void 0
+  fill: void 0,
 };
 var SERIALIZABLE_STATE = Symbol("serializable-data");
 var ComponentSerializer = {
@@ -1340,7 +1398,7 @@ var ComponentSerializer = {
   serialize: (obj, getObjId) => {
     const [qrl] = obj[SERIALIZABLE_STATE];
     return serializeQRL(qrl, {
-      $getObjId$: getObjId
+      $getObjId$: getObjId,
     });
   },
   prepare: (data, containerState) => {
@@ -1355,11 +1413,12 @@ var ComponentSerializer = {
       qrl.$captureRef$ = qrl.$capture$.map(getObject);
       qrl.$capture$ = null;
     }
-  }
+  },
 };
 var PureFunctionSerializer = {
   prefix: "",
-  test: (obj) => typeof obj === "function" && obj.__qwik_serializable__ !== void 0,
+  test: (obj) =>
+    typeof obj === "function" && obj.__qwik_serializable__ !== void 0,
   serialize: (obj) => {
     return obj.toString();
   },
@@ -1368,7 +1427,7 @@ var PureFunctionSerializer = {
     fn.__qwik_serializable__ = true;
     return fn;
   },
-  fill: void 0
+  fill: void 0,
 };
 var SignalSerializer = {
   prefix: "",
@@ -1391,7 +1450,7 @@ var SignalSerializer = {
   },
   fill: (signal, getObject) => {
     signal.untrackedValue = getObject(signal.untrackedValue);
-  }
+  },
 };
 var SignalWrapperSerializer = {
   prefix: "",
@@ -1416,7 +1475,7 @@ var SignalWrapperSerializer = {
   },
   fill: (signal, getObject) => {
     signal.ref = getObject(signal.ref);
-  }
+  },
 };
 var NoFiniteNumberSerializer = {
   prefix: "",
@@ -1427,18 +1486,19 @@ var NoFiniteNumberSerializer = {
   prepare: (data) => {
     return Number(data);
   },
-  fill: void 0
+  fill: void 0,
 };
 var URLSearchParamsSerializer = {
   prefix: "",
   test: (v) => v instanceof URLSearchParams,
   serialize: (obj) => obj.toString(),
   prepare: (data) => new URLSearchParams(data),
-  fill: void 0
+  fill: void 0,
 };
 var FormDataSerializer = {
   prefix: "",
-  test: (v) => typeof FormData !== "undefined" && v instanceof globalThis.FormData,
+  test: (v) =>
+    typeof FormData !== "undefined" && v instanceof globalThis.FormData,
   serialize: (formData) => {
     const array = [];
     formData.forEach((value, key) => {
@@ -1458,7 +1518,7 @@ var FormDataSerializer = {
     }
     return formData;
   },
-  fill: void 0
+  fill: void 0,
 };
 var serializers = [
   QRLSerializer,
@@ -1475,7 +1535,7 @@ var serializers = [
   PureFunctionSerializer,
   NoFiniteNumberSerializer,
   URLSearchParamsSerializer,
-  FormDataSerializer
+  FormDataSerializer,
 ];
 var collectorSerializers = /* @__PURE__ */ serializers.filter((a) => a.collect);
 var canSerialize = (obj) => {
@@ -1529,12 +1589,9 @@ var _verifySerializable = (value, seen, ctx, preMessage) => {
     const typeObj = typeof unwrapped;
     switch (typeObj) {
       case "object":
-        if (isPromise(unwrapped))
-          return value;
-        if (isQwikElement(unwrapped))
-          return value;
-        if (isDocument(unwrapped))
-          return value;
+        if (isPromise(unwrapped)) return value;
+        if (isQwikElement(unwrapped)) return value;
+        if (isDocument(unwrapped)) return value;
         if (isArray(unwrapped)) {
           let expectIndex = 0;
           unwrapped.forEach((v, i) => {
@@ -1568,14 +1625,14 @@ var _verifySerializable = (value, seen, ctx, preMessage) => {
       message += ` in ${ctx},`;
     }
     if (typeObj === "object") {
-      message += ` because it's an instance of "${value == null ? void 0 : value.constructor.name}". You might need to use 'noSerialize()' or use an object literal instead. Check out https://qwik.builder.io/docs/advanced/dollar/`;
+      message += ` because it's an instance of "${
+        value == null ? void 0 : value.constructor.name
+      }". You might need to use 'noSerialize()' or use an object literal instead. Check out https://qwik.builder.io/docs/advanced/dollar/`;
     } else if (typeObj === "function") {
       const fnName = value.name;
       message += ` because it's a function named "${fnName}". You might need to convert it to a QRL using $(fn):
 
-const ${fnName} = $(${String(
-        value
-      )});
+const ${fnName} = $(${String(value)});
 
 Please check out https://qwik.builder.io/docs/advanced/qrl/ for more information.`;
     }
@@ -1612,11 +1669,22 @@ var getProxyManager = (obj) => {
 var isQrl = (value) => {
   return typeof value === "function" && typeof value.getSymbol === "function";
 };
-var createQRL = (chunk, symbol, symbolRef, symbolFn, capture, captureRef, refSymbol) => {
+var createQRL = (
+  chunk,
+  symbol,
+  symbolRef,
+  symbolFn,
+  capture,
+  captureRef,
+  refSymbol
+) => {
   if (qDev) {
     if (captureRef) {
       for (const item of captureRef) {
-        verifySerializable(item, "Captured variable in the closure can not be serialized");
+        verifySerializable(
+          item,
+          "Captured variable in the closure can not be serialized"
+        );
       }
     }
   }
@@ -1634,7 +1702,9 @@ var createQRL = (chunk, symbol, symbolRef, symbolFn, capture, captureRef, refSym
       return symbolRef;
     }
     if (symbolFn !== null) {
-      return symbolRef = symbolFn().then((module) => symbolRef = module[symbol]);
+      return (symbolRef = symbolFn().then(
+        (module) => (symbolRef = module[symbol])
+      ));
     } else {
       if (!chunk) {
         throw qError(QError_qrlMissingChunk, symbol);
@@ -1643,9 +1713,9 @@ var createQRL = (chunk, symbol, symbolRef, symbolFn, capture, captureRef, refSym
         throw qError(QError_qrlMissingContainer, chunk, symbol);
       }
       const symbol2 = getPlatform().importSymbol(_containerEl, chunk, symbol);
-      return symbolRef = then(symbol2, (ref) => {
-        return symbolRef = ref;
-      });
+      return (symbolRef = then(symbol2, (ref) => {
+        return (symbolRef = ref);
+      }));
     }
   };
   const resolveLazy = (containerEl) => {
@@ -1663,7 +1733,7 @@ var createQRL = (chunk, symbol, symbolRef, symbolFn, capture, captureRef, refSym
           const baseContext = createInvokationContext(currentCtx);
           const context = {
             ...baseContext,
-            $qrl$: QRL
+            $qrl$: QRL,
           };
           emitUsedSymbol(symbol, context.$element$, start);
           return invoke(context, fn2, ...args);
@@ -1681,7 +1751,7 @@ var createQRL = (chunk, symbol, symbolRef, symbolFn, capture, captureRef, refSym
       return invoke2;
     }
   };
-  const invokeQRL = async function(...args) {
+  const invokeQRL = async function (...args) {
     const fn = invokeFn();
     const result = await fn(...args);
     return result;
@@ -1702,7 +1772,7 @@ var createQRL = (chunk, symbol, symbolRef, symbolFn, capture, captureRef, refSym
     getFn: invokeFn,
     $capture$: capture,
     $captureRef$: captureRef,
-    $dev$: null
+    $dev$: null,
   };
   const qrl = Object.assign(invokeQRL, methods);
   seal(qrl);
@@ -1726,7 +1796,7 @@ var emitUsedSymbol = (symbol, element, reqTime) => {
   emitEvent("qsymbol", {
     symbol,
     element,
-    reqTime
+    reqTime,
   });
 };
 var emitEvent = (eventName, detail) => {
@@ -1734,7 +1804,7 @@ var emitEvent = (eventName, detail) => {
     document.dispatchEvent(
       new CustomEvent(eventName, {
         bubbles: false,
-        detail
+        detail,
       })
     );
   }
@@ -1762,7 +1832,7 @@ var componentQrl = (componentQrl2) => {
         [QSlot]: props[QSlot],
         [_IMMUTABLE]: props[_IMMUTABLE],
         children: props.children,
-        props
+        props,
       },
       finalKey
     );
@@ -1771,14 +1841,16 @@ var componentQrl = (componentQrl2) => {
   return QwikComponent;
 };
 var isQwikComponent = (component) => {
-  return typeof component == "function" && component[SERIALIZABLE_STATE] !== void 0;
+  return (
+    typeof component == "function" && component[SERIALIZABLE_STATE] !== void 0
+  );
 };
 
 // packages/qwik-city/middleware/request-handler/response-page.ts
 function getQwikCityServerData(requestEv) {
   const { url, params, request, status, locale } = requestEv;
   const requestHeaders = {};
-  request.headers.forEach((value, key) => requestHeaders[key] = value);
+  request.headers.forEach((value, key) => (requestHeaders[key] = value));
   return {
     url: new URL(url.pathname + url.search, url).href,
     requestHeaders,
@@ -1789,9 +1861,9 @@ function getQwikCityServerData(requestEv) {
       response: {
         status: status(),
         loaders: getRequestLoaders(requestEv),
-        action: getRequestAction(requestEv)
-      }
-    }
+        action: getRequestAction(requestEv),
+      },
+    },
   };
 }
 
@@ -1801,14 +1873,26 @@ var resolveRequestHandlers = (serverPlugins, route, method, renderHandler) => {
   const requestHandlers = [];
   const isPageRoute = !!(route && isLastModulePageRoute(route[1]));
   if (serverPlugins) {
-    _resolveRequestHandlers(serverLoaders, requestHandlers, serverPlugins, isPageRoute, method);
+    _resolveRequestHandlers(
+      serverLoaders,
+      requestHandlers,
+      serverPlugins,
+      isPageRoute,
+      method
+    );
   }
   if (route) {
     if (isPageRoute) {
       requestHandlers.push(fixTrailingSlash);
       requestHandlers.push(renderQData);
     }
-    _resolveRequestHandlers(serverLoaders, requestHandlers, route[1], isPageRoute, method);
+    _resolveRequestHandlers(
+      serverLoaders,
+      requestHandlers,
+      route[1],
+      isPageRoute,
+      method
+    );
     if (isPageRoute) {
       if (serverLoaders.length + actionsMiddleware.length > 0) {
         requestHandlers.push(actionsMiddleware(serverLoaders));
@@ -1821,7 +1905,13 @@ var resolveRequestHandlers = (serverPlugins, route, method, renderHandler) => {
   }
   return requestHandlers;
 };
-var _resolveRequestHandlers = (serverLoaders, requestHandlers, routeModules, collectActions, method) => {
+var _resolveRequestHandlers = (
+  serverLoaders,
+  requestHandlers,
+  routeModules,
+  collectActions,
+  method
+) => {
   for (const routeModule of routeModules) {
     if (typeof routeModule.onRequest === "function") {
       requestHandlers.push(routeModule.onRequest);
@@ -1865,8 +1955,8 @@ var _resolveRequestHandlers = (serverLoaders, requestHandlers, routeModules, col
       requestHandlers.push(...methodReqHandler);
     }
     if (collectActions) {
-      const loaders = Object.values(routeModule).filter(
-        (e) => checkBrand(e, "server_loader")
+      const loaders = Object.values(routeModule).filter((e) =>
+        checkBrand(e, "server_loader")
       );
       serverLoaders.push(...loaders);
     }
@@ -1891,7 +1981,9 @@ function actionsMiddleware(serverLoaders) {
         if (action) {
           setRequestAction(requestEv, selectedAction);
           const isForm = isFormContentType(requestEv.request.headers);
-          let data = isForm ? formToObj(await requestEv.request.formData()) : await requestEv.request.json();
+          let data = isForm
+            ? formToObj(await requestEv.request.formData())
+            : await requestEv.request.json();
           let failed = false;
           if (action.__schema) {
             const validator = await action.__schema;
@@ -1909,7 +2001,7 @@ function actionsMiddleware(serverLoaders) {
               }
               loaders[selectedAction] = {
                 __brand: "fail",
-                ...result.error.flatten()
+                ...result.error.flatten(),
               };
             } else {
               data = result.data;
@@ -1928,14 +2020,17 @@ function actionsMiddleware(serverLoaders) {
         serverLoaders.map(async (loader) => {
           const loaderId = loader.__qrl.getHash();
           const loaderResolved = await loader.__qrl(requestEv);
-          loaders[loaderId] = typeof loaderResolved === "function" ? loaderResolved() : loaderResolved;
+          loaders[loaderId] =
+            typeof loaderResolved === "function"
+              ? loaderResolved()
+              : loaderResolved;
           if (isDevMode) {
             try {
               validateSerializable(loaderResolved);
             } catch (e) {
               throw Object.assign(e, {
                 id: "DEV_SERIALIZE",
-                method
+                method,
               });
             }
           }
@@ -1969,14 +2064,21 @@ var formToObj = (formData) => {
 function fixTrailingSlash({ pathname, url, redirect }) {
   const trailingSlash = true;
   const basePathname = "/";
-  if (!isQDataJson(pathname) && pathname !== basePathname && !pathname.endsWith(".html")) {
+  if (
+    !isQDataJson(pathname) &&
+    pathname !== basePathname &&
+    !pathname.endsWith(".html")
+  ) {
     if (trailingSlash) {
       if (!pathname.endsWith("/")) {
         throw redirect(302 /* Found */, pathname + "/" + url.search);
       }
     } else {
       if (pathname.endsWith("/")) {
-        throw redirect(302 /* Found */, pathname.slice(0, pathname.length - 1) + url.search);
+        throw redirect(
+          302 /* Found */,
+          pathname.slice(0, pathname.length - 1) + url.search
+        );
       }
     }
   }
@@ -1987,15 +2089,24 @@ function isLastModulePageRoute(routeModules) {
 }
 function getPathname(url, trailingSlash) {
   if (url.pathname.endsWith(QDATA_JSON)) {
-    return url.pathname.slice(0, -QDATA_JSON.length + (trailingSlash ? 1 : 0)) + url.search;
+    return (
+      url.pathname.slice(0, -QDATA_JSON.length + (trailingSlash ? 1 : 0)) +
+      url.search
+    );
   }
   return url.pathname;
 }
 var encoder = /* @__PURE__ */ new TextEncoder();
 function securityMiddleware({ method, url, request, error }) {
-  const forbidden = method === "POST" && request.headers.get("origin") !== url.origin && isFormContentType(request.headers);
+  const forbidden =
+    method === "POST" &&
+    request.headers.get("origin") !== url.origin &&
+    isFormContentType(request.headers);
   if (forbidden) {
-    throw error(403, `Cross-site ${request.method} form submissions are forbidden`);
+    throw error(
+      403,
+      `Cross-site ${request.method} form submissions are forbidden`
+    );
   }
 }
 function renderQwikMiddleware(render, opts) {
@@ -2008,25 +2119,39 @@ function renderQwikMiddleware(render, opts) {
       return;
     }
     const requestHeaders = {};
-    requestEv.request.headers.forEach((value, key) => requestHeaders[key] = value);
+    requestEv.request.headers.forEach(
+      (value, key) => (requestHeaders[key] = value)
+    );
     const responseHeaders = requestEv.headers;
     if (!responseHeaders.has("Content-Type")) {
       responseHeaders.set("Content-Type", "text/html; charset=utf-8");
     }
     const { readable, writable } = new TextEncoderStream();
     const writableStream = requestEv.getWritableStream();
+    console.log("writableStream", writableStream);
+
     const pipe = readable.pipeTo(writableStream);
+    console.log("pipe", pipe);
+
     const stream = writable.getWriter();
+    console.log("stream", stream);
+
     const status = requestEv.status();
+    console.log("status", status);
     try {
       const isStatic = getRequestMode(requestEv) === "static";
+      console.log("isStatic", isStatic);
+
       const result = await render({
         stream,
         serverData: getQwikCityServerData(requestEv),
         containerAttributes: {
-          ["q:render"]: isStatic ? "static" : ""
-        }
+          ["q:render"]: isStatic ? "static" : "",
+        },
       });
+
+      console.log("result", result);
+
       const qData = {
         __brand: "qdata",
         loaders: getRequestLoaders(requestEv),
@@ -2034,16 +2159,22 @@ function renderQwikMiddleware(render, opts) {
         status: status !== 200 ? status : 200,
         href: getPathname(requestEv.url, true),
         // todo
-        isStatic: result.isStatic
+        isStatic: result.isStatic,
       };
+
       if ((typeof result).html === "string") {
         await stream.write(result.html);
       }
+
       requestEv.sharedMap.set("qData", qData);
     } finally {
+      console.log("finally1");
       await stream.ready;
+      console.log("finally2");
       await stream.close();
+      console.log("finally3");
       await pipe;
+      console.log("finally4");
     }
   };
 }
@@ -2075,7 +2206,9 @@ async function renderQData(requestEv) {
       }
     }
     const requestHeaders = {};
-    requestEv.request.headers.forEach((value, key) => requestHeaders[key] = value);
+    requestEv.request.headers.forEach(
+      (value, key) => (requestHeaders[key] = value)
+    );
     requestEv.headers.set("Content-Type", "application/json; charset=utf-8");
     const qData = {
       __brand: "qdata",
@@ -2084,7 +2217,7 @@ async function renderQData(requestEv) {
       status: status !== 200 ? status : 200,
       href: getPathname(requestEv.url, true),
       // todo
-      redirect: location ?? void 0
+      redirect: location ?? void 0,
     };
     const writer = requestEv.getWritableStream().getWriter();
     writer.write(encoder.encode(_serializeData(qData)));
@@ -2096,7 +2229,9 @@ function makeQDataPath(href) {
   if (href.startsWith("/")) {
     const append = QDATA_JSON;
     const url = new URL(href, "http://localhost");
-    const pathname = url.pathname.endsWith("/") ? url.pathname.slice(0, -1) : url.pathname;
+    const pathname = url.pathname.endsWith("/")
+      ? url.pathname.slice(0, -1)
+      : url.pathname;
     return pathname + (append.startsWith("/") ? "" : "/") + append + url.search;
   } else {
     return void 0;
@@ -2104,11 +2239,18 @@ function makeQDataPath(href) {
 }
 function isContentType(headers, ...types) {
   var _a2;
-  const type = ((_a2 = headers.get("content-type")) == null ? void 0 : _a2.split(";", 1)[0].trim()) ?? "";
+  const type =
+    ((_a2 = headers.get("content-type")) == null
+      ? void 0
+      : _a2.split(";", 1)[0].trim()) ?? "";
   return types.includes(type);
 }
 function isFormContentType(headers) {
-  return isContentType(headers, "application/x-www-form-urlencoded", "multipart/form-data");
+  return isContentType(
+    headers,
+    "application/x-www-form-urlencoded",
+    "multipart/form-data"
+  );
 }
 
 // packages/qwik-city/middleware/request-handler/cache-control.ts
@@ -2125,25 +2267,25 @@ function createCacheControl(cacheControl) {
   } else if (cacheControl === "private") {
     cacheControl = {
       private: true,
-      noCache: true
+      noCache: true,
     };
   } else if (cacheControl === "immutable") {
     cacheControl = {
       public: true,
       immutable: true,
       maxAge: 60 * 60 * 24 * 365,
-      staleWhileRevalidate: 60 * 60 * 24 * 365
+      staleWhileRevalidate: 60 * 60 * 24 * 365,
     };
   } else if (cacheControl === "no-cache") {
     cacheControl = {
-      noCache: true
+      noCache: true,
     };
   }
   if (typeof cacheControl === "number") {
     cacheControl = {
       maxAge: cacheControl,
       sMaxAge: cacheControl,
-      staleWhileRevalidate: cacheControl
+      staleWhileRevalidate: cacheControl,
     };
   }
   if (cacheControl.immutable) {
@@ -2168,7 +2310,9 @@ function createCacheControl(cacheControl) {
     controls.push("public");
   }
   if (cacheControl.staleWhileRevalidate) {
-    controls.push(`stale-while-revalidate=${cacheControl.staleWhileRevalidate}`);
+    controls.push(
+      `stale-while-revalidate=${cacheControl.staleWhileRevalidate}`
+    );
   }
   return controls.join(", ");
 }
@@ -2181,7 +2325,14 @@ var RequestEvStatus = Symbol("RequestEvStatus");
 var RequestEvAction = Symbol("RequestEvAction");
 var RequestEvTrailingSlash = Symbol("RequestEvTrailingSlash");
 var RequestEvBasePathname = Symbol("RequestEvBasePathname");
-function createRequestEvent(serverRequestEv, params, requestHandlers, trailingSlash = true, basePathname = "/", resolved) {
+function createRequestEvent(
+  serverRequestEv,
+  params,
+  requestHandlers,
+  trailingSlash = true,
+  basePathname = "/",
+  resolved
+) {
   const { request, platform, env } = serverRequestEv;
   const cookie = new Cookie(request.headers.get("cookie"));
   const headers = new Headers();
@@ -2310,7 +2461,7 @@ function createRequestEvent(serverRequestEv, params, requestHandlers, trailingSl
       headers.delete("Cache-Control");
       return {
         __brand: "fail",
-        ...data
+        ...data,
       };
     },
     text: (statusCode, text) => {
@@ -2337,7 +2488,7 @@ function createRequestEvent(serverRequestEv, params, requestHandlers, trailingSl
         );
       }
       return writableStream;
-    }
+    },
   };
   return requestEv;
 }
@@ -2356,12 +2507,18 @@ function getRequestMode(requestEv) {
 var ABORT_INDEX = 999999999;
 
 // packages/qwik-city/middleware/request-handler/user-response.ts
-function runQwikCity(serverRequestEv, params, requestHandlers, trailingSlash = true, basePathname = "/") {
+function runQwikCity(
+  serverRequestEv,
+  params,
+  requestHandlers,
+  trailingSlash = true,
+  basePathname = "/"
+) {
   if (requestHandlers.length === 0) {
     throw new ErrorResponse(404 /* NotFound */, `Not Found`);
   }
   let resolve;
-  const responsePromise = new Promise((r) => resolve = r);
+  const responsePromise = new Promise((r) => (resolve = r));
   const requestEv = createRequestEvent(
     serverRequestEv,
     params,
@@ -2373,7 +2530,7 @@ function runQwikCity(serverRequestEv, params, requestHandlers, trailingSlash = t
   return {
     response: responsePromise,
     requestEv,
-    completion: runNext(requestEv, resolve)
+    completion: runNext(requestEv, resolve),
   };
 }
 async function runNext(requestEv, resolve) {
@@ -2429,14 +2586,15 @@ var loadRoute = async (routes, menus, cacheModules, pathname) => {
           loadModule(
             moduleLoader,
             pendingLoads,
-            (routeModule) => mods[i] = routeModule,
+            (routeModule) => (mods[i] = routeModule),
             cacheModules
           );
         });
         loadModule(
           menuLoader,
           pendingLoads,
-          (menuModule) => menu = menuModule == null ? void 0 : menuModule.default,
+          (menuModule) =>
+            (menu = menuModule == null ? void 0 : menuModule.default),
           cacheModules
         );
         if (pendingLoads.length > 0) {
@@ -2474,7 +2632,9 @@ var getMenuLoader = (menus, pathname) => {
   if (menus) {
     pathname = pathname.endsWith("/") ? pathname : pathname + "/";
     const menu = menus.find(
-      (m) => m[0] === pathname || pathname.startsWith(m[0] + (pathname.endsWith("/") ? "" : "/"))
+      (m) =>
+        m[0] === pathname ||
+        pathname.startsWith(m[0] + (pathname.endsWith("/") ? "" : "/"))
     );
     if (menu) {
       return menu[1];
@@ -2497,7 +2657,14 @@ var getPathParams = (paramNames, match) => {
 // packages/qwik-city/middleware/request-handler/request-handler.ts
 async function requestHandler(serverRequestEv, opts) {
   const { render, qwikCityPlan } = opts;
-  const { routes, serverPlugins, menus, cacheModules, trailingSlash, basePathname } = qwikCityPlan;
+  const {
+    routes,
+    serverPlugins,
+    menus,
+    cacheModules,
+    trailingSlash,
+    basePathname,
+  } = qwikCityPlan;
   const pathname = serverRequestEv.url.pathname;
   const matchPathname = getRouteMatchPathname(pathname, trailingSlash);
   const loadedRoute = await loadRequestHandlers(
@@ -2520,7 +2687,15 @@ async function requestHandler(serverRequestEv, opts) {
   }
   return null;
 }
-async function loadRequestHandlers(serverPlugins, routes, menus, cacheModules, pathname, method, renderFn) {
+async function loadRequestHandlers(
+  serverPlugins,
+  routes,
+  menus,
+  cacheModules,
+  pathname,
+  method,
+  renderFn
+) {
   const route = await loadRoute(routes, menus, cacheModules, pathname);
   const requestHandlers = resolveRequestHandlers(
     serverPlugins,
@@ -2533,8 +2708,4 @@ async function loadRequestHandlers(serverPlugins, routes, menus, cacheModules, p
   }
   return null;
 }
-export {
-  getErrorHtml,
-  mergeHeadersCookies,
-  requestHandler
-};
+export { getErrorHtml, mergeHeadersCookies, requestHandler };
