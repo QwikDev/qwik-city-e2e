@@ -10,13 +10,13 @@ function createQwikCity(opts) {
 
   async function onNetlifyEdgeRequest(request, context) {
     try {
-      console.log("onNetlifyEdgeRequest(request, context)");
       const url = new URL(request.url);
-      console.log("url", url.href);
+      console.log("onNetlifyEdgeRequest", url.href);
       if (
         isStaticPath(request.method, url) ||
         url.pathname.startsWith("/.netlify")
       ) {
+        console.log("static", url.href);
         return context.next();
       }
       const serverRequestEv = {
@@ -26,6 +26,7 @@ function createQwikCity(opts) {
         env: Deno.env,
         request,
         getWritableStream: (status, headers, cookies, resolve) => {
+          console.log("getWritableStream", url.href);
           const { readable, writable } = new TransformStream();
           const response = new Response(readable, {
             status,
@@ -38,11 +39,14 @@ function createQwikCity(opts) {
       };
       const handledResponse = await requestHandler(serverRequestEv, opts);
       if (handledResponse) {
+        console.log("handledResponse", url.href);
         const response = await handledResponse.response;
         if (response) {
           return response;
         }
+        console.log("handledResponse no response", url.href);
       }
+      console.log("404", url.href);
       const notFoundHtml = getNotFound(url.pathname);
       return new Response(notFoundHtml, {
         status: 404,
