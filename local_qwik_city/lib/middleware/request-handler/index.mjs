@@ -2128,13 +2128,13 @@ function renderQwikMiddleware(render, opts) {
     }
     const { readable, writable } = new TextEncoderStream();
     const writableStream = requestEv.getWritableStream();
-    console.log("writableStream", writableStream);
+    console.log("writableStream");
 
     const pipe = readable.pipeTo(writableStream);
-    console.log("pipe", pipe);
+    console.log("pipe");
 
     const stream = writable.getWriter();
-    console.log("stream", stream);
+    console.log("stream");
 
     const status = requestEv.status();
     console.log("status", status);
@@ -2150,7 +2150,7 @@ function renderQwikMiddleware(render, opts) {
         },
       });
 
-      console.log("result", result);
+      console.log("result");
 
       const qData = {
         __brand: "qdata",
@@ -2163,18 +2163,15 @@ function renderQwikMiddleware(render, opts) {
       };
 
       if ((typeof result).html === "string") {
+        console.log("stream.write");
         await stream.write(result.html);
       }
 
       requestEv.sharedMap.set("qData", qData);
     } finally {
-      console.log("finally1");
       await stream.ready;
-      console.log("finally2");
       await stream.close();
-      console.log("finally3");
       await pipe;
-      console.log("finally4");
     }
   };
 }
@@ -2333,6 +2330,7 @@ function createRequestEvent(
   basePathname = "/",
   resolved
 ) {
+  console.log("createRequestEvent");
   const { request, platform, env } = serverRequestEv;
   const cookie = new Cookie(request.headers.get("cookie"));
   const headers = new Headers();
@@ -2352,6 +2350,7 @@ function createRequestEvent(
   };
   const check = () => {
     if (writableStream !== null) {
+      console.error("Response already sent");
       throw new Error("Response already sent");
     }
   };
@@ -2421,6 +2420,7 @@ function createRequestEvent(
       const id = loaderOrAction.__qrl.getHash();
       if (loaderOrAction.__brand === "server_loader") {
         if (id in loaders) {
+          console.error("Loader data does not exist");
           throw new Error("Loader data does not exist");
         }
       }
@@ -2479,6 +2479,7 @@ function createRequestEvent(
     send,
     getWritableStream: () => {
       if (writableStream === null) {
+        console.log("serverRequestEv.getWritableStream");
         writableStream = serverRequestEv.getWritableStream(
           requestEv[RequestEvStatus],
           headers,
