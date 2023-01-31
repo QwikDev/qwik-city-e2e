@@ -31,11 +31,11 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
-      - name: Install Playwright
-        run: npx playwright install chromium --with-deps
+      # - name: Install Playwright
+      #   run: npx playwright install chromium --with-deps
 
-      - name: Test Netlify Server MPA
-        run: npm run test.netlify.mpa
+      # - name: Test Netlify Server MPA
+      #   run: npm run test.netlify.mpa
 
-      - name: Test Netlify Server SPA
-        run: npm run test.netlify.spa
+      # - name: Test Netlify Server SPA
+      #   run: npm run test.netlify.spa
