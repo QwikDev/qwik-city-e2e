@@ -11,14 +11,17 @@ function createQwikCity(opts) {
   async function onNetlifyEdgeRequest(request, context) {
     try {
       const url = new URL(request.url);
-      console.log("onNetlifyEdgeRequest", url.href);
+
       if (
         isStaticPath(request.method, url) ||
         url.pathname.startsWith("/.netlify")
       ) {
-        console.log("static", url.href);
+        // console.log("static", url.href);
         return context.next();
       }
+
+      console.log("ssr request", url.href);
+
       const serverRequestEv = {
         mode: "server",
         locale: void 0,
@@ -26,14 +29,19 @@ function createQwikCity(opts) {
         env: Deno.env,
         request,
         getWritableStream: (status, headers, cookies, resolve) => {
-          console.log("getWritableStream", url.href);
-          const { readable, writable } = new TransformStream();
-          const response = new Response(readable, {
-            status,
-            headers: mergeHeadersCookies(headers, cookies),
-          });
-          resolve(response);
-          return writable;
+          try {
+            console.log("getWritableStream", url.href);
+            const { readable, writable } = new TransformStream();
+            const response = new Response(readable, {
+              status,
+              headers: mergeHeadersCookies(headers, cookies),
+            });
+            console.log("getWritableStream resolve", url.href);
+            resolve(response);
+            return writable;
+          } catch (e) {
+            console.error("getWritableStream error", String(e));
+          }
         },
         platform: context,
       };
