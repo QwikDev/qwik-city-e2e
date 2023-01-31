@@ -2168,8 +2168,6 @@ function renderQwikMiddleware(render, opts) {
       }
 
       requestEv.sharedMap.set("qData", qData);
-    } catch (e) {
-      console.error("render error", e);
     } finally {
       await stream.ready;
       await stream.close();
