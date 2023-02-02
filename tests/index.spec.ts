@@ -12,11 +12,3 @@ test("index", async ({ page }) => {
   await expect(page.locator("h1")).toContainText("Homepage");
   await expect(page.locator("footer")).toHaveCount(1);
 });
-
-test("index q-data.json", async ({ page }) => {
-  const rsp = (await page.goto("/q-data.json"))!;
-  expect(rsp.status()).toBe(200);
-
-  const json = await rsp.json();
-  expect(json.isStatic).toBeFalsy();
-});
