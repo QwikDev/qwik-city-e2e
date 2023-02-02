@@ -35,8 +35,8 @@
     "qwik": "qwik"
   },
   "devDependencies": {
-    "@builder.io/qwik": "0.17.0",
-    "@builder.io/qwik-city": "0.1.0-beta10",
+    "@builder.io/qwik": "0.17.1",
+    "@builder.io/qwik-city": "0.1.0-beta11",
     "@builder.io/qwik-react": "0.2.1",
     "@emotion/react": "11.10.4",
     "@emotion/styled": "11.10.4",
