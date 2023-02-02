@@ -48,7 +48,7 @@ test("navigate to static 404 /static/idk/", async ({ page }, { config }) => {
   await page.goto("/");
   const link = page.locator("a[href='/static/idk/']");
   await link.click();
-  if (config.metadata.server !== "dev" && config.metadata.mode !== "preview") {
+  if (config.metadata.server !== "dev" && config.metadata.server !== "preview") {
     await expect(page.locator("h1")).toContainText("Static Directory 404");
     await expect(new URL(page.url()).pathname).toEqual("/static/idk/");
   }
