@@ -36,7 +36,7 @@ test("navigate to root 404 /idk/", async ({ page }, { config }) => {
   await page.goto("/");
   const link = page.locator("a[href='/idk/']");
   await link.click();
-  if (config.metadata.server !== "dev" && config.metadata.mode !== "preview") {
+  if (config.metadata.server !== "dev" && config.metadata.server !== "preview") {
     await expect(page.locator("h1")).toContainText("Root Directory 404");
     await expect(new URL(page.url()).pathname).toEqual("/idk/");
   }
