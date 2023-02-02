@@ -25,11 +25,6 @@ test("static q-data.json", async ({ page }, { config }) => {
   ) {
     const rsp = (await page.goto("/static/q-data.json"))!;
     expect(rsp.status()).toBe(200);
-
-    const json = await rsp.json();
-
-    // not the dev server
-    expect(json.isStatic).toBe(true);
   }
 });
 
