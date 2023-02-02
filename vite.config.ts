@@ -4,6 +4,9 @@ import { qwikCity } from "@builder.io/qwik-city/vite";
 import { qwikReact } from "@builder.io/qwik-react/vite";
 export default defineConfig(() => {
     return {
+        optimizeDeps: {
+            include: ["@mui/material"],
+        },
         plugins: [qwikCity(), qwikVite(), qwikReact()],
         preview: {
             headers: {
