@@ -35,8 +35,8 @@
     "qwik": "qwik"
   },
   "devDependencies": {
-    "@builder.io/qwik": "BuilderIO/qwik-build#3b7c0c9b5c6e81ddaf6b854fb8cd0d1283304c02",
-    "@builder.io/qwik-city": "file:./local_qwik_city/lib",
+    "@builder.io/qwik": "BuilderIO/qwik-build#c37c83702b7d57ce2713676628caa5ecb19916aa",
+    "@builder.io/qwik-city": "BuilderIO/qwik-city-build#e4a9ffdb583fdaccf215628bb13f4b96c5a07d93",
     "@builder.io/qwik-react": "0.2.1",
     "@emotion/react": "11.10.4",
     "@emotion/styled": "11.10.4",
