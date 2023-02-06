@@ -1,11 +1,11 @@
 import { component$ } from "@builder.io/qwik";
-import { DocumentHead, Link, loader$ } from "@builder.io/qwik-city";
+import { DocumentHead, loader$ } from "@builder.io/qwik-city";
 
-export const getEnv = loader$(({env}) => {
+export const getEnv = loader$(({ env }) => {
   return {
-    platform: env.get('PLATFORM_NAME'),
+    platform: env.get("PLATFORM_NAME"),
     importMetaEnv: import.meta.env.VITE_HELLO_WORLD,
-  }
+  };
 });
 
 export default component$(() => {

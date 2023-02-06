@@ -42,6 +42,8 @@ test("sign-in", async ({ page }) => {
   });
   await expect(page.locator("h1")).toContainText("Dashboard");
 
+  await expect(page.locator("[data-test-user-id]")).toHaveText("qwik");
+
   // go to sign-in, while signed-in, and should redirect back to dashboard
   await Promise.all([page.waitForNavigation(), page.goto("/sign-in/")]);
   await expect(page.locator("h1")).toContainText("Dashboard");

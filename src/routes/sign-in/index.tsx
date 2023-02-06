@@ -5,7 +5,11 @@ import {
   Form,
   RequestHandler,
 } from "@builder.io/qwik-city";
-import { isUserAuthenticated, signIn } from "../../auth/auth";
+import {
+  AUTHTOKEN_COOKIE_NAME,
+  USER_COOKIE_NAME,
+  isUserAuthenticated,
+} from "../../auth/auth";
 
 export const onGet: RequestHandler = async ({ redirect, cookie }) => {
   if (await isUserAuthenticated(cookie)) {
@@ -15,9 +19,21 @@ export const onGet: RequestHandler = async ({ redirect, cookie }) => {
 
 export const signinAction = action$(
   async ({ username, password }, { cookie, redirect, fail }) => {
-    const result = await signIn(username as string, password as string, cookie);
+    if (username == "qwik" && password == "dev") {
+      // super secret username/password (Testing purposes only, DO NOT DO THIS!!)
+      cookie.set(AUTHTOKEN_COOKIE_NAME, Math.round(Math.random() * 9999999), {
+        httpOnly: true,
+        maxAge: [5, "minutes"],
+        path: "/",
+      });
 
-    if (result.status === "signed-in") {
+      cookie.set(USER_COOKIE_NAME, username, {
+        // NOT httpOnly so that document.cookie can get this value
+        // httpOnly: true,
+        maxAge: [5, "minutes"],
+        path: "/",
+      });
+
       throw redirect(301, "/dashboard/");
     }
 
@@ -43,7 +59,13 @@ export default component$(() => {
         {signIn.fail?.message && <p style="color:red">{signIn.fail.message}</p>}
         <p>
           <span>Username: </span>
-          <input name="username" type="text" autoComplete="username" required />
+          <input
+            name="username"
+            type="text"
+            autoComplete="username"
+            autoFocus
+            required
+          />
         </p>
         <p>
           <span>Password: </span>
