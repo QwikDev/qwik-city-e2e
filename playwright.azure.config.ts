@@ -9,7 +9,7 @@ const config: PlaywrightTestConfig = {
   },
 
   use: {
-    baseURL: "https://AZURE.TODO.URL/",
+    baseURL: "https://blue-smoke-0a7cdfe10.2.azurestaticapps.net/",
   },
 
   webServer: undefined,

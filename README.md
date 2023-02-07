@@ -8,9 +8,9 @@ The [package.json](https://github.com/BuilderIO/qwik-city-e2e/blob/main/package.
 
 ## External Servers
 
-### Azure
+### Azure SWA
 
-    todo
+https://blue-smoke-0a7cdfe10.2.azurestaticapps.net/
 
 ### Cloudflare Pages
 
