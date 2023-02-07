@@ -13,6 +13,7 @@
     "dev": "PLATFORM_NAME=dev vite --mode ssr --port 3000",
     "dev.debug": "PLATFORM_NAME=dev node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force --port 3000",
     "dev.netlify": "netlify dev",
+    "deploy.azure": "swa deploy ./dist --api-location ./api",
     "deploy.netlify": "netlify deploy --prod --build",
     "deploy.vercel": "vercel deploy --prod",
     "serve.azure": "swa start",

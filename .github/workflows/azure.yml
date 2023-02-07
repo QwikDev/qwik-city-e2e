@@ -33,6 +33,9 @@ jobs:
         run: tree azure-functions
 
       # - name: Deploy to Azure SWA
+      #   run: npm run deploy.azure
+      #   env:
+      #     AZURE_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_DEPLOYMENT_TOKEN }}
 
       # - name: Install Playwright
       #   run: npx playwright install chromium --with-deps
