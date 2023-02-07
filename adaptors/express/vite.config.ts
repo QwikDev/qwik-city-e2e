@@ -1,4 +1,4 @@
-import { expressAdaptor } from "@builder.io/qwik-city/adaptors/express/vite";
+import { expressAdapter } from "@builder.io/qwik-city/adapters/express/vite";
 import { extendConfig } from "@builder.io/qwik-city/vite";
 import baseConfig from "../../vite.config";
 
@@ -13,7 +13,7 @@ export default extendConfig(baseConfig, () => {
       minify: false,
     },
     plugins: [
-      expressAdaptor({
+      expressAdapter({
         ssg: {
           include: ["/static/*"],
         },
