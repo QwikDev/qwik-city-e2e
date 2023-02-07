@@ -1,4 +1,4 @@
-name: Cloudflare Server
+name: Cloudflare Pages Server
 
 on:
   push:

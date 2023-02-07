@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build.client": "vite build",
+    "build.azure": "npm run build.client && vite build -c adapters/azure-swa/vite.config.ts",
     "build.cloudflare": "npm run build.client && vite build -c adapters/cloudflare-pages/vite.config.ts",
     "build.express": "vite build -c adapters/express/vite.config.ts",
     "build.netlify": "npm run build.client && vite build -c adapters/netlify-edge/vite.config.ts",
@@ -14,12 +15,15 @@
     "dev.netlify": "netlify dev",
     "deploy.netlify": "netlify deploy --prod --build",
     "deploy.vercel": "vercel deploy --prod",
+    "serve.azure": "swa start",
     "serve.cloudflare": "wrangler pages dev ./dist",
     "serve.cloudflare.debug": "node --inspect-brk ./node_modules/.bin/wrangler pages dev ./dist",
     "serve.express": "node .express/entry.express.js",
     "serve.express.debug": "node --inspect-brk .express/entry.express.js",
     "serve.preview": "vite preview --port 3001",
     "serve.preview.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js preview --port 3001",
+    "test.azure.mpa": "APP=mpa playwright test tests --config playwright.azure.config.ts",
+    "test.azure.spa": "APP=spa playwright test tests --config playwright.azure.config.ts",
     "test.cloudflare.mpa": "APP=mpa playwright test tests --config playwright.cloudflare.config.ts",
     "test.cloudflare.spa": "APP=spa playwright test tests --config playwright.cloudflare.config.ts",
     "test.dev.mpa": "APP=mpa playwright test tests --config playwright.config.ts",
@@ -35,6 +39,7 @@
     "qwik": "qwik"
   },
   "devDependencies": {
+    "@azure/static-web-apps-cli": "^1.0.6",
     "@builder.io/qwik": "BuilderIO/qwik-build#eefc0f5b371770aeb1b64d690a9971e75a1d9f87",
     "@builder.io/qwik-city": "BuilderIO/qwik-city-build#65431f514ff8ad2eabb0ce295874e3620a477c68",
     "@builder.io/qwik-react": "0.2.1",

@@ -1,15 +1,19 @@
-# Netlify
-.netlify
+# Azure
+/azure-functions/**
+!/azure-functions/host.json
 
 # Cloudflare
 /server
 functions/**/*.js
 
-# Vercel
-.vercel
-
 # Express
 .express
+
+# Netlify
+.netlify
+
+# Vercel
+.vercel
 
 # Build
 /dist
