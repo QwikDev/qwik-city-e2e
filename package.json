@@ -15,7 +15,7 @@
     "dev.netlify": "netlify dev",
     "deploy.azure": "swa deploy ./dist --api-location ./api",
     "deploy.netlify": "netlify deploy --prod --build",
-    "deploy.vercel": "vercel deploy --prod",
+    "deploy.vercel": "vercel deploy --prod --env PLATFORM_NAME=vercel",
     "serve.azure": "swa start",
     "serve.cloudflare": "wrangler pages dev ./dist",
     "serve.cloudflare.debug": "node --inspect-brk ./node_modules/.bin/wrangler pages dev ./dist",
