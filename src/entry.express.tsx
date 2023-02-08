@@ -9,6 +9,7 @@ import compression from "compression";
 // Directories where the static assets are located
 const distDir = join(fileURLToPath(import.meta.url), "..", "..", "dist");
 const buildDir = join(distDir, "build");
+const publicDir = join(fileURLToPath(import.meta.url), "..", "..", "public");
 
 // Allow for dynamic port
 const PORT = process.env.PORT ?? 3002;
@@ -29,6 +30,7 @@ const app = express();
 // Static asset handlers
 // https://expressjs.com/en/starter/static-files.html
 app.use(`/build`, express.static(buildDir, { immutable: true, maxAge: "1y" }));
+app.use(express.static(publicDir));
 app.use(express.static(distDir, { redirect: false }));
 
 // Use Qwik City's page and endpoint request handler
