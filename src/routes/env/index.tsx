@@ -2,6 +2,14 @@ import { component$ } from "@builder.io/qwik";
 import { DocumentHead, loader$ } from "@builder.io/qwik-city";
 
 export const getEnv = loader$(({ env }) => {
+  console.log('process', process);
+  console.log('process.env', process.env);
+  console.log('process.env.PLATFORM_NAME', process.env.PLATFORM_NAME);
+
+  console.log('JSON process', process);
+  console.log('JSON process.env', JSON.stringify(process.env));
+  console.log('JSON process.env.PLATFORM_NAME', process.env.PLATFORM_NAME);
+
   return {
     platform: env.get("PLATFORM_NAME"),
     importMetaEnv: import.meta.env.VITE_HELLO_WORLD,
