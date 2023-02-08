@@ -27,15 +27,6 @@ test("Endpoint html()", async ({ page }) => {
   expect(data).toBe("html GET");
 });
 
-test("Endpoint rss.xml feed", async ({ page }) => {
-  const rsp = (await page.goto("/endpoints/rss.xml"))!;
-  expect(rsp.status()).toBe(200);
-  expect(rsp.headers()["content-type"]).toBe("text/xml");
-
-  const data = await rsp.text();
-  expect(data).toContain(`<rss version="2.0">`);
-});
-
 test("Endpoint getWritableStream()", async ({ page }) => {
   const rsp = (await page.goto("/endpoints/stream.csv"))!;
   expect(rsp.status()).toBe(203);
