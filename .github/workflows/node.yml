@@ -40,6 +40,9 @@ jobs:
       - name: Test Vite Preview Server SPA
         run: npm run test.preview.spa
 
+      - name: Clear dist dir
+        run: rm -rf dist
+
       - name: Build Express Server
         run: npm run build.express
 
@@ -48,3 +51,15 @@ jobs:
 
       - name: Test Express Server SPA
         run: npm run test.express.spa
+
+      - name: Clear dist dir
+        run: rm -rf dist
+
+      - name: Build Static Server
+        run: npm run build.static
+
+      - name: Test Static Server MPA
+        run: npm run test.static.mpa
+
+      - name: Test Static Server SPA
+        run: npm run test.static.spa

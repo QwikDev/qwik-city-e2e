@@ -12,6 +12,9 @@ functions/**/*.js
 # Netlify
 .netlify
 
+# Static
+.static
+
 # Vercel
 .vercel
 
