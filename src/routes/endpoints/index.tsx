@@ -16,9 +16,6 @@ export default component$(() => {
           <a href="/endpoints/data.txt">/endpoints/data.txt</a>
         </li>
         <li>
-          <a href="/endpoints/rss.xml">/endpoints/rss.xml</a>
-        </li>
-        <li>
           <a href="/endpoints/image.png">/endpoints/image.png</a>
         </li>
         <li>

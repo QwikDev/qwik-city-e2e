@@ -6,6 +6,9 @@ export default component$(() => {
     <>
       <h1>Static</h1>
       <p>{new Date().toISOString()}</p>
+      <p>
+        <a href="/static/rss.xml">Static rss.xml feed</a>
+      </p>
     </>
   );
 });
