@@ -2,7 +2,6 @@ import { component$ } from "@builder.io/qwik";
 import { DocumentHead, loader$ } from "@builder.io/qwik-city";
 
 export const getEnv = loader$(({ env }) => {
-  console.log('process.env', process.env);
   return {
     platform: env.get("PLATFORM_NAME"),
     importMetaEnv: import.meta.env.VITE_HELLO_WORLD,
