@@ -15,9 +15,9 @@ export default component$(() => {
     <>
       <h1>Environment variables</h1>
       <ul>
-        <li>env.value.platform: {env.value.platform}</li>
-        <li>env.value.importMetaEnv: {env.value.importMetaEnv}</li>
-        <li>importmeta.env.VITE_HELLO_WORLD: {importMeta}</li>
+        <li>env.value.platform: <span id="env-value-platform">{env.value.platform}</span></li>
+        <li>env.value.importMetaEnv: <span id="env-value-importMetaEnv">{env.value.importMetaEnv}</span></li>
+        <li>importmeta.env.VITE_HELLO_WORLD: <span id="importmeta-env-VITE_HELLO_WORLD">{importMeta}</span></li>
       </ul>
     </>
   );
