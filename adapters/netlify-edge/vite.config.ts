@@ -15,7 +15,7 @@ export default extendConfig(baseConfig, () => {
     plugins: [
       netifyEdgeAdapter({
         ssg: {
-          include: ["/static/*"],
+          include: ["/static/*", "/endpoints/rss.xml"],
         },
       }),
     ],

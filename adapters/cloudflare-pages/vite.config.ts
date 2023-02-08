@@ -14,7 +14,7 @@ export default extendConfig(baseConfig, () => {
     plugins: [
       cloudflarePagesAdapter({
         ssg: {
-          include: ["/static/*"],
+          include: ["/static/*", "/endpoints/rss.xml"],
         },
       }),
     ],

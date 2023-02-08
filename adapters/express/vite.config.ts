@@ -15,7 +15,7 @@ export default extendConfig(baseConfig, () => {
     plugins: [
       expressAdapter({
         ssg: {
-          include: ["/static/*"],
+          include: ["/static/*", "/endpoints/rss.xml"],
         },
       }),
     ],
