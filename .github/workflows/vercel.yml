@@ -17,10 +17,10 @@ jobs:
           node-version: 18
 
       - name: Install NPM Dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Deploy to Vercel
-        run: pnpm run deploy.vercel -- --token=${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
+        run: npm run deploy.vercel -- --token=${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -29,7 +29,7 @@ jobs:
         run: npx playwright install chromium --with-deps
 
       - name: Test Vercel Server MPA
-        run: pnpm run test.vercel.mpa
+        run: npm run test.vercel.mpa
 
       - name: Test Vercel Server SPA
-        run: pnpm run test.vercel.spa
+        run: npm run test.vercel.spa
