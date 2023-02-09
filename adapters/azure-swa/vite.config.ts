@@ -22,7 +22,7 @@ export default extendConfig(baseConfig, () => {
     plugins: [
       azureSwaAdapter({
         ssg: {
-          include: ["/", "/static/*", "/endpoints/rss.xml"],
+          include: ["/", "/static/*"],
         },
       }),
     ],

@@ -15,7 +15,7 @@ export default extendConfig(baseConfig, () => {
     plugins: [
       vercelEdgeAdapter({
         ssg: {
-          include: ["/static/*", "/endpoints/rss.xml"],
+          include: ["/static/*"],
         },
       }),
     ],
