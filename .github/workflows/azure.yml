@@ -37,11 +37,11 @@ jobs:
         env:
           SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_DEPLOYMENT_TOKEN }}
 
-      # - name: Install Playwright
-      #   run: npx playwright install chromium --with-deps
+      - name: Install Playwright
+        run: npx playwright install chromium --with-deps
 
-      # - name: Test Azure Server MPA
-      #   run: npm run test.azure.mpa
+      - name: Test Azure Server MPA
+        run: npm run test.azure.mpa
 
-      # - name: Test Azure Server SPA
-      #   run: npm run test.azure.spa
+      - name: Test Azure Server SPA
+        run: npm run test.azure.spa
