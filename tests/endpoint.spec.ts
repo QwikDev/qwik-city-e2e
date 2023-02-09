@@ -41,7 +41,7 @@ test("send(new Response())", async ({ page }) => {
   expect(rsp.headers()["content-type"]).toBe("text/plain; charset=utf-8");
 
   const data = await rsp.text();
-  expect(data).toBe("responsetext");
+  expect(data).toBe("responsetext GET");
 });
 
 test("Endpoint redirect()", async ({ page }) => {

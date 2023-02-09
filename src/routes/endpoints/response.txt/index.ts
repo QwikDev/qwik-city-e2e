@@ -1,7 +1,7 @@
 import type { RequestHandler } from "@builder.io/qwik-city";
 
-export const onRequest: RequestHandler = ({ send }) => {
-  const response = new Response("responsetext", {
+export const onRequest: RequestHandler = ({ send, method }) => {
+  const response = new Response(`responsetext ${method}`, {
     status: 201,
     headers: {
       "content-type": "text/plain; charset=utf-8",
