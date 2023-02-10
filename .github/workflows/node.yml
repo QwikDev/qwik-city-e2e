@@ -28,9 +28,6 @@ jobs:
       - name: Test Dev Server SPA
         run: npm run test.dev.spa
 
-      - name: Build Client for all Servers
-        run: npm run build.client
-
       - name: Build Vite Preview Server
         run: npm run build.preview
 
