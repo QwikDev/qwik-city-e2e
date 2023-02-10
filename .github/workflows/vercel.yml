@@ -16,18 +16,11 @@ jobs:
         with:
           node-version: 18
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: 7
-          run_install: false
-
       - name: Install NPM Dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Deploy to Vercel
-        run: pnpm deploy.vercel --token=${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
+        run: npm run deploy.vercel -- --token=${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
