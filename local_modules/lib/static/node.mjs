@@ -7,23 +7,12 @@ import {
   TextEncoderStream,
   TextDecoderStream,
   WritableStream,
-  ReadableStream,
+  ReadableStream
 } from "stream/web";
-import {
-  fetch,
-  Headers,
-  Request as Request2,
-  Response,
-  FormData,
-} from "undici";
+import { fetch, Headers, Request as Request2, Response, FormData } from "undici";
 import crypto from "crypto";
 function patchGlobalThis() {
-  if (
-    typeof global !== "undefined" &&
-    typeof globalThis.fetch !== "function" &&
-    typeof process !== "undefined" &&
-    process.versions.node
-  ) {
+  if (typeof global !== "undefined" && typeof globalThis.fetch !== "function" && typeof process !== "undefined" && process.versions.node) {
     globalThis.fetch = fetch;
     globalThis.Headers = Headers;
     globalThis.Request = Request2;
@@ -96,8 +85,225 @@ function normalizePath(path) {
   return path;
 }
 
+// packages/qwik-city/static/worker-thread.ts
+import { requestHandler } from "../middleware/request-handler/index.mjs";
+import { pathToFileURL } from "url";
+import { WritableStream as WritableStream2 } from "stream/web";
+import { _serializeData } from "@builder.io/qwik";
+async function workerThread(sys) {
+  const ssgOpts = sys.getOptions();
+  const pendingPromises = /* @__PURE__ */ new Set();
+  const opts = {
+    ...ssgOpts,
+    render: (await import(pathToFileURL(ssgOpts.renderModulePath).href)).default,
+    qwikCityPlan: (await import(pathToFileURL(ssgOpts.qwikCityPlanModulePath).href)).default
+  };
+  sys.createWorkerProcess(async (msg) => {
+    switch (msg.type) {
+      case "render": {
+        return new Promise((resolve2) => {
+          workerRender(sys, opts, msg, pendingPromises, resolve2);
+        });
+      }
+      case "close": {
+        const promises = Array.from(pendingPromises);
+        pendingPromises.clear();
+        await Promise.all(promises);
+        return { type: "close" };
+      }
+    }
+  });
+}
+async function createSingleThreadWorker(sys) {
+  const ssgOpts = sys.getOptions();
+  const pendingPromises = /* @__PURE__ */ new Set();
+  const opts = {
+    ...ssgOpts,
+    render: (await import(pathToFileURL(ssgOpts.renderModulePath).href)).default,
+    qwikCityPlan: (await import(pathToFileURL(ssgOpts.qwikCityPlanModulePath).href)).default
+  };
+  return (staticRoute) => {
+    return new Promise((resolve2) => {
+      workerRender(sys, opts, staticRoute, pendingPromises, resolve2);
+    });
+  };
+}
+async function workerRender(sys, opts, staticRoute, pendingPromises, callback) {
+  const url = new URL(staticRoute.pathname, opts.origin);
+  const result = {
+    type: "render",
+    pathname: staticRoute.pathname,
+    url: url.href,
+    ok: false,
+    error: null,
+    filePath: null,
+    contentType: null
+  };
+  try {
+    let routeWriter = null;
+    let closeResolved;
+    const closePromise = new Promise((closePromiseResolve) => {
+      closeResolved = closePromiseResolve;
+    });
+    const request = new Request(url);
+    const requestCtx = {
+      mode: "static",
+      locale: void 0,
+      url,
+      request,
+      env: {
+        get(key) {
+          return sys.getEnv(key);
+        }
+      },
+      platform: sys.platform,
+      getWritableStream: (status, headers, _, _r, requestEv) => {
+        result.ok = status >= 200 && status < 300;
+        if (!result.ok) {
+          return noopWriter;
+        }
+        const contentType = (headers.get("Content-Type") || "").toLowerCase();
+        const isHtml = contentType.includes("text/html");
+        const routeFilePath = sys.getRouteFilePath(url.pathname, isHtml);
+        const hasRouteWriter = isHtml ? opts.emitHtml !== false : true;
+        const writeQDataEnabled = isHtml && opts.emitData !== false;
+        const stream = new WritableStream2({
+          async start() {
+            try {
+              if (hasRouteWriter || writeQDataEnabled) {
+                await sys.ensureDir(routeFilePath);
+              }
+              if (hasRouteWriter) {
+                routeWriter = sys.createWriteStream(routeFilePath);
+                routeWriter.on("error", (e) => {
+                  console.error(e);
+                  routeWriter = null;
+                  result.error = {
+                    message: e.message,
+                    stack: e.stack
+                  };
+                });
+              }
+            } catch (e) {
+              routeWriter = null;
+              result.error = {
+                message: String(e),
+                stack: e.stack || ""
+              };
+            }
+          },
+          write(chunk) {
+            try {
+              if (routeWriter) {
+                routeWriter.write(Buffer.from(chunk.buffer));
+              }
+            } catch (e) {
+              routeWriter = null;
+              result.error = {
+                message: String(e),
+                stack: e.stack || ""
+              };
+            }
+          },
+          async close() {
+            const writePromises = [];
+            try {
+              if (writeQDataEnabled) {
+                const qData = requestEv.sharedMap.get("qData");
+                if (qData && !url.pathname.endsWith("/404.html")) {
+                  const qDataFilePath = sys.getDataFilePath(url.pathname);
+                  const dataWriter = sys.createWriteStream(qDataFilePath);
+                  dataWriter.on("error", (e) => {
+                    console.error(e);
+                    result.error = {
+                      message: e.message,
+                      stack: e.stack
+                    };
+                  });
+                  const serialized = await _serializeData(qData);
+                  dataWriter.write(serialized);
+                  writePromises.push(
+                    new Promise((resolve2) => {
+                      result.filePath = routeFilePath;
+                      dataWriter.end(resolve2);
+                    })
+                  );
+                }
+              }
+              if (routeWriter) {
+                writePromises.push(
+                  new Promise((resolve2) => {
+                    result.filePath = routeFilePath;
+                    routeWriter.end(resolve2);
+                  }).finally(closeResolved)
+                );
+              }
+              if (writePromises.length > 0) {
+                await Promise.all(writePromises);
+              }
+            } catch (e) {
+              routeWriter = null;
+              result.error = {
+                message: String(e),
+                stack: e.stack || ""
+              };
+            }
+          }
+        });
+        return stream;
+      }
+    };
+    const promise = requestHandler(requestCtx, opts).then(async (rsp) => {
+      if (rsp != null) {
+        const r = await rsp.completion;
+        if (routeWriter) {
+          await closePromise;
+        }
+        return r;
+      }
+    }).then((e) => {
+      if (e !== void 0) {
+        if (e instanceof Error) {
+          result.error = {
+            message: e.message,
+            stack: e.stack
+          };
+        } else {
+          result.error = {
+            message: String(e),
+            stack: void 0
+          };
+        }
+      }
+    }).finally(() => {
+      pendingPromises.delete(promise);
+      callback(result);
+    });
+    pendingPromises.add(promise);
+  } catch (e) {
+    if (e instanceof Error) {
+      result.error = {
+        message: e.message,
+        stack: e.stack
+      };
+    } else {
+      result.error = {
+        message: String(e),
+        stack: void 0
+      };
+    }
+    callback(result);
+  }
+}
+var noopWriter = /* @__PURE__ */ new WritableStream2({
+  write() {
+  },
+  close() {
+  }
+});
+
 // packages/qwik-city/static/node/node-main.ts
-async function createNodeMainProcess(opts) {
+async function createNodeMainProcess(sys, opts) {
   const ssgWorkers = [];
   const sitemapBuffer = [];
   let sitemapPromise = null;
@@ -107,18 +313,16 @@ async function createNodeMainProcess(opts) {
     throw new Error(`Missing "outDir" option`);
   }
   if (!isAbsolute(outDir)) {
-    throw new Error(
-      `"outDir" must be an absolute file path, received: ${outDir}`
-    );
+    throw new Error(`"outDir" must be an absolute file path, received: ${outDir}`);
   }
   outDir = normalizePath(outDir);
   let maxWorkers = nodeCpus().length;
   if (typeof opts.maxWorkers === "number") {
-    maxWorkers = Math.max(1, Math.min(opts.maxWorkers, maxWorkers));
+    maxWorkers = Math.max(0, Math.min(opts.maxWorkers, maxWorkers));
   }
   let maxTasksPerWorker = 20;
   if (typeof opts.maxTasksPerWorker === "number") {
-    maxTasksPerWorker = Math.max(1, Math.min(opts.maxTasksPerWorker, 50));
+    maxTasksPerWorker = Math.max(0, Math.min(opts.maxTasksPerWorker, 50));
   }
   let sitemapOutFile = opts.sitemapOutFile;
   if (sitemapOutFile !== null) {
@@ -129,7 +333,24 @@ async function createNodeMainProcess(opts) {
       sitemapOutFile = resolve(outDir, sitemapOutFile);
     }
   }
-  const createWorker = () => {
+  const singleThreadWorker = await createSingleThreadWorker(sys);
+  const createWorker = (workerIndex) => {
+    if (workerIndex === 0) {
+      const ssgSameThreadWorker = {
+        activeTasks: 0,
+        totalTasks: 0,
+        render: async (staticRoute) => {
+          ssgSameThreadWorker.activeTasks++;
+          ssgSameThreadWorker.totalTasks++;
+          const result = await singleThreadWorker(staticRoute);
+          ssgSameThreadWorker.activeTasks--;
+          return result;
+        },
+        terminate: async () => {
+        }
+      };
+      return ssgSameThreadWorker;
+    }
     let terminateResolve = null;
     const mainTasks = /* @__PURE__ */ new Map();
     let workerFilePath;
@@ -138,10 +359,7 @@ async function createNodeMainProcess(opts) {
     } else {
       workerFilePath = import.meta.url;
     }
-    if (
-      typeof workerFilePath === "string" &&
-      workerFilePath.startsWith("file://")
-    ) {
+    if (typeof workerFilePath === "string" && workerFilePath.startsWith("file://")) {
       workerFilePath = new URL(workerFilePath);
     }
     const nodeWorker = new Worker(workerFilePath, { workerData: opts });
@@ -170,7 +388,7 @@ async function createNodeMainProcess(opts) {
           nodeWorker.postMessage(msg);
         });
         await nodeWorker.terminate();
-      },
+      }
     };
     nodeWorker.on("message", (msg) => {
       switch (msg.type) {
@@ -230,9 +448,7 @@ async function createNodeMainProcess(opts) {
         await sitemapPromise;
       }
       sitemapBuffer.push(`</urlset>`);
-      promises.push(
-        fs.promises.appendFile(sitemapOutFile, sitemapBuffer.join("\n"))
-      );
+      promises.push(fs.promises.appendFile(sitemapOutFile, sitemapBuffer.join("\n")));
       sitemapBuffer.length = 0;
     }
     for (const ssgWorker of ssgWorkers) {
@@ -255,12 +471,12 @@ async function createNodeMainProcess(opts) {
     );
   }
   for (let i = 0; i < maxWorkers; i++) {
-    ssgWorkers.push(createWorker());
+    ssgWorkers.push(createWorker(i));
   }
   const mainCtx = {
     hasAvailableWorker,
     render,
-    close,
+    close
   };
   return mainCtx;
 }
@@ -278,14 +494,10 @@ function ssgWorkerCompare(a, b) {
 import { parentPort } from "worker_threads";
 async function createNodeWorkerProcess(onMessage) {
   var _a;
-  (_a = parentPort) == null
-    ? void 0
-    : _a.on("message", async (msg) => {
-        var _a2;
-        (_a2 = parentPort) == null
-          ? void 0
-          : _a2.postMessage(await onMessage(msg));
-      });
+  (_a = parentPort) == null ? void 0 : _a.on("message", async (msg) => {
+    var _a2;
+    (_a2 = parentPort) == null ? void 0 : _a2.postMessage(await onMessage(msg));
+  });
 }
 
 // packages/qwik-city/static/node/node-system.ts
@@ -293,7 +505,7 @@ async function createSystem(opts) {
   patchGlobalThis();
   const createWriteStream = (filePath) => {
     return fs2.createWriteStream(filePath, {
-      flags: "w",
+      flags: "w"
     });
   };
   const NS_PER_SEC = 1e9;
@@ -307,9 +519,10 @@ async function createSystem(opts) {
   };
   const createLogger = async () => {
     return {
-      debug: opts.log === "debug" ? console.debug.bind(console) : () => {},
+      debug: opts.log === "debug" ? console.debug.bind(console) : () => {
+      },
       error: console.error.bind(console),
-      info: console.info.bind(console),
+      info: console.info.bind(console)
     };
   };
   const outDir = normalizePath(opts.outDir);
@@ -342,7 +555,7 @@ async function createSystem(opts) {
     return join(outDir, pathname);
   };
   const sys = {
-    createMainProcess: () => createNodeMainProcess(opts),
+    createMainProcess: null,
     createWorkerProcess: createNodeWorkerProcess,
     createLogger,
     getOptions: () => opts,
@@ -355,9 +568,10 @@ async function createSystem(opts) {
     getEnv: (key) => process.env[key],
     platform: {
       static: true,
-      node: process.versions.node,
-    },
+      node: process.versions.node
+    }
   };
+  sys.createMainProcess = () => createNodeMainProcess(sys, opts);
   return sys;
 }
 var ensureDir = async (filePath) => {
@@ -440,7 +654,7 @@ async function generateNotFoundPages(sys, opts, routes) {
 }
 
 // packages/qwik-city/static/main-thread.ts
-import { pathToFileURL } from "url";
+import { pathToFileURL as pathToFileURL2 } from "url";
 import { relative as relative2 } from "path";
 
 // node_modules/.pnpm/kleur@4.1.5/node_modules/kleur/index.mjs
@@ -454,11 +668,7 @@ if (typeof process !== "undefined") {
   isTTY = process.stdout && process.stdout.isTTY;
 }
 var $ = {
-  enabled:
-    !NODE_DISABLE_COLORS &&
-    NO_COLOR == null &&
-    TERM !== "dumb" &&
-    ((FORCE_COLOR != null && FORCE_COLOR !== "0") || isTTY),
+  enabled: !NODE_DISABLE_COLORS && NO_COLOR == null && TERM !== "dumb" && (FORCE_COLOR != null && FORCE_COLOR !== "0" || isTTY),
   // modifiers
   reset: init(0, 0),
   bold: init(1, 22),
@@ -487,13 +697,10 @@ var $ = {
   bgBlue: init(44, 49),
   bgMagenta: init(45, 49),
   bgCyan: init(46, 49),
-  bgWhite: init(47, 49),
+  bgWhite: init(47, 49)
 };
 function run(arr, str) {
-  let i = 0,
-    tmp,
-    beg = "",
-    end = "";
+  let i = 0, tmp, beg = "", end = "";
   for (; i < arr.length; i++) {
     tmp = arr[i];
     beg += tmp.open;
@@ -538,22 +745,14 @@ function init(open, close) {
   let blk = {
     open: `\x1B[${open}m`,
     close: `\x1B[${close}m`,
-    rgx: new RegExp(`\\x1b\\[${close}m`, "g"),
+    rgx: new RegExp(`\\x1b\\[${close}m`, "g")
   };
-  return function (txt) {
+  return function(txt) {
     if (this !== void 0 && this.has !== void 0) {
       !!~this.has.indexOf(open) || (this.has.push(open), this.keys.push(blk));
-      return txt === void 0
-        ? this
-        : $.enabled
-        ? run(this.keys, txt + "")
-        : txt + "";
+      return txt === void 0 ? this : $.enabled ? run(this.keys, txt + "") : txt + "";
     }
-    return txt === void 0
-      ? chain([open], [blk])
-      : $.enabled
-      ? run([blk], txt + "")
-      : txt + "";
+    return txt === void 0 ? chain([open], [blk]) : $.enabled ? run([blk], txt + "") : txt + "";
   };
 }
 var kleur_default = $;
@@ -562,12 +761,7 @@ var kleur_default = $;
 var findLocation = (e) => {
   const stack = e.stack;
   if (typeof stack === "string") {
-    const lines = stack
-      .split("\n")
-      .filter(
-        (l) =>
-          !l.includes("/node_modules/@builder.io/qwik") && !l.includes("(node:")
-      );
+    const lines = stack.split("\n").filter((l) => !l.includes("/node_modules/@builder.io/qwik") && !l.includes("(node:"));
     for (let i = 1; i < lines.length; i++) {
       const line = lines[i].replace("file:///", "/");
       if (/^\s+at/.test(line)) {
@@ -583,20 +777,20 @@ var findLocation = (e) => {
             return {
               file: parts.join(":"),
               line: nu1,
-              column: nu0,
+              column: nu0
             };
           } else if (typeof nu0 === "number") {
             parts.length -= 1;
             return {
               file: parts.join(":"),
               line: nu0,
-              column: void 0,
+              column: void 0
             };
           } else {
             return {
               file: parts.join(":"),
               line: void 0,
-              column: void 0,
+              column: void 0
             };
           }
         }
@@ -615,7 +809,8 @@ var safeParseInt = (nu) => {
 var splitRE = /\r?\n/;
 var range = 2;
 function posToNumber(source, pos) {
-  if (typeof pos === "number") return pos;
+  if (typeof pos === "number")
+    return pos;
   const lines = source.split(splitRE);
   const { line, column } = pos;
   let start = 0;
@@ -634,20 +829,14 @@ function generateCodeFrame(source, start = 0, end) {
     count += lines[i].length + 1;
     if (count >= start) {
       for (let j = i - range; j <= i + range || end > count; j++) {
-        if (j < 0 || j >= lines.length) continue;
+        if (j < 0 || j >= lines.length)
+          continue;
         const line = j + 1;
-        res.push(
-          `${line}${" ".repeat(Math.max(3 - String(line).length, 0))}|  ${
-            lines[j]
-          }`
-        );
+        res.push(`${line}${" ".repeat(Math.max(3 - String(line).length, 0))}|  ${lines[j]}`);
         const lineLength = lines[j].length;
         if (j === i) {
           const pad = Math.max(start - (count - lineLength) + 1, 0);
-          const length = Math.max(
-            1,
-            end > count ? lineLength - pad : end - start
-          );
+          const length = Math.max(1, end > count ? lineLength - pad : end - start);
           res.push(`   |  ` + " ".repeat(pad) + "^".repeat(length));
         } else if (j > i) {
           if (end > count) {
@@ -680,7 +869,8 @@ function formatError(e) {
           try {
             const code = fs3.readFileSync(err.loc.file, "utf-8");
             err.frame = generateCodeFrame(code, err.loc);
-          } catch {}
+          } catch {
+          }
         }
       }
     }
@@ -696,9 +886,7 @@ async function mainThread(sys) {
   const main = await sys.createMainProcess();
   const log = await sys.createLogger();
   log.info("\n" + kleur_default.bold().green("Starting Qwik City SSG..."));
-  const qwikCityPlan = (
-    await import(pathToFileURL(opts.qwikCityPlanModulePath).href)
-  ).default;
+  const qwikCityPlan = (await import(pathToFileURL2(opts.qwikCityPlanModulePath).href)).default;
   const queue = [];
   const active = /* @__PURE__ */ new Set();
   const routes = qwikCityPlan.routes || [];
@@ -711,7 +899,7 @@ async function mainThread(sys) {
         duration: 0,
         rendered: 0,
         errors: 0,
-        staticPaths: [],
+        staticPaths: []
       };
       let isCompleted = false;
       let isRoutesLoaded = false;
@@ -725,32 +913,22 @@ ${kleur_default.green("SSG results")}`);
           if (generatorResult.rendered > 0) {
             log.info(
               `- Generated: ${kleur_default.dim(
-                `${generatorResult.rendered} page${
-                  generatorResult.rendered === 1 ? "" : "s"
-                }`
+                `${generatorResult.rendered} page${generatorResult.rendered === 1 ? "" : "s"}`
               )}`
             );
           }
-          log.info(
-            `- Duration: ${kleur_default.dim(
-              msToString(generatorResult.duration)
-            )}`
-          );
+          log.info(`- Duration: ${kleur_default.dim(msToString(generatorResult.duration))}`);
           const total = generatorResult.rendered + generatorResult.errors;
           if (total > 0) {
             log.info(
-              `- Average: ${kleur_default.dim(
-                msToString(generatorResult.duration / total) + " per page"
-              )}`
+              `- Average: ${kleur_default.dim(msToString(generatorResult.duration / total) + " per page")}`
             );
           }
           log.info(``);
         }
-        closePromise
-          .then(() => {
-            setTimeout(() => resolve2(generatorResult));
-          })
-          .catch(reject);
+        closePromise.then(() => {
+          setTimeout(() => resolve2(generatorResult));
+        }).catch(reject);
       };
       const next = () => {
         while (!isCompleted && main.hasAvailableWorker() && queue.length > 0) {
@@ -759,12 +937,7 @@ ${kleur_default.green("SSG results")}`);
             render(staticRoute);
           }
         }
-        if (
-          !isCompleted &&
-          isRoutesLoaded &&
-          queue.length === 0 &&
-          active.size === 0
-        ) {
+        if (!isCompleted && isRoutesLoaded && queue.length === 0 && active.size === 0) {
           isCompleted = true;
           completed();
         }
@@ -790,11 +963,9 @@ ${kleur_default.green("SSG results")}`);
             log.error(`
 ${kleur_default.bold().red("Error during SSG")}`);
             log.error(kleur_default.red(err.message));
-            log.error(
-              `  Pathname: ${kleur_default.magenta(staticRoute.pathname)}`
-            );
+            log.error(`  Pathname: ${kleur_default.magenta(staticRoute.pathname)}`);
             Object.assign(formatError(err), {
-              plugin: "qwik-ssg",
+              plugin: "qwik-ssg"
             });
             log.error(buildErrorMessage(err));
             generatorResult.errors++;
@@ -805,11 +976,7 @@ ${kleur_default.bold().red("Error during SSG")}`);
             const base = opts.rootDir ?? opts.outDir;
             const path = relative2(base, result.filePath);
             const lastSlash = path.lastIndexOf("/");
-            log.info(
-              `${kleur_default.dim(path.slice(0, lastSlash + 1))}${path.slice(
-                lastSlash + 1
-              )}`
-            );
+            log.info(`${kleur_default.dim(path.slice(0, lastSlash + 1))}${path.slice(lastSlash + 1)}`);
           }
           flushQueue();
         } catch (e) {
@@ -835,13 +1002,10 @@ ${kleur_default.bold().red("Error during SSG")}`);
               }
             }
           }
-          if (
-            includeRoute(pathname) &&
-            !queue.some((s) => s.pathname === pathname)
-          ) {
+          if (includeRoute(pathname) && !queue.some((s) => s.pathname === pathname)) {
             queue.push({
               pathname,
-              params,
+              params
             });
             flushQueue();
           }
@@ -851,15 +1015,10 @@ ${kleur_default.bold().red("Error during SSG")}`);
         const [_, loaders, paramNames, originalPathname] = route;
         const modules = await Promise.all(loaders.map((loader) => loader()));
         const pageModule = modules[modules.length - 1];
-        const isValidStaticModule =
-          pageModule &&
-          (pageModule.default || pageModule.onRequest || pageModule.onGet);
+        const isValidStaticModule = pageModule && (pageModule.default || pageModule.onRequest || pageModule.onGet);
         if (isValidStaticModule) {
           if (Array.isArray(paramNames) && paramNames.length > 0) {
-            if (
-              typeof pageModule.onStaticGenerate === "function" &&
-              paramNames.length > 0
-            ) {
+            if (typeof pageModule.onStaticGenerate === "function" && paramNames.length > 0) {
               const staticGenerate = await pageModule.onStaticGenerate();
               if (Array.isArray(staticGenerate.params)) {
                 for (const params of staticGenerate.params) {
@@ -912,217 +1071,6 @@ function validateOptions(opts) {
   }
 }
 
-// packages/qwik-city/static/worker-thread.ts
-import { requestHandler } from "../middleware/request-handler/index.mjs";
-import { pathToFileURL as pathToFileURL2 } from "url";
-import { WritableStream as WritableStream2 } from "stream/web";
-import { _serializeData } from "@builder.io/qwik";
-async function workerThread(sys) {
-  const ssgOpts = sys.getOptions();
-  const pendingPromises = /* @__PURE__ */ new Set();
-  const opts = {
-    ...ssgOpts,
-    render: (await import(pathToFileURL2(ssgOpts.renderModulePath).href))
-      .default,
-    qwikCityPlan: (
-      await import(pathToFileURL2(ssgOpts.qwikCityPlanModulePath).href)
-    ).default,
-  };
-  sys.createWorkerProcess(async (msg) => {
-    switch (msg.type) {
-      case "render": {
-        return new Promise((resolve2) => {
-          workerRender(sys, opts, msg, pendingPromises, resolve2);
-        });
-      }
-      case "close": {
-        const promises = Array.from(pendingPromises);
-        pendingPromises.clear();
-        await Promise.all(promises);
-        return { type: "close" };
-      }
-    }
-  });
-}
-async function workerRender(sys, opts, staticRoute, pendingPromises, callback) {
-  const url = new URL(staticRoute.pathname, opts.origin);
-  const result = {
-    type: "render",
-    pathname: staticRoute.pathname,
-    url: url.href,
-    ok: false,
-    error: null,
-    filePath: null,
-    contentType: null,
-  };
-  try {
-    let routeWriter = null;
-    let closeResolved;
-    const closePromise = new Promise((closePromiseResolve) => {
-      closeResolved = closePromiseResolve;
-    });
-    const request = new Request(url);
-    const requestCtx = {
-      mode: "static",
-      locale: void 0,
-      url,
-      request,
-      env: {
-        get(key) {
-          return sys.getEnv(key);
-        },
-      },
-      platform: sys.platform,
-      getWritableStream: (status, headers, _, _r, requestEv) => {
-        result.ok = status >= 200 && status < 300;
-        if (!result.ok) {
-          return noopWriter;
-        }
-        const contentType = (headers.get("Content-Type") || "").toLowerCase();
-        const isHtml = contentType.includes("text/html");
-        const routeFilePath = sys.getRouteFilePath(url.pathname, isHtml);
-        const hasRouteWriter = isHtml ? opts.emitHtml !== false : true;
-        const writeQDataEnabled = isHtml && opts.emitData !== false;
-        const stream = new WritableStream2({
-          async start() {
-            try {
-              if (hasRouteWriter || writeQDataEnabled) {
-                await sys.ensureDir(routeFilePath);
-              }
-              if (hasRouteWriter) {
-                routeWriter = sys.createWriteStream(routeFilePath);
-                routeWriter.on("error", (e) => {
-                  console.error(e);
-                  routeWriter = null;
-                  result.error = {
-                    message: e.message,
-                    stack: e.stack,
-                  };
-                });
-              }
-            } catch (e) {
-              routeWriter = null;
-              result.error = {
-                message: String(e),
-                stack: e.stack || "",
-              };
-            }
-          },
-          write(chunk) {
-            try {
-              if (routeWriter) {
-                routeWriter.write(Buffer.from(chunk.buffer));
-              }
-            } catch (e) {
-              routeWriter = null;
-              result.error = {
-                message: String(e),
-                stack: e.stack || "",
-              };
-            }
-          },
-          async close() {
-            const writePromises = [];
-            try {
-              if (writeQDataEnabled) {
-                const qData = requestEv.sharedMap.get("qData");
-                if (qData && !url.pathname.endsWith("/404.html")) {
-                  const qDataFilePath = sys.getDataFilePath(url.pathname);
-                  const dataWriter = sys.createWriteStream(qDataFilePath);
-                  dataWriter.on("error", (e) => {
-                    console.error(e);
-                    result.error = {
-                      message: e.message,
-                      stack: e.stack,
-                    };
-                  });
-                  const serialized = await _serializeData(qData);
-                  dataWriter.write(serialized);
-                  writePromises.push(
-                    new Promise((resolve2) => {
-                      result.filePath = routeFilePath;
-                      dataWriter.end(resolve2);
-                    })
-                  );
-                }
-              }
-              if (routeWriter) {
-                writePromises.push(
-                  new Promise((resolve2) => {
-                    result.filePath = routeFilePath;
-                    routeWriter.end(resolve2);
-                  }).finally(closeResolved)
-                );
-              }
-              if (writePromises.length > 0) {
-                await Promise.all(writePromises);
-              }
-            } catch (e) {
-              routeWriter = null;
-              result.error = {
-                message: String(e),
-                stack: e.stack || "",
-              };
-            }
-          },
-        });
-        return stream;
-      },
-    };
-    const promise = requestHandler(requestCtx, opts)
-      .then(async (rsp) => {
-        if (rsp != null) {
-          try {
-            const r = await rsp.completion;
-            if (routeWriter) {
-              await closePromise;
-            }
-            return r;
-          } catch (e) {
-            console.log("requestHandler then error", e);
-          }
-        }
-      })
-      .then((e) => {
-        if (e !== void 0) {
-          if (e instanceof Error) {
-            result.error = {
-              message: e.message,
-              stack: e.stack,
-            };
-          } else {
-            result.error = {
-              message: String(e),
-              stack: void 0,
-            };
-          }
-        }
-      })
-      .finally(() => {
-        pendingPromises.delete(promise);
-        callback(result);
-      });
-    pendingPromises.add(promise);
-  } catch (e) {
-    if (e instanceof Error) {
-      result.error = {
-        message: e.message,
-        stack: e.stack,
-      };
-    } else {
-      result.error = {
-        message: String(e),
-        stack: void 0,
-      };
-    }
-    callback(result);
-  }
-}
-var noopWriter = /* @__PURE__ */ new WritableStream2({
-  write() {},
-  close() {},
-});
-
 // packages/qwik-city/static/node/index.ts
 async function generate(opts) {
   if (isMainThread) {
@@ -1139,4 +1087,6 @@ if (!isMainThread && workerData) {
     await workerThread(sys);
   })();
 }
-export { generate };
+export {
+  generate
+};

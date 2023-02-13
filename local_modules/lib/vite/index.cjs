@@ -24062,7 +24062,10 @@ async function runNext(requestEv, resolve4) {
     await requestEv.next();
   } catch (e) {
     if (e instanceof RedirectMessage) {
-      requestEv.getWritableStream().close();
+      if (requestEv.isDirty()) {
+        const stream = requestEv.getWritableStream();
+        await stream.close();
+      }
     } else if (e instanceof ErrorResponse) {
       console.error(e);
       if (!requestEv.headersSent) {
