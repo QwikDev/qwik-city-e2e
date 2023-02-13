@@ -16,7 +16,7 @@ export default extendConfig(baseConfig, () => {
       vercelEdgeAdapter({
         ssg: {
           include: ["/static/*"],
-          maxWorkers: 1,
+          maxWorkers: 2,
         },
       }),
     ],
