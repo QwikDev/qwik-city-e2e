@@ -93,7 +93,7 @@ test("Endpoints as static files", async ({ page }, { config }) => {
   expect(rSend.headers()["content-type"]).toContain(`text/plain`);
   expect(await rSend.text()).toContain(`responsetext GET`);
 
-  const rCsv = (await page.goto("/endpoints/stream.csv"))!;
+  const rCsv = (await page.goto("/endpoints/stream.txt"))!;
   expect(rCsv.status()).toBe(200);
   expect(rCsv.headers()["content-type"]).toContain(`text/plain`);
   expect(await rCsv.text()).toContain(`stream012`);

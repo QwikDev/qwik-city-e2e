@@ -28,7 +28,7 @@ test("Endpoint html()", async ({ page }) => {
 });
 
 test("Endpoint getWritableStream()", async ({ page }) => {
-  const rsp = (await page.goto("/endpoints/stream.csv"))!;
+  const rsp = (await page.goto("/endpoints/stream.txt"))!;
   expect(rsp.status()).toBe(203);
   expect(rsp.headers()["content-type"]).toBe("text/plain; charset=utf-8");
 

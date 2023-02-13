@@ -25,7 +25,7 @@ export default component$(() => {
           <a href="/endpoints/response.txt">/endpoints/response.txt</a>
         </li>
         <li>
-          <a href="/endpoints/stream.csv">/endpoints/stream.csv</a>
+          <a href="/endpoints/stream.txt">/endpoints/stream.txt</a>
         </li>
       </ul>
       <p>
