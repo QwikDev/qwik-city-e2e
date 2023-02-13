@@ -191,7 +191,7 @@ async function workerRender(sys, opts, staticRoute, pendingPromises, callback) {
       getWritableStream: (status, headers, _, _r, requestEv) => {
         result.ok = status >= 200 && status < 300;
         if (!result.ok) {
-          return noopWriter;
+          return noopWritableStream;
         }
         const contentType = (headers.get("Content-Type") || "").toLowerCase();
         const isHtml = contentType.includes("text/html");
@@ -284,13 +284,14 @@ async function workerRender(sys, opts, staticRoute, pendingPromises, callback) {
         return stream;
       }
     };
-    const promise = (0, import_request_handler.requestHandler)(requestCtx, opts).then(async (rsp) => {
+    const promise = (0, import_request_handler.requestHandler)(requestCtx, opts).then((rsp) => {
       if (rsp != null) {
-        const r = await rsp.completion;
-        if (routeWriter) {
-          await closePromise;
-        }
-        return r;
+        return rsp.completion.then((r) => {
+          if (routeWriter) {
+            return closePromise.then(() => r);
+          }
+          return r;
+        });
       }
     }).then((e) => {
       if (e !== void 0) {
@@ -326,12 +327,33 @@ async function workerRender(sys, opts, staticRoute, pendingPromises, callback) {
     callback(result);
   }
 }
-var noopWriter = /* @__PURE__ */ new import_web2.WritableStream({
-  write() {
+var noopWriter = {
+  closed: Promise.resolve(void 0),
+  ready: Promise.resolve(void 0),
+  desiredSize: 0,
+  async close() {
   },
-  close() {
+  async abort() {
+  },
+  async write() {
+  },
+  releaseLock() {
   }
-});
+};
+var noopWritableStream = {
+  get locked() {
+    return false;
+  },
+  set locked(_) {
+  },
+  async abort() {
+  },
+  async close() {
+  },
+  getWriter() {
+    return noopWriter;
+  }
+};
 
 // packages/qwik-city/static/node/node-main.ts
 var import_meta = {};
@@ -350,11 +372,11 @@ async function createNodeMainProcess(sys, opts) {
   outDir = normalizePath(outDir);
   let maxWorkers = (0, import_node_os.cpus)().length;
   if (typeof opts.maxWorkers === "number") {
-    maxWorkers = Math.max(0, Math.min(opts.maxWorkers, maxWorkers));
+    maxWorkers = Math.max(1, Math.min(opts.maxWorkers, maxWorkers));
   }
   let maxTasksPerWorker = 20;
   if (typeof opts.maxTasksPerWorker === "number") {
-    maxTasksPerWorker = Math.max(0, Math.min(opts.maxTasksPerWorker, 50));
+    maxTasksPerWorker = Math.max(1, Math.min(opts.maxTasksPerWorker, 50));
   }
   let sitemapOutFile = opts.sitemapOutFile;
   if (sitemapOutFile !== null) {

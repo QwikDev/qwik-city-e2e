@@ -832,10 +832,8 @@ async function runNext(requestEv, resolve) {
     await requestEv.next();
   } catch (e) {
     if (e instanceof RedirectMessage) {
-      if (requestEv.isDirty()) {
-        const stream = requestEv.getWritableStream();
-        await stream.close();
-      }
+      const stream = requestEv.getWritableStream();
+      await stream.close();
     } else if (e instanceof ErrorResponse) {
       console.error(e);
       if (!requestEv.headersSent) {
