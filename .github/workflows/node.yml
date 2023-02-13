@@ -19,38 +19,38 @@ jobs:
       - name: Install NPM Dependencies
         run: npm install
 
-      # - name: Install Playwright
-      #   run: npx playwright install chromium --with-deps
+      - name: Install Playwright
+        run: npx playwright install chromium --with-deps
 
-      # - name: Test Dev Server MPA
-      #   run: npm run test.dev.mpa
+      - name: Test Dev Server MPA
+        run: npm run test.dev.mpa
 
-      # - name: Test Dev Server SPA
-      #   run: npm run test.dev.spa
+      - name: Test Dev Server SPA
+        run: npm run test.dev.spa
 
-      # - name: Build Vite Preview Server
-      #   run: npm run build.preview
+      - name: Build Vite Preview Server
+        run: npm run build.preview
 
-      # - name: Test Vite Preview Server MPA
-      #   run: npm run test.preview.mpa
+      - name: Test Vite Preview Server MPA
+        run: npm run test.preview.mpa
 
-      # - name: Test Vite Preview Server SPA
-      #   run: npm run test.preview.spa
+      - name: Test Vite Preview Server SPA
+        run: npm run test.preview.spa
 
-      # - name: Clear dist dir
-      #   run: rm -rf dist
+      - name: Clear dist dir
+        run: rm -rf dist
 
-      # - name: Build Express Server
-      #   run: npm run build.express
+      - name: Build Express Server
+        run: npm run build.express
 
-      # - name: Test Express Server MPA
-      #   run: npm run test.express.mpa
+      - name: Test Express Server MPA
+        run: npm run test.express.mpa
 
-      # - name: Test Express Server SPA
-      #   run: npm run test.express.spa
+      - name: Test Express Server SPA
+        run: npm run test.express.spa
 
-      # - name: Clear dist dir
-      #   run: rm -rf dist
+      - name: Clear dist dir
+        run: rm -rf dist
 
       - name: Build Static Server
         run: npm run build.static
