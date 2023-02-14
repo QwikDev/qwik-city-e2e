@@ -46,8 +46,8 @@
   },
   "devDependencies": {
     "@azure/static-web-apps-cli": "^1.0.6",
-    "@builder.io/qwik": "BuilderIO/qwik-build#b3ff08e4ce132e695040214987606f47194fd1a6",
-    "@builder.io/qwik-city": "BuilderIO/qwik-city-build#b3ff08e4ce132e695040214987606f47194fd1a6",
+    "@builder.io/qwik": "0.18.0",
+    "@builder.io/qwik-city": "0.2.0",
     "@builder.io/qwik-react": "0.2.1",
     "@emotion/react": "11.10.5",
     "@emotion/styled": "11.10.5",
