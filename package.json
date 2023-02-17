@@ -47,8 +47,8 @@
   },
   "devDependencies": {
     "@azure/static-web-apps-cli": "^1.0.6",
-    "@builder.io/qwik": "BuilderIO/qwik-build#370c0c0a0429c5190ca7d5036d2499012ddabfb6",
-    "@builder.io/qwik-city": "file:./local_modules/lib",
+    "@builder.io/qwik": "BuilderIO/qwik-build#5781f8a93bef50822c6dc40ad44a568a69810331",
+    "@builder.io/qwik-city": "BuilderIO/qwik-city-build#883e848da2b5633284db351e0b6dcde667e0c7b2",
     "@builder.io/qwik-react": "0.2.1",
     "@emotion/react": "11.10.5",
     "@emotion/styled": "11.10.5",
