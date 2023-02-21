@@ -49,7 +49,7 @@
     "@azure/static-web-apps-cli": "^1.0.6",
     "@builder.io/qwik": "BuilderIO/qwik-build#bd8a4844aab0aefb2013d3512e5e2106515f74dc",
     "@builder.io/qwik-city": "BuilderIO/qwik-city-build#6c0149fcc25ebbd95a4da707c7d07926bdde2b3b",
-    "@builder.io/qwik-react": "0.2.1",
+    "@builder.io/qwik-react": "0.3.0",
     "@emotion/react": "11.10.5",
     "@emotion/styled": "11.10.5",
     "@mui/material": "5.11.8",
