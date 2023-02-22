@@ -7,7 +7,15 @@ export default defineConfig(() => {
         optimizeDeps: {
             include: ["@mui/material"],
         },
-        plugins: [qwikCity(), qwikVite(), qwikReact()],
+        plugins: [
+            qwikCity({
+                routesDir: 'custom-src/routes'
+            }),
+            qwikVite({
+                srcDir: 'custom-src'
+            }),
+            qwikReact()
+        ],
         preview: {
             headers: {
                 "Cache-Control": "public, max-age=600",

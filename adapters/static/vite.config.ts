@@ -7,7 +7,7 @@ export default extendConfig(baseConfig, () => {
     build: {
       ssr: true,
       rollupOptions: {
-        input: ["src/entry.static.tsx", "@qwik-city-plan"],
+        input: ["custom-src/entry.static.tsx", "@qwik-city-plan"],
       },
       outDir: ".static",
       minify: false,

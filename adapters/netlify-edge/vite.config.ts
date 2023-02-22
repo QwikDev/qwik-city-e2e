@@ -7,7 +7,7 @@ export default extendConfig(baseConfig, () => {
     build: {
       ssr: true,
       rollupOptions: {
-        input: ["src/entry.netlify-edge.tsx", "@qwik-city-plan"],
+        input: ["custom-src/entry.netlify-edge.tsx", "@qwik-city-plan"],
       },
       outDir: ".netlify/edge-functions/entry.netlify-edge",
       minify: false,

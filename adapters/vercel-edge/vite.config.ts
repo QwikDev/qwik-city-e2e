@@ -7,7 +7,7 @@ export default extendConfig(baseConfig, () => {
     build: {
       ssr: true,
       rollupOptions: {
-        input: ["src/entry.vercel-edge.tsx", "@qwik-city-plan"],
+        input: ["custom-src/entry.vercel-edge.tsx", "@qwik-city-plan"],
       },
       outDir: ".vercel/output/functions/_qwik-city.func",
       minify: false,
