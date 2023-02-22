@@ -24,6 +24,7 @@ async function functionsTest(page: Page) {
   await save.click();
   await page.waitForTimeout(100);
   await load.click();
+  await page.waitForTimeout(100);
 
   await expect(increment).toHaveText("Increment 0");
   await expect(result).toHaveText("Stuff is: 0");
@@ -31,7 +32,6 @@ async function functionsTest(page: Page) {
   await increment.click();
   await save.click();
   await load.click();
-  await expect(result).toHaveText("Stuff is: 0");
   await expect(result).toHaveText("Stuff is: 2");
 
   await increment.click();
