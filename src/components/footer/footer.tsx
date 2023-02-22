@@ -22,6 +22,9 @@ export const Footer = component$(() => {
           <Link href="/static/idk/">Static Directory 404</Link>
         </li>
         <li>
+          <Link href="/functions/">Functions</Link>
+        </li>
+        <li>
           <Link href="/catchall/">Catchall</Link>
         </li>
         <li>
