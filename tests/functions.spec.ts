@@ -31,14 +31,19 @@ async function functionsTest(page: Page) {
 
   await increment.click();
   await save.click();
+  await page.waitForTimeout(100);
   await load.click();
+  await page.waitForTimeout(100);
   await expect(result).toHaveText("Stuff is: 2");
 
   await increment.click();
   await increment.click();
   await load.click();
+  await page.waitForTimeout(100);
   await expect(result).toHaveText("Stuff is: 4");
   await save.click();
+  await page.waitForTimeout(100);
   await load.click();
+  await page.waitForTimeout(100);
   await expect(result).toHaveText("Stuff is: 6");
 }
