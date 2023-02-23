@@ -11,7 +11,7 @@ const config: PlaywrightTestConfig = {
   use: {
     baseURL: "https://qwik-city-e2e.vercel.app/",
   },
-
+  retries: 2,
   webServer: undefined,
 };
 
