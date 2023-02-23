@@ -16,6 +16,7 @@ export default extendConfig(baseConfig, () => {
       staticAdapter({
         origin: "https://qwik-city-e2e.static.qwik.dev",
         maxWorkers: 1,
+        exclude: ["/errors/*"],
       }),
     ],
   };
