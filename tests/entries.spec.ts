@@ -16,7 +16,7 @@ test("service-worker.js", async ({ page }, { config }) => {
     return;
   }
 
-  const rsp = (await page.goto("/service-worker.js"))!;
+  const rsp = (await page.goto("/app/service-worker.js"))!;
   expect(rsp.status()).toBe(200);
   expect(rsp.headers()["content-type"]).toContain("javascript");
   expect(await rsp.text()).toContain("QwikBuild");
