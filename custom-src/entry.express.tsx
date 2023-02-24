@@ -29,10 +29,7 @@ const app = express();
 
 // Static asset handlers
 // https://expressjs.com/en/starter/static-files.html
-app.use(
-  `/app/build`,
-  express.static(buildDir, { immutable: true, maxAge: "1y" })
-);
+app.use(`/build`, express.static(buildDir, { immutable: true, maxAge: "1y" }));
 app.use(express.static(publicDir));
 app.use(express.static(distDir, { redirect: false }));
 
