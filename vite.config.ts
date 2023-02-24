@@ -6,9 +6,6 @@ import { qwikReact } from "@builder.io/qwik-react/vite";
 export default defineConfig(() => {
   return {
     base: "/app/",
-    build: {
-      outDir: "dist/app",
-    },
     optimizeDeps: {
       include: ["@mui/material"],
     },
@@ -18,6 +15,9 @@ export default defineConfig(() => {
       }),
       qwikVite({
         srcDir: "custom-src",
+        client: {
+          outDir: "dist/app",
+        },
       }),
       qwikReact(),
     ],

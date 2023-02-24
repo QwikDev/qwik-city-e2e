@@ -98,3 +98,11 @@ test("Endpoints as static files", async ({ page }, { config }) => {
   expect(rCsv.headers()["content-type"]).toContain(`text/plain`);
   expect(await rCsv.text()).toContain(`stream012`);
 });
+
+test("sitemap.xml", async ({ page }, { config }) => {
+  if (config.metadata.server === "dev") {
+    return;
+  }
+  const rsp = (await page.goto("/app/sitemap.xml"))!;
+  expect(rsp.status()).toBe(200);
+});
