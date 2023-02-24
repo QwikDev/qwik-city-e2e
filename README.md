@@ -10,37 +10,35 @@ The [package.json](https://github.com/BuilderIO/qwik-city-e2e/blob/main/package.
 
 ### Azure SWA
 
-https://blue-smoke-0a7cdfe10.2.azurestaticapps.net/
+https://blue-smoke-0a7cdfe10.2.azurestaticapps.net/app/
 
 ### Cloudflare Pages
 
-https://qwik-city-e2e.pages.dev/
+https://qwik-city-e2e.pages.dev/app/
 
 ### Netlify Edge
 
-https://qwik-city-e2e.netlify.app/
+https://qwik-city-e2e.netlify.app/app/
 
 ### Vercel Edge
 
-https://qwik-city-e2e.vercel.app/
+https://qwik-city-e2e.vercel.app/app/
 
 ## Node Servers
 
 ### Dev
 
     npm run dev
-    http://127.0.0.1:3000/
+    http://127.0.0.1:3000/app/
 
 ### Preview
 
-    npm run build.client
     npm run build.preview
-    npm run serve.express
-    http://127.0.0.1:3001/
+    npm run serve.preview
+    http://127.0.0.1:3001/app/
 
 ### Express
 
-    npm run build.client
-    npm run build.preview
-    npm run serve.preview
-    http://127.0.0.1:3002/
+    npm run build.express
+    npm run serve.express
+    http://127.0.0.1:3002/app/
