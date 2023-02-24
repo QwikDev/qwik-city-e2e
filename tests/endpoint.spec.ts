@@ -45,7 +45,7 @@ test("send(new Response())", async ({ page }) => {
 });
 
 test("Endpoint redirect()", async ({ page }) => {
-  await page.goto("/app/endpoints/redirect?url=/");
+  await page.goto("/app/endpoints/redirect?url=/app/");
   await expect(page.locator("h1")).toContainText("Homepage");
 });
 
