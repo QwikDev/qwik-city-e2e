@@ -6,9 +6,14 @@ export default component$(() => {
     <>
       <h1>Static</h1>
       <p>{new Date().toISOString()}</p>
-      <p>
-        <a href="/app/static/rss.xml">Static rss.xml feed</a>
-      </p>
+      <ul>
+        <li>
+          <a href="/app/static/rss.xml">Static rss.xml feed</a>
+        </li>
+        <li>
+          <a href="/app/sitemap.xml">sitemap.xml</a>
+        </li>
+      </ul>
     </>
   );
 });
