@@ -100,7 +100,10 @@ test("Endpoints as static files", async ({ page }, { config }) => {
 });
 
 test("sitemap.xml", async ({ page }, { config }) => {
-  if (config.metadata.server === "dev") {
+  if (
+    config.metadata.server === "dev" ||
+    config.metadata.server === "preview"
+  ) {
     return;
   }
   const rsp = (await page.goto("/app/sitemap.xml"))!;
