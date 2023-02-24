@@ -26,12 +26,6 @@ jobs:
       - name: Build Azure
         run: npm run build.azure
 
-      - name: Print dist Build
-        run: tree dist
-
-      - name: Print server Build
-        run: tree azure-functions
-
       - name: Deploy to Azure SWA
         run: npm run deploy.azure
         env:

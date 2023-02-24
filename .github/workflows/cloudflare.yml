@@ -26,12 +26,6 @@ jobs:
       - name: Build Cloudflare
         run: npm run build.cloudflare
 
-      - name: Print dist Build
-        run: tree dist
-
-      - name: Print server Build
-        run: tree server
-
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@1
         with:
