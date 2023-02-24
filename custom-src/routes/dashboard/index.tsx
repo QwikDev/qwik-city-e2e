@@ -19,7 +19,7 @@ export default component$(() => {
       </p>
       <ul>
         <li>
-          <Link href="/sign-out/">Sign out</Link>
+          <Link href="/app/sign-out/">Sign out</Link>
         </li>
       </ul>
     </>

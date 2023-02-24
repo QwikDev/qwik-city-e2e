@@ -2,10 +2,12 @@ import { expect, test } from "@playwright/test";
 import { appNavigationClick } from "./utils";
 
 test("sign-in", async ({ page }) => {
-  const rsp = (await page.goto("/sign-in/"))!;
+  const rsp = (await page.goto("/app/sign-in/"))!;
   expect(rsp.status()).toBe(200);
 
   await expect(page.locator("h1")).toContainText("Sign In");
+
+  await expect(page.locator("[data-sign-in-fail]")).not.toBeVisible();
 
   const signInForm = page.locator(`form[data-test="sign-in"]`);
   await expect(signInForm).toHaveCount(1);
@@ -22,10 +24,12 @@ test("sign-in", async ({ page }) => {
   const invalidSubmit = await appNavigationClick({
     page,
     clickElm: loginSubmit,
-    waitForPathResponse: "/sign-in/",
+    waitForPathResponse: "/app/sign-in/",
   });
   expect(invalidSubmit.status).toBe(403);
   expect(invalidSubmit.method).toBe("POST");
+
+  await expect(page.locator("[data-sign-in-fail]")).toBeVisible();
 
   // valid sign-in
   await username.fill("");
@@ -38,20 +42,20 @@ test("sign-in", async ({ page }) => {
   await appNavigationClick({
     page,
     clickElm: loginSubmit,
-    waitForPathResponse: "/dashboard/",
+    waitForPathResponse: "/app/dashboard/",
   });
   await expect(page.locator("h1")).toContainText("Dashboard");
 
   await expect(page.locator("[data-test-user-id]")).toHaveText("qwik");
 
   // go to sign-in, while signed-in, and should redirect back to dashboard
-  await Promise.all([page.waitForNavigation(), page.goto("/sign-in/")]);
+  await Promise.all([page.waitForNavigation(), page.goto("/app/sign-in/")]);
   await expect(page.locator("h1")).toContainText("Dashboard");
 
   // sign-out
-  await Promise.all([page.waitForNavigation(), page.goto("/sign-out/")]);
+  await Promise.all([page.waitForNavigation(), page.goto("/app/sign-out/")]);
   await expect(page.locator("h1")).toContainText("Homepage");
 
   // try to go to dashboard, while signed-out, and should redirect to sign-in
-  await Promise.all([page.waitForNavigation(), page.goto("/dashboard/")]);
+  await Promise.all([page.waitForNavigation(), page.goto("/app/dashboard/")]);
 });

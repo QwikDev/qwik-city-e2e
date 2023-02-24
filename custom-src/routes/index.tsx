@@ -13,20 +13,20 @@ export default component$(() => {
         {userData.value.isAuthenticated ? (
           <>
             <li>
-              <Link href="/dashboard/">Dashboard</Link>
+              <Link href="/app/dashboard/">Dashboard</Link>
             </li>
             <li>
-              <Link href="/sign-out/">Sign out</Link>
+              <Link href="/app/sign-out/">Sign out</Link>
             </li>
             <li>
-              <Link href="/sign-in/">
+              <Link href="/app/sign-in/">
                 Sign In (should redirect to dashboard)
               </Link>
             </li>
           </>
         ) : (
           <li>
-            <Link href="/sign-in/">Sign In</Link>
+            <Link href="/app/sign-in/">Sign In</Link>
           </li>
         )}
       </ul>

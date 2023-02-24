@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("index", async ({ page }) => {
-  const rsp = (await page.goto("/"))!;
+  const rsp = (await page.goto("/app/"))!;
   expect(rsp.status()).toBe(200);
 
   const headers = rsp.headers();

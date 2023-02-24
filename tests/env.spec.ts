@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("index", async ({ page }, { config }) => {
-  await page.goto("/env/");
+  await page.goto("/app/env/");
 
   if (config.metadata.server === "vercel") {
     // TODO: figure out why our Vercel build does not work with process.env

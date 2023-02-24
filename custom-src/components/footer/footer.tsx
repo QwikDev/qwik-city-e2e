@@ -7,34 +7,40 @@ export const Footer = component$(() => {
       <hr />
       <ul>
         <li>
-          <Link href="/env/">Env</Link>
+          <Link href="/app/env/">Env</Link>
         </li>
         <li>
-          <Link href="/endpoints/">Endpoints</Link>
+          <Link href="/app/endpoints/">Endpoints</Link>
         </li>
         <li>
-          <Link href="/static/">Static</Link>
+          <Link href="/app/static/">Static</Link>
         </li>
         <li>
-          <Link href="/idk/">Root Directory 404</Link>
+          <Link href="/app/idk/">Root Directory 404</Link>
         </li>
         <li>
-          <Link href="/static/idk/">Static Directory 404</Link>
+          <Link href="/app/static/idk/">Static Directory 404</Link>
         </li>
         <li>
-          <Link href="/functions/">Functions</Link>
+          <a href="/errors/component/">Errors Component</a>
         </li>
         <li>
-          <Link href="/catchall/">Catchall</Link>
+          <a href="/errors/loader/">Errors Loader</a>
         </li>
         <li>
-          <Link href="/endpoints">No trailing slash - redirected</Link>
+          <Link href="/app/functions/">Functions</Link>
         </li>
         <li>
-          <Link href="/react/">Qwik React</Link>
+          <Link href="/app/catchall/">Catchall</Link>
         </li>
         <li>
-          <Link href="/">Homepage</Link>
+          <Link href="/app/endpoints">No trailing slash - redirected</Link>
+        </li>
+        <li>
+          <Link href="/app/react/">Qwik React</Link>
+        </li>
+        <li>
+          <Link href="/app/">Homepage</Link>
         </li>
       </ul>
     </footer>

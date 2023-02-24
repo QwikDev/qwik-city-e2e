@@ -7,30 +7,30 @@ export default component$(() => {
       <h1>Endpoints</h1>
       <ul>
         <li>
-          <a href="/endpoints/data.html">/endpoints/data.html</a>
+          <a href="/app/endpoints/data.html">/endpoints/data.html</a>
         </li>
         <li>
-          <a href="/endpoints/data.json">/endpoints/data.json</a>
+          <a href="/app/endpoints/data.json">/endpoints/data.json</a>
         </li>
         <li>
-          <a href="/endpoints/data.txt">/endpoints/data.txt</a>
+          <a href="/app/endpoints/data.txt">/endpoints/data.txt</a>
         </li>
         <li>
-          <a href="/endpoints/image.png">/endpoints/image.png</a>
+          <a href="/app/endpoints/image.png">/endpoints/image.png</a>
         </li>
         <li>
-          <a href="/endpoints/redirect?url=/">/endpoints/redirect?url=/</a>
+          <a href="/app/endpoints/redirect?url=/">/endpoints/redirect?url=/</a>
         </li>
         <li>
-          <a href="/endpoints/response.txt">/endpoints/response.txt</a>
+          <a href="/app/endpoints/response.txt">/endpoints/response.txt</a>
         </li>
         <li>
-          <a href="/endpoints/stream.txt">/endpoints/stream.txt</a>
+          <a href="/app/endpoints/stream.txt">/endpoints/stream.txt</a>
         </li>
       </ul>
       <p>
-        <a href="/endpoints/image.png" target="_blank">
-          <img src={`/endpoints/image.png?v=${Math.random()}`} />
+        <a href="/app/endpoints/image.png" target="_blank">
+          <img src={`/app/endpoints/image.png?v=${Math.random()}`} />
         </a>
       </p>
     </div>

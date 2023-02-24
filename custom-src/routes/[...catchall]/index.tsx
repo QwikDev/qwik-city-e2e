@@ -10,7 +10,7 @@ export default component$(() => {
 });
 
 export const onGet: RequestHandler = ({ url, exit }) => {
-  if (url.pathname === "/catchall/") {
+  if (url.pathname === "/app/catchall/") {
     // special case catchall
     return;
   }

@@ -13,7 +13,7 @@ import {
 
 export const onGet: RequestHandler = async ({ redirect, cookie }) => {
   if (await isUserAuthenticated(cookie)) {
-    throw redirect(302, "/dashboard/");
+    throw redirect(302, "/app/dashboard/");
   }
 };
 
@@ -34,7 +34,7 @@ export const signinAction = action$(
         path: "/",
       });
 
-      throw redirect(301, "/dashboard/");
+      throw redirect(301, "/app/dashboard/");
     }
 
     return fail(403, {
@@ -48,7 +48,7 @@ export const resetPasswordAction = action$(async () => {
 });
 
 export default component$(() => {
-  const signIn = signinAction.use();
+  const signIn = signinAction();
   const resetPassword = resetPasswordAction.use();
 
   return (
@@ -56,7 +56,11 @@ export default component$(() => {
       <h1>Sign In</h1>
 
       <Form action={signIn} data-test="sign-in">
-        {signIn.fail?.message && <p style="color:red">{signIn.fail.message}</p>}
+        {signIn.value?.message && (
+          <p data-sign-in-fail style="color:red;font-weight:bold">
+            {signIn.value.message}
+          </p>
+        )}
         <p>
           <span>Username: </span>
           <input

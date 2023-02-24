@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("Endpoint json()", async ({ page }) => {
-  const rsp = (await page.goto("/endpoints/data.json"))!;
+  const rsp = (await page.goto("/app/endpoints/data.json"))!;
   expect(rsp.status()).toBe(200);
   expect(rsp.headers()["content-type"]).toBe("application/json; charset=utf-8");
 
@@ -10,7 +10,7 @@ test("Endpoint json()", async ({ page }) => {
 });
 
 test("Endpoint text()", async ({ page }) => {
-  const rsp = (await page.goto("/endpoints/data.txt"))!;
+  const rsp = (await page.goto("/app/endpoints/data.txt"))!;
   expect(rsp.status()).toBe(202);
   expect(rsp.headers()["content-type"]).toBe("text/plain; charset=utf-8");
 
@@ -19,7 +19,7 @@ test("Endpoint text()", async ({ page }) => {
 });
 
 test("Endpoint html()", async ({ page }) => {
-  const rsp = (await page.goto("/endpoints/data.html"))!;
+  const rsp = (await page.goto("/app/endpoints/data.html"))!;
   expect(rsp.status()).toBe(201);
   expect(rsp.headers()["content-type"]).toBe("text/html; charset=utf-8");
 
@@ -28,7 +28,7 @@ test("Endpoint html()", async ({ page }) => {
 });
 
 test("Endpoint getWritableStream()", async ({ page }) => {
-  const rsp = (await page.goto("/endpoints/stream.txt"))!;
+  const rsp = (await page.goto("/app/endpoints/stream.txt"))!;
   expect(rsp.status()).toBe(203);
   expect(rsp.headers()["content-type"]).toBe("text/plain; charset=utf-8");
 
@@ -37,7 +37,7 @@ test("Endpoint getWritableStream()", async ({ page }) => {
 });
 
 test("send(new Response())", async ({ page }) => {
-  const rsp = (await page.goto("/endpoints/response.txt"))!;
+  const rsp = (await page.goto("/app/endpoints/response.txt"))!;
   expect(rsp.headers()["content-type"]).toBe("text/plain; charset=utf-8");
 
   const data = await rsp.text();
@@ -45,12 +45,12 @@ test("send(new Response())", async ({ page }) => {
 });
 
 test("Endpoint redirect()", async ({ page }) => {
-  await page.goto("/endpoints/redirect?url=/");
+  await page.goto("/app/endpoints/redirect?url=/");
   await expect(page.locator("h1")).toContainText("Homepage");
 });
 
 test("Endpoint <img>", async ({ page }) => {
-  await page.goto("/endpoints/", { waitUntil: "networkidle" });
+  await page.goto("/app/endpoints/", { waitUntil: "networkidle" });
   const img = page.locator("img");
   await expect(img).toHaveJSProperty("clientWidth", 256);
   await expect(img).toHaveJSProperty("clientHeight", 79);

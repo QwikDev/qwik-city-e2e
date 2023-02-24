@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("static", async ({ page }, { config }) => {
-  const rsp = (await page.goto("/static/"))!;
+  const rsp = (await page.goto("/app/static/"))!;
   expect(rsp.status()).toBe(200);
 
   await expect(page.locator("h1")).toContainText("Static");
@@ -23,18 +23,18 @@ test("static q-data.json", async ({ page }, { config }) => {
     config.metadata.server !== "dev" &&
     config.metadata.server !== "preview"
   ) {
-    const rsp = (await page.goto("/static/q-data.json"))!;
+    const rsp = (await page.goto("/app/static/q-data.json"))!;
     expect(rsp.status()).toBe(200);
   }
 });
 
 test("public static asset, favicon.ico", async ({ page }) => {
-  const rsp = (await page.goto("/favicon.ico"))!;
+  const rsp = (await page.goto("/app/favicon.ico"))!;
   expect(rsp.status()).toBe(200);
 });
 
 test("Static endpoint rss.xml feed", async ({ page }) => {
-  const rsp = (await page.goto("/static/rss.xml"))!;
+  const rsp = (await page.goto("/app/static/rss.xml"))!;
   expect(rsp.status()).toBe(200);
 
   const data = await rsp.text();
@@ -44,13 +44,13 @@ test("Static endpoint rss.xml feed", async ({ page }) => {
 test("Static endpoint /list/ as html response", async ({ page }, {
   config,
 }) => {
-  const rsp = (await page.goto("/static/html-endpoint/"))!;
+  const rsp = (await page.goto("/app/static/html-endpoint/"))!;
   expect(rsp.status()).toBe(200);
   expect(rsp.headers()["content-type"]).toContain(`text/html`);
   expect(await rsp.text()).toContain(`html-endpoint`);
 
   if (config.metadata.server === "static") {
-    const rsp2 = (await page.goto("/static/html-endpoint/index.html"))!;
+    const rsp2 = (await page.goto("/app/static/html-endpoint/index.html"))!;
     expect(rsp2.status()).toBe(200);
     expect(rsp2.headers()["content-type"]).toContain(`text/html`);
     expect(await rsp2.text()).toContain(`html-endpoint`);
@@ -63,37 +63,37 @@ test("Endpoints as static files", async ({ page }, { config }) => {
     return;
   }
 
-  const rHtml = (await page.goto("/endpoints/data.html"))!;
+  const rHtml = (await page.goto("/app/endpoints/data.html"))!;
   expect(rHtml.status()).toBe(200);
   expect(rHtml.headers()["content-type"]).toContain(`text/html`);
   expect(await rHtml.text()).toContain(`html GET`);
 
-  const rJson = (await page.goto("/endpoints/data.json"))!;
+  const rJson = (await page.goto("/app/endpoints/data.json"))!;
   expect(rJson.status()).toBe(200);
   expect(rJson.headers()["content-type"]).toContain(`json`);
   const dJson = await rJson.json();
   expect(dJson.method).toBe(`GET`);
 
-  const rTxt = (await page.goto("/endpoints/data.txt"))!;
+  const rTxt = (await page.goto("/app/endpoints/data.txt"))!;
   expect(rTxt.headers()["content-type"]).toContain(`text/plain`);
   expect(rTxt.status()).toBe(200);
   expect(await rTxt.text()).toContain(`text GET`);
 
-  const rPng = (await page.goto("/endpoints/image.png"))!;
+  const rPng = (await page.goto("/app/endpoints/image.png"))!;
   expect(rPng.headers()["content-type"]).toContain(`image/png`);
   expect(rPng.status()).toBe(200);
 
-  const rIndexHtml = (await page.goto("/endpoints/index.html"))!;
+  const rIndexHtml = (await page.goto("/app/endpoints/index.html"))!;
   expect(rIndexHtml.status()).toBe(200);
   expect(rIndexHtml.headers()["content-type"]).toContain(`text/html`);
   expect(await rIndexHtml.text()).toContain(`<h1>Endpoints</h1>`);
 
-  const rSend = (await page.goto("/endpoints/response.txt"))!;
+  const rSend = (await page.goto("/app/endpoints/response.txt"))!;
   expect(rSend.status()).toBe(200);
   expect(rSend.headers()["content-type"]).toContain(`text/plain`);
   expect(await rSend.text()).toContain(`responsetext GET`);
 
-  const rCsv = (await page.goto("/endpoints/stream.txt"))!;
+  const rCsv = (await page.goto("/app/endpoints/stream.txt"))!;
   expect(rCsv.status()).toBe(200);
   expect(rCsv.headers()["content-type"]).toContain(`text/plain`);
   expect(await rCsv.text()).toContain(`stream012`);

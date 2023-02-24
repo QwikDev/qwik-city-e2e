@@ -1,15 +1,21 @@
 import { expect, Page, test } from "@playwright/test";
 
-test("navigate to /functions/ from root and run test", async ({ page, javaScriptEnabled }) => {
-  await page.goto("/");
+test("navigate to /app/functions/ from root and run test", async ({
+  page,
+  javaScriptEnabled,
+}) => {
+  await page.goto("/app/");
   if (javaScriptEnabled) {
     await page.click("text=Functions");
     await functionsTest(page);
   }
 });
 
-test("navigate to /functions/ and run test", async ({ page, javaScriptEnabled }) => {
-  await page.goto("/functions/");
+test("navigate to /app/functions/ and run test", async ({
+  page,
+  javaScriptEnabled,
+}) => {
+  await page.goto("/app/functions/");
   if (javaScriptEnabled) {
     await functionsTest(page);
   }
