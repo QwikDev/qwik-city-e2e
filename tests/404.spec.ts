@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("nested directory 404", async ({ page }, { config }) => {
-  const rsp = (await page.goto("/static/idk/"))!;
+  const rsp = (await page.goto("/app/static/idk/"))!;
   expect(rsp.status()).toBe(404);
 
   if (
@@ -16,7 +16,7 @@ test("nested directory 404", async ({ page }, { config }) => {
 });
 
 test("root directory 404", async ({ page }, { config }) => {
-  const rsp = (await page.goto("/idk/"))!;
+  const rsp = (await page.goto("/app/idk/"))!;
   expect(rsp.status()).toBe(404);
 
   if (
