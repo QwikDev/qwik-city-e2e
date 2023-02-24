@@ -1,6 +1,6 @@
 import type { RequestHandler } from "@builder.io/qwik-city";
 
-export const onRequest: RequestHandler = ({
+export const onRequest: RequestHandler = async ({
   headers,
   getWritableStream,
   status,
@@ -10,14 +10,15 @@ export const onRequest: RequestHandler = ({
   const { writable, readable } = new TextEncoderStream();
   readable.pipeTo(getWritableStream());
   const stream = writable.getWriter();
-  stream.write(`stream`);
-  setTimeout(() => {
-    stream.write(`0`);
-    setTimeout(() => {
-      stream.write(`1`);
-      setTimeout(() => {
-        stream.write(`2`);
-        stream.close();
+
+  await stream.write(`stream`);
+  setTimeout(async () => {
+    await stream.write(`0`);
+    setTimeout(async () => {
+      await stream.write(`1`);
+      setTimeout(async () => {
+        await stream.write(`2`);
+        await stream.close();
       }, 100);
     }, 100);
   }, 100);

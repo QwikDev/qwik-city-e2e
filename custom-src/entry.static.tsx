@@ -20,12 +20,15 @@ app.use(compression());
 
 // Static asset handlers
 // https://expressjs.com/en/starter/static-files.html
-app.use(`/build`, express.static(buildDir, { immutable: true, maxAge: "1y" }));
+app.use(
+  `/app/build`,
+  express.static(buildDir, { immutable: true, maxAge: "1y" })
+);
 app.use(express.static(publicDir));
 app.use(express.static(distDir, { redirect: false }));
 
 // Start the express server
 app.listen(PORT, () => {
   /* eslint-disable */
-  console.log(`Server starter: http://localhost:${PORT}/`);
+  console.log(`Server starter: http://localhost:${PORT}/app/`);
 });
