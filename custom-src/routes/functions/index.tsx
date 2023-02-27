@@ -1,6 +1,6 @@
 import { component$, useSignal } from '@builder.io/qwik';
 import { server$ } from '@builder.io/qwik-city';
-
+import { getItems } from './functions';
 
 let globalDB = {count: 0};
 
@@ -8,6 +8,7 @@ export default component$(() => {
 
   const counter = useSignal(0);
   const message = useSignal('');
+  const items = useSignal<string[]>([]);
 
   return (
     <>
@@ -33,11 +34,17 @@ export default component$(() => {
       <p id="result">
         {message.value}
       </p>
+      <button onClick$={async () => {
+        items.value = await getItems(counter.value);
+      }}>Get items</button>
+      <ul>
+        {items.value.map(item => <li>{item}</li>)}
+      </ul>
 
     </>
   );
 })
 
-const getstuff = server$((_, nu: number) => {
+const getstuff = server$((nu: number) => {
   return globalDB.count + nu;
 })
