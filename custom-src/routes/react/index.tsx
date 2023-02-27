@@ -48,6 +48,7 @@ export default component$(() => {
       {show.value && (
         <TableApp client:visible>Slider is {count.value}</TableApp>
       )}
+      <h4 class="finished-qwik">Everything rendered</h4>
     </>
   );
 });

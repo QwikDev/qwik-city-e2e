@@ -5,4 +5,5 @@ test("qwik react", async ({ page }) => {
   expect(rsp.status()).toBe(200);
 
   await expect(page.locator("h1")).toContainText("Qwik React");
+  await expect(page.locator(".finished-qwik")).toHaveText("Everything rendered");
 });
