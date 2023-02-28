@@ -13,8 +13,9 @@
 import { createQwikCity } from "@builder.io/qwik-city/middleware/node";
 import render from "./entry.ssr";
 import qwikCityPlan from "@qwik-city-plan";
+import { manifest } from "@qwik-client-manifest";
 
 /**
  * The default export is the QwikCity adapter used by Vite preview.
  */
-export default createQwikCity({ render, qwikCityPlan });
+export default createQwikCity({ render, qwikCityPlan, manifest });

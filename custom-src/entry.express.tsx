@@ -4,6 +4,8 @@ import render from "./entry.ssr";
 import express from "express";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
+import { manifest } from "@qwik-client-manifest";
+
 import compression from "compression";
 
 // Directories where the static assets are located
@@ -18,6 +20,7 @@ const PORT = process.env.PORT ?? 3002;
 const { router, notFound, staticFile } = createQwikCity({
   render,
   qwikCityPlan,
+  manifest,
 });
 
 // Create the express server
