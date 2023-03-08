@@ -3,8 +3,8 @@ import { DocumentHead, Link } from "@builder.io/qwik-city";
 import { rootLoader, userLoader } from "./layout";
 
 export default component$(() => {
-  const rootData = rootLoader.use();
-  const userData = userLoader.use();
+  const rootData = rootLoader();
+  const userData = userLoader();
   return (
     <>
       <h1>Homepage</h1>

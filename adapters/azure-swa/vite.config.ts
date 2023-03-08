@@ -23,6 +23,7 @@ export default extendConfig(baseConfig, () => {
       azureSwaAdapter({
         ssg: {
           include: ["/static/*"],
+          origin: "https://qwik-city.azurewebsites.net",
         },
       }),
     ],

@@ -109,3 +109,44 @@ test("sitemap.xml", async ({ page }, { config }) => {
   const rsp = (await page.goto("/app/sitemap.xml"))!;
   expect(rsp.status()).toBe(200);
 });
+
+test("static origin", async ({ page }, { config }) => {
+  await page.goto("/app/static/");
+
+  if (config.metadata.server === "azure") {
+    await expect(page.locator("[data-static]")).toContainText(
+      "blue-smoke-0a7cdfe10.2.azurestaticapps.net"
+    );
+    return;
+  }
+
+  if (config.metadata.server === "cloudflare") {
+    await expect(page.locator("[data-static]")).toContainText(
+      "https://qwik-city-e2e.pages.dev"
+    );
+  }
+
+  if (config.metadata.server === "express") {
+    await expect(page.locator("[data-static]")).toContainText(
+      "https://express.qwik.dev"
+    );
+  }
+
+  if (config.metadata.server === "netlify") {
+    await expect(page.locator("[data-static]")).toContainText(
+      "https://qwik-city-e2e.netlify.app"
+    );
+  }
+
+  if (config.metadata.server === "static") {
+    await expect(page.locator("[data-static]")).toContainText(
+      "https://qwik-city-e2e.static.qwik.dev"
+    );
+  }
+
+  if (config.metadata.server === "vercel") {
+    await expect(page.locator("[data-static]")).toContainText(
+      "https://qwik-city-e2e.vercel.app"
+    );
+  }
+});

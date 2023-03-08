@@ -15,6 +15,7 @@ export default extendConfig(baseConfig, () => {
       cloudflarePagesAdapter({
         ssg: {
           include: ["/static/*"],
+          origin: "https://qwik-city-e2e.pages.dev",
         },
       }),
     ],

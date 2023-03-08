@@ -16,6 +16,7 @@ export default extendConfig(baseConfig, () => {
       netifyEdgeAdapter({
         ssg: {
           include: ["/static/*"],
+          origin: "https://qwik-city-e2e.netlify.app",
         },
       }),
     ],

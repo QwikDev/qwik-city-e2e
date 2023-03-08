@@ -16,6 +16,7 @@ export default extendConfig(baseConfig, () => {
       expressAdapter({
         ssg: {
           include: ["/static/*"],
+          origin: "https://express.qwik.dev",
         },
       }),
     ],

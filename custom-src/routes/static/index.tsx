@@ -1,10 +1,23 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import { routeLoader$ } from "@builder.io/qwik-city";
+
+export const originLoader = routeLoader$(({ url }) => {
+  return {
+    origin: url.origin,
+  };
+});
 
 export default component$(() => {
+  const originData = originLoader();
+
   return (
     <>
       <h1>Static</h1>
+      <p>
+        <span>origin: </span>
+        <span data-origin>{originData.value.origin}</span>
+      </p>
       <p>{new Date().toISOString()}</p>
       <ul>
         <li>
