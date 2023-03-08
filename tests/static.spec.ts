@@ -114,39 +114,44 @@ test("static origin", async ({ page }, { config }) => {
   await page.goto("/app/static/");
 
   if (config.metadata.server === "azure") {
-    await expect(page.locator("[data-static]")).toContainText(
+    await expect(page.locator("[data-origin]")).toContainText(
       "blue-smoke-0a7cdfe10.2.azurestaticapps.net"
     );
     return;
   }
 
   if (config.metadata.server === "cloudflare") {
-    await expect(page.locator("[data-static]")).toContainText(
+    await expect(page.locator("[data-origin]")).toContainText(
       "https://qwik-city-e2e.pages.dev"
     );
+    return;
   }
 
   if (config.metadata.server === "express") {
-    await expect(page.locator("[data-static]")).toContainText(
+    await expect(page.locator("[data-origin]")).toContainText(
       "https://express.qwik.dev"
     );
+    return;
   }
 
   if (config.metadata.server === "netlify") {
-    await expect(page.locator("[data-static]")).toContainText(
+    await expect(page.locator("[data-origin]")).toContainText(
       "https://qwik-city-e2e.netlify.app"
     );
+    return;
   }
 
   if (config.metadata.server === "static") {
-    await expect(page.locator("[data-static]")).toContainText(
+    await expect(page.locator("[data-origin]")).toContainText(
       "https://qwik-city-e2e.static.qwik.dev"
     );
+    return;
   }
 
   if (config.metadata.server === "vercel") {
-    await expect(page.locator("[data-static]")).toContainText(
+    await expect(page.locator("[data-origin]")).toContainText(
       "https://qwik-city-e2e.vercel.app"
     );
+    return;
   }
 });
