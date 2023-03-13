@@ -1,4 +1,4 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import { component$, useSignal, useTask$ } from '@builder.io/qwik';
 import { server$ } from '@builder.io/qwik-city';
 import { getItems } from './functions';
 
@@ -7,15 +7,21 @@ let globalDB = {count: 0};
 export default component$(() => {
 
   const counter = useSignal(0);
+  const counterDoubled = useSignal(0);
+
   const message = useSignal('');
   const items = useSignal<string[]>([]);
 
+  useTask$(async ({track}) => {
+    const nu = track(() => counter.value);
+    counterDoubled.value = await computeOnTheServer(nu);
+  });
   return (
     <>
       <button id="increment" onClick$={() => {
         counter.value++;
       }}>
-        Increment {counter.value}
+        Increment {counter.value} {counterDoubled.value}
       </button>
 
       <button id="save" onClick$={server$(() => {
@@ -47,4 +53,8 @@ export default component$(() => {
 
 const getstuff = server$((nu: number) => {
   return globalDB.count + nu;
+});
+
+const computeOnTheServer = server$((nu: number) => {
+  return nu * 2;
 })

@@ -32,10 +32,11 @@ async function functionsTest(page: Page) {
   await load.click();
   await page.waitForTimeout(100);
 
-  await expect(increment).toHaveText("Increment 0");
+  await expect(increment).toHaveText("Increment 0 0");
   await expect(result).toHaveText("Stuff is: 0");
 
   await increment.click();
+  await expect(increment).toHaveText("Increment 1 2");
   await save.click();
   await page.waitForTimeout(100);
   await load.click();
@@ -43,7 +44,9 @@ async function functionsTest(page: Page) {
   await expect(result).toHaveText("Stuff is: 2");
 
   await increment.click();
+  await expect(increment).toHaveText("Increment 2 4");
   await increment.click();
+  await expect(increment).toHaveText("Increment 3 6");
   await load.click();
   await page.waitForTimeout(100);
   await expect(result).toHaveText("Stuff is: 4");
