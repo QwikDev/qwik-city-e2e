@@ -2,7 +2,8 @@ name: Azure SWA Server
 
 on:
   push:
-
+  repository_dispatch:
+    types: [main-updated]
 jobs:
   test:
     name: Test Azure Server

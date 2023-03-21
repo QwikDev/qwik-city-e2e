@@ -2,6 +2,8 @@ name: Netlify Server
 
 on:
   push:
+  repository_dispatch:
+    types: [main-updated]
 
 jobs:
   test:
