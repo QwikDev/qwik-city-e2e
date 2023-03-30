@@ -1,7 +1,7 @@
 import { component$ } from "@builder.io/qwik";
-import { loader$ } from "@builder.io/qwik-city";
+import { routeLoader$ } from "@builder.io/qwik-city";
 
-export const usetData = loader$(() => {
+export const useSetData = routeLoader$(() => {
   const a = 0 / 0;
   if (Number.isNaN(a)) {
     throw new Error("Is NaN");
@@ -12,7 +12,7 @@ export const usetData = loader$(() => {
 });
 
 export default component$(() => {
-  const data = usetData();
+  const data = useSetData();
 
   return <div>{data.value.title}</div>;
 });

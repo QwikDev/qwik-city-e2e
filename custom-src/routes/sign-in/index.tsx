@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import {
-  action$,
+  globalAction$,
   DocumentHead,
   Form,
   RequestHandler,
@@ -17,7 +17,7 @@ export const onGet: RequestHandler = async ({ redirect, cookie }) => {
   }
 };
 
-export const signinAction = action$(
+export const useSigninAction = globalAction$(
   async ({ username, password }, { cookie, redirect, fail }) => {
     if (username == "qwik" && password == "dev") {
       // super secret username/password (Testing purposes only, DO NOT DO THIS!!)
@@ -43,13 +43,13 @@ export const signinAction = action$(
   }
 );
 
-export const resetPasswordAction = action$(async () => {
+export const useResetPasswordAction = globalAction$(async () => {
   console.warn("resetPasswordAction");
 });
 
 export default component$(() => {
-  const signIn = signinAction();
-  const resetPassword = resetPasswordAction.use();
+  const signIn = useSigninAction();
+  const resetPassword = useResetPasswordAction();
 
   return (
     <>

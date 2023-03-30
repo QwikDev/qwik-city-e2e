@@ -2,14 +2,14 @@ import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { routeLoader$ } from "@builder.io/qwik-city";
 
-export const originLoader = routeLoader$(({ url }) => {
+export const useOriginLoader = routeLoader$(({ url }) => {
   return {
     origin: url.origin,
   };
 });
 
 export default component$(() => {
-  const originData = originLoader();
+  const originData = useOriginLoader();
 
   return (
     <>

@@ -43,6 +43,7 @@
     "test.static.mpa": "APP=mpa playwright test tests/static.spec.ts --config playwright.static.config.ts",
     "test.static.spa": "APP=spa playwright test tests/static.spec.ts --config playwright.static.config.ts",
     "test.unit": "vitest run components",
+    "test.unit.ui": "vitest --ui components",
     "test.vercel.mpa": "APP=mpa playwright test tests --config playwright.vercel.config.ts",
     "test.vercel.spa": "APP=spa playwright test tests --config playwright.vercel.config.ts",
     "qwik": "qwik"
@@ -73,5 +74,8 @@
     "vite": "4.1.1",
     "vitest": "^0.28.5",
     "wrangler": "^2.9.0"
+  },
+  "dependencies": {
+    "@vitest/ui": "^0.29.7"
   }
 }

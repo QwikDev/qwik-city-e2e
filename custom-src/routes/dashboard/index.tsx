@@ -1,15 +1,15 @@
 import { component$ } from "@builder.io/qwik";
-import { DocumentHead, Link, loader$ } from "@builder.io/qwik-city";
+import { DocumentHead, Link, routeLoader$ } from "@builder.io/qwik-city";
 import { USER_COOKIE_NAME } from "../../auth/auth";
 
-export const userLoader = loader$(({ cookie }) => {
+export const useUserLoader = routeLoader$(({ cookie }) => {
   return {
     userId: cookie.get(USER_COOKIE_NAME)?.value || "unknown",
   };
 });
 
 export default component$(() => {
-  const userData = userLoader.use();
+  const userData = useUserLoader();
   return (
     <>
       <h1>Dashboard</h1>
