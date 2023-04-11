@@ -25,14 +25,16 @@ test("static onStaticGenerate", async ({ page }, { config }) => {
   ) {
     return;
   }
-  let rsp = (await page.goto("/static/getting-started/"))!;
-  expect(rsp.status()).toBe(200);
-  await expect(page.locator("h1")).toContainText("/static/getting-started/");
-
-  rsp = (await page.goto("/static//pages/file-structure/"))!;
+  let rsp = (await page.goto("/static/docs/getting-started/"))!;
   expect(rsp.status()).toBe(200);
   await expect(page.locator("h1")).toContainText(
-    "/static/pages/file-structure/"
+    "/static/docs/getting-started/"
+  );
+
+  rsp = (await page.goto("/static/docs//pages/file-structure/"))!;
+  expect(rsp.status()).toBe(200);
+  await expect(page.locator("h1")).toContainText(
+    "/static/docs/pages/file-structure/"
   );
 });
 

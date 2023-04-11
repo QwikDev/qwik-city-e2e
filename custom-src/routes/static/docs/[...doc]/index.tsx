@@ -5,10 +5,10 @@ export const onStaticGenerate: StaticGenerateHandler = async () => {
   return {
     params: [
       {
-        doc: "/getting-started",
+        doc: "getting-started",
       },
       {
-        doc: "/pages/file-structure",
+        doc: "pages/file-structure",
       },
     ],
   };
