@@ -18,6 +18,24 @@ test("static", async ({ page }, { config }) => {
   }
 });
 
+test("static onStaticGenerate", async ({ page }, { config }) => {
+  if (
+    config.metadata.server === "dev" ||
+    config.metadata.server === "preview"
+  ) {
+    return;
+  }
+  let rsp = (await page.goto("/static/getting-started/"))!;
+  expect(rsp.status()).toBe(200);
+  await expect(page.locator("h1")).toContainText("/static/getting-started/");
+
+  rsp = (await page.goto("/static//pages/file-structure/"))!;
+  expect(rsp.status()).toBe(200);
+  await expect(page.locator("h1")).toContainText(
+    "/static/pages/file-structure/"
+  );
+});
+
 test("static q-data.json", async ({ page }, { config }) => {
   if (
     config.metadata.server !== "dev" &&
