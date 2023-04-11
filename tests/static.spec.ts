@@ -31,7 +31,7 @@ test("static onStaticGenerate", async ({ page }, { config }) => {
     "/app/static/docs/getting-started/"
   );
 
-  rsp = (await page.goto("/app/static/docs//pages/file-structure/"))!;
+  rsp = (await page.goto("/app/static/docs/pages/file-structure/"))!;
   expect(rsp.status()).toBe(200);
   await expect(page.locator("h1")).toContainText(
     "/app/static/docs/pages/file-structure/"
