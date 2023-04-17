@@ -175,3 +175,16 @@ test("static origin", async ({ page }, { config }) => {
     return;
   }
 });
+
+test("Static Link navigate", async ({ page }, { config }) => {
+  await page.goto("/app/static/");
+  const link = page.locator(`a[data-test="static-docs"]`);
+  await link.click();
+
+  await expect(page.locator("h1")).toContainText(
+    "/app/static/docs/getting-started/"
+  );
+  expect(new URL(page.url()).pathname).toEqual(
+    "/app/static/docs/getting-started/"
+  );
+});
