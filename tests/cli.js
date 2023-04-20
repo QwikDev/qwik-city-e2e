@@ -12,7 +12,7 @@ async function testCreateQwik(starterId) {
 
   const result = await createApp(opts);
   console.log(app, "created:", result);
-  await exec(app, "pnpm", ["install"], result.outDir);
+  await exec(app, "npm", ["install"], result.outDir);
 }
 
 async function exec(app, cmd, args, cwd) {
