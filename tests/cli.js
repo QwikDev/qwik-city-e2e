@@ -3,20 +3,24 @@ const { join } = require("path");
 const { spawn } = require("child_process");
 
 async function testCreateQwik(starterId) {
-  let name = `my-${starterId}-app`;
+  let app = `my-${starterId}-app`;
   const opts = {
-    projectName: `my-${starterId}-app`,
+    projectName: app,
     starterId: starterId,
-    outDir: join(__dirname, "..", "dist", name),
+    outDir: join(__dirname, "..", "dist", app),
   };
 
   const result = await createApp(opts);
-  console.log("created:", result);
+  console.log(app, "created:", result);
+  await exec(app, "pnpm", ["install"], result.outDir);
+}
 
-  console.log("npm install:", result.outDir);
-  const child = spawn("npm", ["install"], { cwd: result.outDir });
+async function exec(app, cmd, args, cwd) {
+  console.log(`${app}: ${cmd} ${args.join(" ")} (${cwd})`);
+
+  const child = spawn(cmd, args, { cwd });
   child.on("error", (err) => {
-    console.error(`❌ Error executing npm install: ${err}`);
+    console.error(`❌ Error executing ${app} ${cmd} ${args.join(" ")}: ${err}`);
     process.exit(1);
   });
 
@@ -26,10 +30,12 @@ async function testCreateQwik(starterId) {
 
   child.on("close", (code) => {
     if (code !== 0) {
-      console.error(`❌ npm install failed with code ${code}`);
+      console.error(
+        `❌ ${app}: ${cmd} ${args.join(" ")} failed with code ${code}`
+      );
       process.exit(1);
     } else {
-      console.log(`npm install completed successfully`);
+      console.log(`${app}: ${cmd} ${args.join(" ")} completed successfully`);
     }
   });
 }
