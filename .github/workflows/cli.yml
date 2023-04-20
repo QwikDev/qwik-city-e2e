@@ -23,7 +23,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: Install NPM Dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Run Create Qwik CLI
         run: node ./tests/cli.js
