@@ -1,0 +1,25 @@
+name: Create Qwik CLI
+
+on:
+  push:
+  repository_dispatch:
+    types: [main-updated]
+
+jobs:
+  test:
+    name: Test Create Qwik CLI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install NPM Dependencies
+        run: npm install
+
+      - name: Run Create Qwik CLI
+        run: node ./tests/cli.js
