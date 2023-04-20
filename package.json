@@ -87,5 +87,6 @@
   },
   "dependencies": {
     "@vitest/ui": "^0.29.7"
-  }
+  },
+  "packageManager": "pnpm@7.25.1"
 }
