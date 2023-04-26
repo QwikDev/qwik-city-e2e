@@ -23,6 +23,14 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "build.static",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/node_modules/vite/bin/vite.js",
+      "args": ["build", "-c", "adapters/static/vite.config.ts"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "dev",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/node_modules/vite/bin/vite.js",
