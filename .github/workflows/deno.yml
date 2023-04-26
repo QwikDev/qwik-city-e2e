@@ -1,0 +1,39 @@
+name: Deno Server
+
+on:
+  push:
+  repository_dispatch:
+    types: [main-updated]
+
+jobs:
+  test:
+    name: Test Deno Server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Install NPM Dependencies
+        run: npm install
+
+      - name: Install Playwright
+        run: npx playwright install chromium --with-deps
+
+      - name: Build Deno Server
+        run: npm run build.deno
+
+      - name: Test Deno Server MPA
+        run: npm run test.deno.mpa
+
+      - name: Test Deno Server SPA
+        run: npm run test.deno.spa
