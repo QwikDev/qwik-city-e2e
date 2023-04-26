@@ -1,4 +1,4 @@
-import { nodeServerAdapter } from "@builder.io/qwik-city/adapters/node-server/vite";
+import { denoServerAdapter } from "@builder.io/qwik-city/adapters/deno-server/vite";
 import { extendConfig } from "@builder.io/qwik-city/vite";
 import baseConfig from "../../vite.config";
 
@@ -7,16 +7,16 @@ export default extendConfig(baseConfig, () => {
     build: {
       ssr: true,
       rollupOptions: {
-        input: ["custom-src/entry.express.tsx", "@qwik-city-plan"],
+        input: ["custom-src/entry.deno.tsx", "@qwik-city-plan"],
       },
-      outDir: ".express",
+      outDir: ".deno",
       minify: false,
     },
     plugins: [
-      nodeServerAdapter({
+      denoServerAdapter({
         ssg: {
           include: ["/static/*"],
-          origin: "https://express.qwik.dev",
+          origin: "https://deno.qwik.dev",
         },
       }),
     ],
