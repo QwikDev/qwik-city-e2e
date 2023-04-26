@@ -7,7 +7,7 @@ export default extendConfig(baseConfig, () => {
     build: {
       ssr: true,
       rollupOptions: {
-        input: ["custom-src/entry.deno.tsx", "@qwik-city-plan"],
+        input: ["custom-src/entry.deno.ts", "@qwik-city-plan"],
       },
       outDir: ".deno",
       minify: false,

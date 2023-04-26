@@ -18,5 +18,5 @@
     "types": ["node", "vite/client"]
   },
   "include": ["custom-src"],
-  "exclude": ["custom-src/entry.oak.ts"]
+  "exclude": ["custom-src/entry.deno.ts"]
 }

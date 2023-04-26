@@ -6,6 +6,9 @@
 /server
 functions/**/*.js
 
+# Deno
+.deno
+
 # Express
 .express
 
