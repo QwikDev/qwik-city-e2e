@@ -17,5 +17,6 @@
     "noEmit": true,
     "types": ["node", "vite/client"]
   },
-  "include": ["custom-src"]
+  "include": ["custom-src"],
+  "exclude": ["custom-src/entry.oak.ts"]
 }
