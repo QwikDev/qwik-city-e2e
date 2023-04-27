@@ -25,7 +25,7 @@
     "serve.azure": "swa start",
     "serve.cloudflare": "wrangler pages dev ./dist",
     "serve.cloudflare.debug": "node --inspect-brk ./node_modules/.bin/wrangler pages dev ./dist",
-    "serve.deno": "PLATFORM_NAME=deno deno run --allow-net --allow-env .deno/entry.deno.js --port 3009",
+    "serve.deno": "PLATFORM_NAME=deno deno run --allow-net --allow-read --allow-env .deno/entry.deno.js --port 3009",
     "serve.express": "PLATFORM_NAME=express node .express/entry.express.js",
     "serve.express.debug": "PLATFORM_NAME=express node --inspect-brk .express/entry.express.js",
     "serve.fastify": "PLATFORM_NAME=fastify node .fastify/entry.fastify.js",

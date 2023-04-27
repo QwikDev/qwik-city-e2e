@@ -1,11 +1,15 @@
-import { createQwikCity } from "/Users/adambradley/git/qwik/packages/qwik-city/lib/middleware/deno/index";
+import { createQwikCity } from "@builder.io/qwik-city/middleware/deno";
 import qwikCityPlan from "@qwik-city-plan";
 import { manifest } from "@qwik-client-manifest";
 import render from "./entry.ssr";
 
 const port = Number(Deno.env.get("PORT") ?? 3009);
 
-const qwikCity = createQwikCity({ render, qwikCityPlan, manifest });
+const { router, notFound, staticFile } = createQwikCity({
+  render,
+  qwikCityPlan,
+  manifest,
+});
 
 const server = Deno.listen({ port });
 
@@ -19,8 +23,19 @@ async function serveHttp(conn) {
   const httpConn = Deno.serveHttp(conn);
 
   for await (const requestEvent of httpConn) {
-    const response = await qwikCity(requestEvent.request);
-    requestEvent.respondWith(response);
+    const staticResponse = await staticFile(requestEvent.request);
+    if (staticResponse) {
+      requestEvent.respondWith(staticResponse);
+      continue;
+    }
+
+    const qwikCityResponse = await router(requestEvent.request);
+    if (qwikCityResponse) {
+      requestEvent.respondWith(qwikCityResponse);
+      continue;
+    }
+
+    requestEvent.respondWith(notFound(requestEvent.request));
   }
 }
 
