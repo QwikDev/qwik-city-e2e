@@ -3,6 +3,6 @@ import qwikCityPlan from "@qwik-city-plan";
 import { manifest } from "@qwik-client-manifest";
 import render from "./entry.ssr";
 
-const onRequest = createQwikCity({ render, qwikCityPlan, manifest });
+const fetch = createQwikCity({ render, qwikCityPlan, manifest });
 
-export { onRequest };
+export { fetch };
