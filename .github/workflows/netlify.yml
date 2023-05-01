@@ -22,11 +22,6 @@ jobs:
       - name: Install NPM Dependencies
         run: npm install
 
-      - name: Remove functions dir
-        # this is a hack because both cloudflare and netlify
-        # use the "functions" directory, and it's committed for cloudflare
-        run: rm -r functions
-
       - name: Deploy to Netlify
         run: npm run deploy.netlify
         env:
