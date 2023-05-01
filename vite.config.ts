@@ -15,9 +15,6 @@ export default defineConfig(() => {
       }),
       qwikVite({
         srcDir: "custom-src",
-        client: {
-          outDir: "dist/app",
-        },
       }),
       qwikReact(),
     ],
