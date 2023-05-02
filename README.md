@@ -1,4 +1,4 @@
-# Qwik City E2E Test App 🌃
+# Qwik City E2E Test App 🌃⚡️
 
 ![Qwik Logo](https://user-images.githubusercontent.com/452425/215131129-0ae8d7d8-3612-4fca-bdba-42137d8da75c.png)
 
