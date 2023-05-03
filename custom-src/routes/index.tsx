@@ -8,6 +8,7 @@ export default component$(() => {
   return (
     <>
       <h1>Homepage</h1>
+      <p>{performance.now()}</p>
       <p>{rootData.value.serverTime}</p>
       <ul>
         {userData.value.isAuthenticated ? (
