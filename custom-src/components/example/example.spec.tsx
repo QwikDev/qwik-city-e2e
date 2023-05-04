@@ -19,7 +19,6 @@ test(`[ExampleTest Component]: Should render 💣`, async () => {
 test(`[ExampleTest Component]: Click counter +1`, async () => {
   const { screen, render, userEvent } = await createDOM();
   await render(<ExampleTest flag={true} />);
-  debugger;
   expect(screen.outerHTML).toContain('Count:0');
 
   const spanBefore = screen.querySelector('span') as HTMLDivElement;
@@ -29,4 +28,13 @@ test(`[ExampleTest Component]: Click counter +1`, async () => {
   const spanAfter = screen.querySelector('span') as HTMLDivElement;
   await userEvent('button', 'click');
   expect(spanAfter.innerHTML).toEqual('Count:2');
+});
+
+
+test(`[ExampleTest Component]: build conditions`, async () => {
+  const { screen, render } = await createDOM();
+  await render(<ExampleTest flag={false} />);
+  expect(screen.querySelector('#is-browser')?.textContent).toContain('false');
+  expect(screen.querySelector('#is-server')?.textContent).toContain('true');
+  expect(screen.querySelector('#is-dev')?.textContent).toContain('true');
 });
