@@ -16,6 +16,7 @@
     "build.static.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js build -c adapters/static/vite.config.ts",
     "build.types": "tsc --incremental --noEmit",
     "build.vercel": "npm run build.client && vite build -c adapters/vercel-edge/vite.config.ts",
+    "clean.dist": "rimraf dist",
     "deploy.azure": "swa deploy ./dist --api-location ./azure-functions --env production",
     "deploy.netlify": "netlify deploy --prod --build",
     "deploy.vercel": "vercel deploy --prod",

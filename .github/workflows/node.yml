@@ -50,7 +50,7 @@ jobs:
         run: npm run test.preview.spa
 
       - name: Clear dist dir
-        run: rimraf dist
+        run: npm run clean.dist
 
       - name: Build Express Server
         run: npm run build.express
@@ -62,7 +62,7 @@ jobs:
         run: npm run test.express.spa
 
       - name: Clear dist dir
-        run: rimraf dist
+        run: npm run clean.dist
 
       - name: Build Static Server
         run: npm run build.static
