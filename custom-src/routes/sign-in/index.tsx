@@ -1,9 +1,10 @@
 import { component$ } from "@builder.io/qwik";
+import type {
+  DocumentHead,
+  RequestHandler} from "@builder.io/qwik-city";
 import {
   globalAction$,
-  DocumentHead,
-  Form,
-  RequestHandler,
+  Form
 } from "@builder.io/qwik-city";
 import {
   AUTHTOKEN_COOKIE_NAME,

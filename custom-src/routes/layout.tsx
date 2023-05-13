@@ -4,11 +4,12 @@ import {
   useVisibleTask$,
   useStyles$,
 } from "@builder.io/qwik";
-import { RequestHandler, routeLoader$ } from "@builder.io/qwik-city";
+import type { RequestHandler} from "@builder.io/qwik-city";
+import { routeLoader$ } from "@builder.io/qwik-city";
 import { Footer } from "../components/footer/footer";
 import { isUserAuthenticated } from "../auth/auth";
 
-export const rootLoader = routeLoader$(() => {
+export const useRootLoader = routeLoader$(() => {
   return {
     serverTime: new Date().toISOString(),
   };
@@ -28,7 +29,7 @@ export default component$(() => {
     main {
       padding: 20px;
     }
-    html[data-app] body:before { 
+    html[data-app] body:before {
       content: "";
       position: fixed;
       top: 20px;
@@ -40,14 +41,14 @@ export default component$(() => {
       text-align: center;
       font-family: monospace;
     }
-    html[data-app="spa"] body:before { 
+    html[data-app="spa"] body:before {
       content: "SPA";
       background: #0000FF50;
     }
     html[data-app="spa"] body {
       border-top: 10px solid #0000FF50;
     }
-    html[data-app="mpa"] body:before { 
+    html[data-app="mpa"] body:before {
       content: "MPA";
       background: #00FF0070;
     }

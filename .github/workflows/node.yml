@@ -31,6 +31,9 @@ jobs:
       - name: Run TypeChecker
         run: npm run build.types
 
+      - name: Run Linter
+        run: npm run lint
+
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
 

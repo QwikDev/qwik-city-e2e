@@ -2,7 +2,7 @@ import { component$, useSignal, useTask$ } from '@builder.io/qwik';
 import { server$ } from '@builder.io/qwik-city';
 import { getItems } from './functions';
 
-let globalDB = {count: 0};
+const globalDB = {count: 0};
 
 export default component$(() => {
 
@@ -44,7 +44,7 @@ export default component$(() => {
         items.value = await getItems(counter.value);
       }}>Get items</button>
       <ul>
-        {items.value.map(item => <li>{item}</li>)}
+        {items.value.map(item => <li key={item}>{item}</li>)}
       </ul>
 
     </>

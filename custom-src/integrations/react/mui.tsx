@@ -10,7 +10,8 @@ import {
   Slider,
   Typography,
 } from "@mui/material";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import type { GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 
 export const MUIButton = qwikify$(Button);
 export const MUISlider = qwikify$(Slider, { eagerness: "hover" });

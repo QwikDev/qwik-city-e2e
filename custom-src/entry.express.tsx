@@ -6,7 +6,6 @@ import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 import { manifest } from "@qwik-client-manifest";
 
-import compression from "compression";
 
 // Directories where the static assets are located
 const distDir = join(fileURLToPath(import.meta.url), "..", "..", "dist");
@@ -17,7 +16,7 @@ const publicDir = join(fileURLToPath(import.meta.url), "..", "..", "public");
 const PORT = process.env.PORT ?? 3002;
 
 // Create the Qwik City express middleware
-const { router, notFound, staticFile } = createQwikCity({
+const { router, notFound } = createQwikCity({
   render,
   qwikCityPlan,
   manifest,

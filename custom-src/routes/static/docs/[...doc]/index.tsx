@@ -1,5 +1,6 @@
 import { component$ } from "@builder.io/qwik";
-import { StaticGenerateHandler, useLocation } from "@builder.io/qwik-city";
+import { useLocation } from "@builder.io/qwik-city";
+import type { StaticGenerateHandler } from "@builder.io/qwik-city";
 
 export const onStaticGenerate: StaticGenerateHandler = async () => {
   return {

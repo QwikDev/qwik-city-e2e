@@ -19,7 +19,7 @@ for await (const conn of server) {
   serveHttp(conn);
 }
 
-async function serveHttp(conn) {
+async function serveHttp(conn: any) {
   const httpConn = Deno.serveHttp(conn);
 
   for await (const requestEvent of httpConn) {

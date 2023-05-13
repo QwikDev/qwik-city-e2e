@@ -30,7 +30,7 @@ export default component$(() => {
       </ul>
       <p>
         <a href="/app/endpoints/image.png" target="_blank">
-          <img src={`/app/endpoints/image.png?v=${Math.random()}`} />
+          <img src={`/app/endpoints/image.png?v=${Math.random()}`} width="256" height="79" />
         </a>
       </p>
     </div>

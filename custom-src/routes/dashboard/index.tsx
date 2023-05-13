@@ -1,5 +1,6 @@
 import { component$ } from "@builder.io/qwik";
-import { DocumentHead, Link, routeLoader$ } from "@builder.io/qwik-city";
+import type { DocumentHead} from "@builder.io/qwik-city";
+import { Link, routeLoader$ } from "@builder.io/qwik-city";
 import { USER_COOKIE_NAME } from "../../auth/auth";
 
 export const useUserLoader = routeLoader$(({ cookie }) => {
