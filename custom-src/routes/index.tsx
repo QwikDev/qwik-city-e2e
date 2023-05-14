@@ -1,10 +1,10 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead} from "@builder.io/qwik-city";
 import { Link } from "@builder.io/qwik-city";
-import { rootLoader, userLoader } from "./layout";
+import { useRootLoader, userLoader } from "./layout";
 
 export default component$(() => {
-  const rootData = rootLoader();
+  const rootData = useRootLoader();
   const userData = userLoader();
   return (
     <>
