@@ -10,6 +10,9 @@ export default component$(() => {
     <>
       <h1>Homepage</h1>
       <p>{rootData.value.serverTime}</p>
+      <div class="black-box">
+        this should be black
+      </div>
       <ul>
         {userData.value.isAuthenticated ? (
           <>
