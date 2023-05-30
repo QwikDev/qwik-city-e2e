@@ -13,8 +13,15 @@ test("index", async ({ page }) => {
   await expect(page.locator("footer")).toHaveCount(1);
 });
 
-test("black-box should be balck", async ({ page }) => {
+test("black-box should be black", async ({ page }) => {
   await page.goto("/app/");
   const blackBox = page.locator('.black-box');
   await expect(blackBox).toHaveCSS('background-color', 'rgb(0, 0, 0)');
+});
+
+test("local image should be served correctly", async ({ page }) => {
+  await page.goto("/app/");
+  const image = page.locator('#image');
+  await expect(image).toHaveProperty('width', 256);
+  await expect(image).toHaveProperty('height', 256);
 });
