@@ -22,6 +22,6 @@ test("black-box should be black", async ({ page }) => {
 test("local image should be served correctly", async ({ page }) => {
   await page.goto("/app/");
   const image = page.locator('#image');
-  await expect(image).toHaveProperty('width', 256);
-  await expect(image).toHaveProperty('height', 256);
+  await expect(image).toHaveJSProperty('width', 256);
+  await expect(image).toHaveJSProperty('height', 256);
 });
