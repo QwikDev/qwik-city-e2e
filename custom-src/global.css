@@ -1307,3 +1307,8 @@ code .word {
       width: 16rem
   }
 }
+
+#image {
+  width: auto;
+  height: auto;
+}
