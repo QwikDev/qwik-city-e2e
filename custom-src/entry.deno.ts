@@ -29,7 +29,7 @@ async function serveHttp(conn: any) {
       continue;
     }
 
-    const qwikCityResponse = await router(requestEvent.request);
+    const qwikCityResponse = await router(requestEvent.request, conn);
     if (qwikCityResponse) {
       requestEvent.respondWith(qwikCityResponse);
       continue;
