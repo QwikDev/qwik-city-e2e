@@ -19,9 +19,3 @@ test("black-box should be black", async ({ page }) => {
   await expect(blackBox).toHaveCSS('background-color', 'rgb(0, 0, 0)');
 });
 
-test("local image should be served correctly", async ({ page }) => {
-  await page.goto("/app/");
-  const image = page.locator('#image');
-  await expect(image).toHaveJSProperty('width', 256);
-  await expect(image).toHaveJSProperty('height', 256);
-});

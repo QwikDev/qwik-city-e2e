@@ -282,7 +282,8 @@ img,svg,video,canvas,audio,iframe,embed,object {
 
 img,video {
   max-width: 100%;
-  height: auto
+  height: auto;
+  width: 100%;
 }
 
 [hidden] {

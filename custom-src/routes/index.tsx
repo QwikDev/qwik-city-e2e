@@ -14,7 +14,6 @@ export default component$(() => {
       <div class="black-box">
         this should be black
       </div>
-      <img id="image" src={theLogo} width='10' height='10' />
       <ul>
         {userData.value.isAuthenticated ? (
           <>

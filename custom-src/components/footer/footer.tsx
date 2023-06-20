@@ -13,6 +13,9 @@ export const Footer = component$(() => {
           <Link href="/app/endpoints/">Endpoints</Link>
         </li>
         <li>
+          <Link href="/app/media/">Media</Link>
+        </li>
+        <li>
           <Link href="/app/static/">Static</Link>
         </li>
         <li>
