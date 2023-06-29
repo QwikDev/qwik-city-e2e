@@ -1,6 +1,6 @@
 {
   "name": "qwik-city-e2e",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "scripts": {
     "build.azure": "npm run build.client && vite build -c adapters/azure-swa/vite.config.ts && touch dist/index.html && rm dist/app/index.html",
