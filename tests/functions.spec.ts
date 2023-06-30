@@ -21,6 +21,27 @@ test("navigate to /app/functions/ and run test", async ({
   }
 });
 
+test("streaming", async ({ page, javaScriptEnabled }) => {
+  await page.goto("/app/functions/");
+  if (javaScriptEnabled) {
+    const logs = page.locator(".server-streaming");
+    const button = page.locator("#server-streaming-button");
+
+    await expect(logs).toHaveText("");
+    await button.click();
+    await page.waitForTimeout(900);
+    await expect(logs).toHaveText("0");
+    await page.waitForTimeout(900);
+    await expect(logs).toHaveText("01");
+    await page.waitForTimeout(900);
+    await expect(logs).toHaveText("012");
+    await page.waitForTimeout(900);
+    await expect(logs).toHaveText("0123");
+    await page.waitForTimeout(900);
+    await expect(logs).toHaveText("01234");
+  }
+});
+
 async function functionsTest(page: Page) {
   const increment = page.locator("#increment");
   const save = page.locator("#save");
@@ -56,3 +77,4 @@ async function functionsTest(page: Page) {
   await page.waitForTimeout(100);
   await expect(result).toHaveText("Stuff is: 6");
 }
+

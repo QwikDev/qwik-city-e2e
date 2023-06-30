@@ -4,11 +4,24 @@ import { getItems } from './functions';
 
 const globalDB = {count: 0};
 
+export function delay(nu: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, nu);
+  });
+}
+
+export const streamingFunc = server$(async function* () {
+  for (let i = 0; i < 5; i++) {
+    await delay(1000);
+    yield i;
+  }
+});
+
 export default component$(() => {
 
   const counter = useSignal(0);
   const counterDoubled = useSignal(0);
-
+  const streamingLogs = useSignal("");
   const message = useSignal('');
   const items = useSignal<string[]>([]);
 
@@ -46,7 +59,22 @@ export default component$(() => {
       <ul>
         {items.value.map(item => <li key={item}>{item}</li>)}
       </ul>
+      <section>
+        <h2>Streaming</h2>
 
+       <div class="server-streaming">{streamingLogs.value}</div>
+
+        <button
+          id="server-streaming-button"
+          onClick$={async () => {
+            for await (const nu of await streamingFunc()) {
+              streamingLogs.value += nu;
+            }
+          }}
+        >
+          5 seconds streaming
+        </button>
+      </section>
     </>
   );
 })
