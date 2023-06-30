@@ -38,3 +38,20 @@ test(`[ExampleTest Component]: build conditions`, async () => {
   expect(screen.querySelector('#is-server')?.textContent).toContain('true');
   expect(screen.querySelector('#is-dev')?.textContent).toContain('true');
 });
+
+
+test(`[ExampleTest Component]: test image jpeg`, async () => {
+  const { screen, render } = await createDOM();
+  await render(<ExampleTest flag={false} />);
+  const img = screen.querySelector('#image-jpeg') as HTMLImageElement;
+  expect(img?.width).toEqual(200);
+  expect(img?.height).toEqual(200);
+});
+
+
+test(`[ExampleTest Component]: test image svg`, async () => {
+  const { screen, render } = await createDOM();
+  await render(<ExampleTest flag={false} />);
+  const img = screen.querySelector('#image-svg') as SVGElement;
+  expect(img?.innerHTML).toContain('<path fill="#18B6F6"');
+});
