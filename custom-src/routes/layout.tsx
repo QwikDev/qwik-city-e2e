@@ -9,9 +9,10 @@ import { routeLoader$ } from "@builder.io/qwik-city";
 import { Footer } from "../components/footer/footer";
 import { isUserAuthenticated } from "../auth/auth";
 
-export const useRootLoader = routeLoader$(() => {
+export const useRootLoader = routeLoader$(({url}) => {
   return {
     serverTime: new Date().toISOString(),
+    origin: url.origin,
   };
 });
 

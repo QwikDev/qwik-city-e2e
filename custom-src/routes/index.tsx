@@ -10,6 +10,7 @@ export default component$(() => {
     <>
       <h1>Homepage</h1>
       <p>{rootData.value.serverTime}</p>
+      <p>Origin: {rootData.value.origin}</p>
       <div class="black-box">
         this should be black
       </div>
