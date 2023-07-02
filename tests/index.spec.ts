@@ -19,3 +19,9 @@ test("black-box should be black", async ({ page }) => {
   await expect(blackBox).toHaveCSS('background-color', 'rgb(0, 0, 0)');
 });
 
+test("server origin should match origin", async ({ page }) => {
+  await page.goto("/app/");
+  const origin = page.locator('#server-origin');
+  const url = new URL(await page.url());
+  await expect(origin).toHaveText(`Origin: ${url.origin}`);
+});
