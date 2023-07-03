@@ -5,12 +5,12 @@ const config: PlaywrightTestConfig = {
   ...commonConfig,
 
   metadata: {
-    server: "fastify",
+    server: "node",
   },
 
   webServer: {
-    command: "npm run serve.fastify",
-    port: 3005,
+    command: "npm run serve.node",
+    port: 3004,
   },
 };
 

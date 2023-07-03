@@ -59,4 +59,4 @@ lerna-debug.log*
 !.yarn/releases
 .vercel
 .serverless
-
+.node

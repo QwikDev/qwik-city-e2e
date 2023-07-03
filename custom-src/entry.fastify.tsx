@@ -22,7 +22,7 @@ const distDir = join(fileURLToPath(import.meta.url), '..', '..', 'dist');
 const buildDir = join(distDir, 'build');
 
 // Allow for dynamic port
-const PORT = parseInt(process.env.PORT ?? '3000');
+const PORT = parseInt(process.env.PORT ?? '3005');
 
 const start = async () => {
   // Create the fastify server

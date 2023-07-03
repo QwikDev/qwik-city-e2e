@@ -23,7 +23,7 @@ const { router, notFound, staticFile } = createQwikCity({
 });
 
 // Allow for dynamic port
-const port = Number(Deno.env.get("PORT") ?? 3009);
+const port = Number(Deno.env.get("PORT") ?? 3010);
 
 /* eslint-disable */
 console.log(`Server starter: http://localhost:${port}/app/`);
