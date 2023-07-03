@@ -7,22 +7,22 @@
  * - https://qwik.builder.io/integrations/deployments/node/
  *
  */
-import { type PlatformNode } from '@builder.io/qwik-city/middleware/node';
-import Fastify from 'fastify';
-import { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import FastifyQwik from './plugins/fastify-qwik';
+import { type PlatformNode } from "@builder.io/qwik-city/middleware/node";
+import Fastify from "fastify";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
+import FastifyQwik from "./plugins/fastify-qwik";
 
 declare global {
-  interface QwikCityPlatform extends PlatformNode { }
+  interface QwikCityPlatform extends PlatformNode {}
 }
 
 // Directories where the static assets are located
-const distDir = join(fileURLToPath(import.meta.url), '..', '..', 'dist');
-const buildDir = join(distDir, 'build');
+const distDir = join(fileURLToPath(import.meta.url), "..", "..", "dist");
+const buildDir = join(distDir, "build");
 
 // Allow for dynamic port
-const PORT = parseInt(process.env.PORT ?? '3005');
+const PORT = parseInt(process.env.PORT ?? "3005");
 
 const start = async () => {
   // Create the fastify server

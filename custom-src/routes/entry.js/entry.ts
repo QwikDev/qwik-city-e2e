@@ -1,2 +1,2 @@
 console.log("entry.js");
-export {}
+export {};

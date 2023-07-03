@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import type { DocumentHead} from "@builder.io/qwik-city";
+import type { DocumentHead } from "@builder.io/qwik-city";
 import { Link } from "@builder.io/qwik-city";
 import { useRootLoader, userLoader } from "./layout";
 
@@ -11,9 +11,7 @@ export default component$(() => {
       <h1>Homepage</h1>
       <p>{rootData.value.serverTime}</p>
       <p id="server-origin">Origin: {rootData.value.origin}</p>
-      <div class="black-box">
-        this should be black
-      </div>
+      <div class="black-box">this should be black</div>
       <ul>
         {userData.value.isAuthenticated ? (
           <>

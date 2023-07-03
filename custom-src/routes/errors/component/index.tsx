@@ -7,7 +7,7 @@ export const usetData = () => {
   }
   return {
     title: a,
-  }
+  };
 };
 
 export default component$(() => {

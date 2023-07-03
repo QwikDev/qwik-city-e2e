@@ -14,7 +14,7 @@ export default extendConfig(baseConfig, () => {
     },
     plugins: [
       nodeServerAdapter({
-        name: 'fastify-server',
+        name: "fastify-server",
         ssg: {
           include: ["/static/*"],
           origin: "https://fastify.qwik.dev",

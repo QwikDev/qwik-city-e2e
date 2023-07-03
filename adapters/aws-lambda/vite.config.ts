@@ -1,7 +1,7 @@
 import { nodeServerAdapter } from "@builder.io/qwik-city/adapters/node-server/vite";
 import { extendConfig } from "@builder.io/qwik-city/vite";
 import baseConfig from "../../vite.config";
-import { builtinModules } from 'module';
+import { builtinModules } from "module";
 export default extendConfig(baseConfig, () => {
   return {
     ssr: {
@@ -10,21 +10,20 @@ export default extendConfig(baseConfig, () => {
       noExternal: /./,
     },
     build: {
-    minify: false,
+      minify: false,
       ssr: true,
       rollupOptions: {
-        input: [
-          "custom-src/entry_aws-lambda.tsx",
-          "@qwik-city-plan",
-        ],
+        input: ["custom-src/entry_aws-lambda.tsx", "@qwik-city-plan"],
       },
     },
-    plugins: [nodeServerAdapter({
-      name: "express",
-      ssg: {
-        include: ["/static/*"],
-        origin: "https://aws.qwik.dev",
-      },
-    })],
+    plugins: [
+      nodeServerAdapter({
+        name: "express",
+        ssg: {
+          include: ["/static/*"],
+          origin: "https://aws.qwik.dev",
+        },
+      }),
+    ],
   };
 });

@@ -8,7 +8,7 @@ export const useSetData = routeLoader$(() => {
   }
   return {
     title: a,
-  }
+  };
 });
 
 export default component$(() => {

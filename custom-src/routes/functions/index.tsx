@@ -1,8 +1,8 @@
-import { component$, useSignal, useTask$ } from '@builder.io/qwik';
-import { server$ } from '@builder.io/qwik-city';
-import { getItems } from './functions';
+import { component$, useSignal, useTask$ } from "@builder.io/qwik";
+import { server$ } from "@builder.io/qwik-city";
+import { getItems } from "./functions";
 
-const globalDB = {count: 0};
+const globalDB = { count: 0 };
 
 export function delay(nu: number) {
   return new Promise((resolve) => {
@@ -18,51 +18,61 @@ export const streamingFunc = server$(async function* () {
 });
 
 export default component$(() => {
-
   const counter = useSignal(0);
   const counterDoubled = useSignal(0);
   const streamingLogs = useSignal("");
-  const message = useSignal('');
+  const message = useSignal("");
   const items = useSignal<string[]>([]);
 
-  useTask$(async ({track}) => {
+  useTask$(async ({ track }) => {
     const nu = track(() => counter.value);
     counterDoubled.value = await computeOnTheServer(nu);
   });
   return (
     <>
-      <button id="increment" onClick$={() => {
-        counter.value++;
-      }}>
+      <button
+        id="increment"
+        onClick$={() => {
+          counter.value++;
+        }}
+      >
         Increment {counter.value} {counterDoubled.value}
       </button>
 
-      <button id="save" onClick$={server$(() => {
-        globalDB.count = counter.value;
-        console.log('Current count is', counter.value);
-      })}>
+      <button
+        id="save"
+        onClick$={server$(() => {
+          globalDB.count = counter.value;
+          console.log("Current count is", counter.value);
+        })}
+      >
         SAVE
       </button>
       <button
         id="load"
         onClick$={async () => {
           message.value = `Stuff is: ${await getstuff(counter.value)}`;
-        }}>
+        }}
+      >
         LOAD
       </button>
-      <p id="result">
-        {message.value}
-      </p>
-      <button onClick$={async () => {
-        items.value = await getItems(counter.value);
-      }}>Get items</button>
+      <p id="result">{message.value}</p>
+      <button
+        onClick$={async () => {
+          items.value = await getItems(counter.value);
+        }}
+      >
+        Get items
+      </button>
       <ul>
-        {items.value.map(item => <li key={item}>{item}</li>)}
+        {items.value.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
       </ul>
       <section>
         <h2>Streaming</h2>
 
-       <div class="server-streaming">{streamingLogs.value}</div>
+        <div class="server-streaming">{streamingLogs.value}</div>
 
         <button
           id="server-streaming-button"
@@ -77,7 +87,7 @@ export default component$(() => {
       </section>
     </>
   );
-})
+});
 
 const getstuff = server$((nu: number) => {
   return globalDB.count + nu;
@@ -85,4 +95,4 @@ const getstuff = server$((nu: number) => {
 
 const computeOnTheServer = server$((nu: number) => {
   return nu * 2;
-})
+});

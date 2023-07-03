@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import type { DocumentHead} from "@builder.io/qwik-city";
+import type { DocumentHead } from "@builder.io/qwik-city";
 import { routeLoader$ } from "@builder.io/qwik-city";
 
 export const useGetEnv = routeLoader$(({ env }) => {
@@ -16,9 +16,18 @@ export default component$(() => {
     <>
       <h1>Environment variables</h1>
       <ul>
-        <li>env.value.platform: <span id="env-value-platform">{env.value.platform}</span></li>
-        <li>env.value.importMetaEnv: <span id="env-value-importMetaEnv">{env.value.importMetaEnv}</span></li>
-        <li>importmeta.env.VITE_HELLO_WORLD: <span id="importmeta-env-VITE_HELLO_WORLD">{importMeta}</span></li>
+        <li>
+          env.value.platform:{" "}
+          <span id="env-value-platform">{env.value.platform}</span>
+        </li>
+        <li>
+          env.value.importMetaEnv:{" "}
+          <span id="env-value-importMetaEnv">{env.value.importMetaEnv}</span>
+        </li>
+        <li>
+          importmeta.env.VITE_HELLO_WORLD:{" "}
+          <span id="importmeta-env-VITE_HELLO_WORLD">{importMeta}</span>
+        </li>
       </ul>
     </>
   );

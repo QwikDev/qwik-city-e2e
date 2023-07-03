@@ -11,7 +11,7 @@ const config: PlaywrightTestConfig = {
   webServer: {
     command: "npm run serve.aws",
     port: 4000,
-  }
+  },
 };
 
 export default config;

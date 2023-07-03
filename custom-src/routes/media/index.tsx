@@ -14,21 +14,19 @@ export default component$(() => {
       </div>
       <div>
         <h2>import png</h2>
-        <img id="image-png" src={theLogo} width='10' height='10' />
+        <img id="image-png" src={theLogo} width="10" height="10" />
       </div>
       <div>
         <h2>import svg</h2>
-        <img id="image-svg" src={qwikLogo} width='10' height='10' />
+        <img id="image-svg" src={qwikLogo} width="10" height="10" />
       </div>
       <div>
         <h2>import png as jsx</h2>
         <TheLogo id="jsx-png" />
-
       </div>
       <div>
         <h2>import svg as jsx</h2>
         <QwikLogo id="jsx-svg" />
-
       </div>
     </>
   );
