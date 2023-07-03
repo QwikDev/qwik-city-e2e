@@ -12,6 +12,8 @@ import { createQwikCity } from "@builder.io/qwik-city/middleware/deno";
 import qwikCityPlan from "@qwik-city-plan";
 import { manifest } from "@qwik-client-manifest";
 import render from "./entry.ssr";
+// @ts-ignore
+import { serve } from "https://deno.land/std@0.119.0/http/server.ts";
 
 // Create the Qwik City Deno middleware
 const { router, notFound, staticFile } = createQwikCity({
@@ -23,49 +25,24 @@ const { router, notFound, staticFile } = createQwikCity({
 // Allow for dynamic port
 const port = Number(Deno.env.get("PORT") ?? 3009);
 
-// Start the Deno server
-const server = Deno.listen({ port });
-
 /* eslint-disable */
 console.log(`Server starter: http://localhost:${port}/app/`);
 
-// https://deno.com/manual/examples/http_server
-// Connections to the server will be yielded up as an async iterable.
-for await (const conn of server) {
-  try {
-    serveHttp(conn);
-  } catch (error) {
-    console.error(error);
+serve(async (request: Request, conn: any) => {
+  const staticResponse = await staticFile(request);
+  if (staticResponse) {
+    return staticResponse;
   }
-}
 
-async function serveHttp(conn: any) {
-  const httpConn = Deno.serveHttp(conn);
-
-  // Each request sent over the HTTP connection will be yielded as an
-  // async iterator from the HTTP connection.
-  for await (const requestEvent of httpConn) {
-    try {
-      const staticResponse = await staticFile(requestEvent.request);
-      if (staticResponse) {
-        // Serve static file
-        requestEvent.respondWith(staticResponse);
-        continue;
-      }
-
-      // Server-side render this request with Qwik City
-      const qwikCityResponse = await router(requestEvent.request, conn);
-      if (qwikCityResponse) {
-        requestEvent.respondWith(qwikCityResponse);
-        continue;
-      }
-
-      // Path not found
-      requestEvent.respondWith(notFound(requestEvent.request));
-    } catch (error) {
-      console.error(error);
-    }
+  // Server-side render this request with Qwik City
+  const qwikCityResponse = await router(request, conn);
+  if (qwikCityResponse) {
+    return qwikCityResponse;
   }
-}
+
+  // Path not found
+  return notFound(request)
+}, { port });
+
 
 declare const Deno: any;

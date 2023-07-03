@@ -1,0 +1,34 @@
+name: AWS Server
+
+on:
+  push:
+  repository_dispatch:
+    types: [main-updated]
+
+jobs:
+  test:
+    name: Test AWS Server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install NPM Dependencies
+        run: npm install
+
+      - name: Build AWS
+        run: npm run build.aws
+
+      - name: Install Playwright
+        run: npx playwright install chromium --with-deps
+
+      - name: Test AWS Server MPA
+        run: npm run test.aws-offline.mpa
+
+      - name: Test AWS Server SPA
+        run: npm run test.aws-offline.spa
