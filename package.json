@@ -102,7 +102,7 @@
     "express": "^4.18.2",
     "fastify": "^4.17.0",
     "fastify-plugin": "^4.5.0",
-    "netlify-cli": "^15.1.1",
+    "netlify-cli": "^15.8.0",
     "prettier": "^2.8.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
