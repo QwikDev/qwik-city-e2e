@@ -77,4 +77,3 @@ async function functionsTest(page: Page) {
   await page.waitForTimeout(100);
   await expect(result).toHaveText("Stuff is: 6");
 }
-

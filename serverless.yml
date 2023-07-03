@@ -24,9 +24,9 @@ custom:
 package:
   excludeDevDependencies: true
   patterns:
-    - './!**'
-    - 'server/**'
-    - 'dist/**'
+    - "./!**"
+    - "server/**"
+    - "dist/**"
 
 plugins:
   - serverless-offline
