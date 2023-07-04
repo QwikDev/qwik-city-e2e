@@ -25,7 +25,7 @@ jobs:
         run: pnpm install
 
       - name: Deploy to Vercel
-        run: pnpm run deploy.vercel -- --token=${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
+        run: pnpm run deploy.vercel --token=${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
