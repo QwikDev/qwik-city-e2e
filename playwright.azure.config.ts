@@ -11,7 +11,7 @@ const config: PlaywrightTestConfig = {
     /@streaming/,
   ],
   webServer: {
-    command: "npm run serve.azure",
+    command: "pnpm run serve.azure",
     port: 4280,
     timeout: 120 * 1000,
   },

@@ -17,16 +17,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - uses: pnpm/action-setup@v2
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: 'pnpm'
 
-      - name: Install NPM Dependencies
-        run: npm install
+      - name: Install pnpm Dependencies
+        run: pnpm install
 
       - name: Build Cloudflare
-        run: npm run build.cloudflare
+        run: pnpm run build.cloudflare
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@1
@@ -40,7 +43,7 @@ jobs:
         run: npx playwright install chromium --with-deps
 
       - name: Test Cloudflare Server MPA
-        run: npm run test.cloudflare.mpa
+        run: pnpm run test.cloudflare.mpa
 
       - name: Test Cloudflare Server SPA
-        run: npm run test.cloudflare.spa
+        run: pnpm run test.cloudflare.spa

@@ -12,7 +12,7 @@ const config: PlaywrightTestConfig = {
     /@trailingSlash/
   ],
   webServer: {
-    command: "npm run serve.aws",
+    command: "pnpm run serve.aws",
     port: 4000,
   },
 };

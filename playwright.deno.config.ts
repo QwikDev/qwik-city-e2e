@@ -9,7 +9,7 @@ const config: PlaywrightTestConfig = {
   },
 
   webServer: {
-    command: "npm run serve.deno",
+    command: "pnpm run serve.deno",
     port: 3010,
   },
 };

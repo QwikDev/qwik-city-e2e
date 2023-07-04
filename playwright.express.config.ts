@@ -9,7 +9,7 @@ const config: PlaywrightTestConfig = {
   },
 
   webServer: {
-    command: "npm run serve.express",
+    command: "pnpm run serve.express",
     port: 3002,
   },
 };

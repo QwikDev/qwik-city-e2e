@@ -17,73 +17,76 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - uses: pnpm/action-setup@v2
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: 'pnpm'
 
-      - name: Install NPM Dependencies
-        run: npm install
+      - name: Install pnpm Dependencies
+        run: pnpm install
 
       - name: Run Vitest
-        run: npm run test.unit
+        run: pnpm run test.unit
 
       - name: Run TypeChecker
-        run: npm run build.types
+        run: pnpm run build.types
 
       - name: Run Linter
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
 
       - name: Test Dev Server MPA
-        run: npm run test.dev.mpa
+        run: pnpm run test.dev.mpa
 
       - name: Test Dev Server SPA
-        run: npm run test.dev.spa
+        run: pnpm run test.dev.spa
 
       - name: Build Vite Preview Server
-        run: npm run build.preview
+        run: pnpm run build.preview
 
       - name: Test Vite Preview Server MPA
-        run: npm run test.preview.mpa
+        run: pnpm run test.preview.mpa
 
       - name: Test Vite Preview Server SPA
-        run: npm run test.preview.spa
+        run: pnpm run test.preview.spa
 
       - name: Clear dist dir
-        run: npm run clean.dist
+        run: pnpm run clean.dist
 
       - name: Build Express Server
-        run: npm run build.express
+        run: pnpm run build.express
 
       - name: Test Express Server MPA
-        run: npm run test.express.mpa
+        run: pnpm run test.express.mpa
 
       - name: Test Express Server SPA
-        run: npm run test.express.spa
+        run: pnpm run test.express.spa
 
       - name: Clear dist dir
-        run: npm run clean.dist
+        run: pnpm run clean.dist
 
       - name: Build Node Server
-        run: npm run build.node
+        run: pnpm run build.node
 
       - name: Test Node Server MPA
-        run: npm run test.node.mpa
+        run: pnpm run test.node.mpa
 
       - name: Test Node Server SPA
-        run: npm run test.node.spa
+        run: pnpm run test.node.spa
 
       - name: Clear dist dir
-        run: npm run clean.dist
+        run: pnpm run clean.dist
 
       - name: Build Static Server
-        run: npm run build.static
+        run: pnpm run build.static
 
       - name: Test Static Server MPA
-        run: npm run test.static.mpa
+        run: pnpm run test.static.mpa
 
       - name: Test Static Server SPA
-        run: npm run test.static.spa
+        run: pnpm run test.static.spa

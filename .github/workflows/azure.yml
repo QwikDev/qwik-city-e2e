@@ -8,7 +8,7 @@ jobs:
   test:
     strategy:
       matrix:
-        platform: [windows-latest]
+        platform: [ubuntu-latest]
 
     name: Test Azure ${{ matrix.platform }}
     runs-on: ${{ matrix.platform }}
@@ -20,25 +20,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - uses: pnpm/action-setup@v2
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: 'pnpm'
 
-      - name: Install NPM Dependencies
-        run: npm install
+      - name: Install pnpm Dependencies
+        run: pnpm install
 
       - name: Build Azure
-        run: npm run build.azure
+        run: pnpm run build.azure
 
       - name: Run
-        run: npm run serve.azure
+        run: pnpm run serve.azure
 
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
 
       - name: Test Azure Server MPA
-        run: npm run test.azure.mpa
+        run: pnpm run test.azure.mpa
 
       - name: Test Azure Server SPA
-        run: npm run test.azure.spa
+        run: pnpm run test.azure.spa

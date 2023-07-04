@@ -13,34 +13,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - uses: pnpm/action-setup@v2
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: 'pnpm'
 
-      - name: Install NPM Dependencies
-        run: npm install
+      - name: Install pnpm Dependencies
+        run: pnpm install
 
       - name: Build AWS
-        run: npm run build.aws
+        run: pnpm run build.aws
 
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
 
       - name: Test AWS Offline Server MPA
-        run: npm run test.aws-offline.mpa
+        run: pnpm run test.aws-offline.mpa
 
       - name: Test AWS Offline Server SPA
-        run: npm run test.aws-offline.spa
+        run: pnpm run test.aws-offline.spa
 
       - name: Configura AWS credentials
         run: npx serverless config credentials --provider aws --key ${{ secrets.AWS_KEY }} --secret ${{ secrets.AWS_SECRET }}
 
       - name: Deploy AWS lambda
-        run: npm run deploy.aws
+        run: pnpm run deploy.aws
 
       - name: Test AWS Server MPA
-        run: npm run test.aws.mpa
+        run: pnpm run test.aws.mpa
 
       - name: Test AWS Server SPA
-        run: npm run test.aws.spa
+        run: pnpm run test.aws.spa

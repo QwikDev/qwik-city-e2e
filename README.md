@@ -4,7 +4,7 @@
 
 Commits to this repo will trigger each [workflow](https://github.com/BuilderIO/qwik-city-e2e/tree/main/.github/workflows), which will build and test on each server. The Node workflow tests the `dev`, `preview` and `express` Nodejs servers.
 
-The [package.json](https://github.com/BuilderIO/qwik-city-e2e/blob/main/package.json) npm installs the build artifacts committed to [qwik-build](https://github.com/BuilderIO/qwik-build) and [qwik-city-build](https://github.com/BuilderIO/qwik-city-build). Update the commit hash in version for the `dependencies` of `@builder.io/qwik` and `@builder.io/qwik-city`.
+The [package.json](https://github.com/BuilderIO/qwik-city-e2e/blob/main/package.json) pnpm installs the build artifacts committed to [qwik-build](https://github.com/BuilderIO/qwik-build) and [qwik-city-build](https://github.com/BuilderIO/qwik-city-build). Update the commit hash in version for the `dependencies` of `@builder.io/qwik` and `@builder.io/qwik-city`.
 
 ## External Servers
 
@@ -28,17 +28,17 @@ https://qwik-city-e2e.vercel.app/app/
 
 ### Dev
 
-    npm run dev
+    pnpm run dev
     http://127.0.0.1:3000/app/
 
 ### Preview
 
-    npm run build.preview
-    npm run serve.preview
+    pnpm run build.preview
+    pnpm run serve.preview
     http://127.0.0.1:3001/app/
 
 ### Express
 
-    npm run build.express
-    npm run serve.express
+    pnpm run build.express
+    pnpm run serve.express
     http://127.0.0.1:3002/app/

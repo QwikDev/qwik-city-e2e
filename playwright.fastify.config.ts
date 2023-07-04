@@ -9,7 +9,7 @@ const config: PlaywrightTestConfig = {
   },
 
   webServer: {
-    command: "npm run serve.fastify",
+    command: "pnpm run serve.fastify",
     port: 3005,
   },
 };

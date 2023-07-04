@@ -14,16 +14,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - uses: pnpm/action-setup@v2
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: 'pnpm'
 
-      - name: Install NPM Dependencies
-        run: npm install
+      - name: Install pnpm Dependencies
+        run: pnpm install
 
       - name: Deploy to Netlify
-        run: npm run deploy.netlify
+        run: pnpm run deploy.netlify
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -32,7 +35,7 @@ jobs:
         run: npx playwright install chromium --with-deps
 
       - name: Test Netlify Server MPA
-        run: npm run test.netlify.mpa
+        run: pnpm run test.netlify.mpa
 
       - name: Test Netlify Server SPA
-        run: npm run test.netlify.spa
+        run: pnpm run test.netlify.spa

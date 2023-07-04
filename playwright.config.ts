@@ -25,7 +25,7 @@ const config: PlaywrightTestConfig = {
     server: "dev",
   },
   webServer: {
-    command: "npm run dev -- --port 3005",
+    command: "pnpm run dev -- --port 3005",
     port: 3005,
     stdout: "pipe",
     stderr: "pipe",
