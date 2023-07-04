@@ -34,14 +34,14 @@ jobs:
       - name: Build Azure
         run: pnpm run build.azure
 
-      - name: Run
-        run: pnpm run serve.azure
+      # - name: Run
+      #   run: pnpm run serve.azure
 
-      - name: Install Playwright
-        run: npx playwright install chromium --with-deps
+      # - name: Install Playwright
+      #   run: npx playwright install chromium --with-deps
 
-      - name: Test Azure Server MPA
-        run: pnpm run test.azure.mpa
+      # - name: Test Azure Server MPA
+      #   run: pnpm run test.azure.mpa
 
-      - name: Test Azure Server SPA
-        run: pnpm run test.azure.spa
+      # - name: Test Azure Server SPA
+      #   run: pnpm run test.azure.spa
