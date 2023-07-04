@@ -6,8 +6,12 @@ on:
     types: [main-updated]
 jobs:
   test:
-    name: Test Azure Server
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform: [macos-latest]
+
+    name: Test Azure ${{ matrix.platform }}
+    runs-on: ${{ matrix.platform }}
     permissions:
       contents: read
       deployments: write
