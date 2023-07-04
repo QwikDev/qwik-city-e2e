@@ -34,7 +34,7 @@ jobs:
         run: npm run test.aws-offline.spa
 
       - name: Configura AWS credentials
-        run: npx serverless config credentials --provider aws --key ${{ secrets.AWS_KEY }} --secre ${{ secrets.AWS_SECRET }}
+        run: npx serverless config credentials --provider aws --key ${{ secrets.AWS_KEY }} --secret ${{ secrets.AWS_SECRET }}
 
       - name: Deploy AWS lambda
         run: npm run deploy.aws

@@ -2,8 +2,6 @@ import { component$, useSignal, useTask$ } from "@builder.io/qwik";
 import { server$ } from "@builder.io/qwik-city";
 import { getItems } from "./functions";
 
-const globalDB = { count: 0 };
-
 export function delay(nu: number) {
   return new Promise((resolve) => {
     setTimeout(resolve, nu);
@@ -72,9 +70,6 @@ export default component$(() => {
   );
 });
 
-const getstuff = server$((nu: number) => {
-  return globalDB.count + nu;
-});
 
 const computeOnTheServer = server$((nu: number) => {
   return nu * 2;
