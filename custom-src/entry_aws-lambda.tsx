@@ -56,7 +56,6 @@ export const qwikApp = serverless(
 );
 
 function fixPath(path: string) {
-  console.log(path);
   if (qwikCityPlan.trailingSlash) {
     const url = new URL(path, "http://aws-qwik.local");
     if (url.pathname.includes(".", url.pathname.lastIndexOf("/"))) {

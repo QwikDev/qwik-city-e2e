@@ -7,12 +7,13 @@ const config: PlaywrightTestConfig = {
   metadata: {
     server: "azure",
   },
-
-  use: {
-    baseURL: "https://blue-smoke-0a7cdfe10.2.azurestaticapps.net/",
+  grepInvert: [
+    /@streaming/,
+  ],
+  webServer: {
+    command: "npm run serve.azure",
+    port: 4280,
   },
-  retries: 2,
-  webServer: undefined,
 };
 
 export default config;

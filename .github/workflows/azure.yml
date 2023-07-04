@@ -27,11 +27,6 @@ jobs:
       - name: Build Azure
         run: npm run build.azure
 
-      - name: Deploy to Azure SWA
-        run: npm run deploy.azure
-        env:
-          SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_DEPLOYMENT_TOKEN }}
-
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
 
