@@ -13,6 +13,7 @@ const config: PlaywrightTestConfig = {
   webServer: {
     command: "npm run serve.azure",
     port: 4280,
+    timeout: 120 * 1000,
   },
 };
 
