@@ -27,8 +27,20 @@ jobs:
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
 
-      - name: Test AWS Server MPA
+      - name: Test AWS Offline Server MPA
         run: npm run test.aws-offline.mpa
 
-      - name: Test AWS Server SPA
+      - name: Test AWS Offline Server SPA
         run: npm run test.aws-offline.spa
+
+      - name: Configura AWS credentials
+        run: npx serverless config credentials --provider aws --key ${{ secrets.AWS_KEY }} --secre ${{ secrets.AWS_SECRET }}
+
+      - name: Deploy AWS lambda
+        run: npm run deploy.aws
+
+      - name: Test AWS Server MPA
+        run: npm run test.aws.mpa
+
+      - name: Test AWS Server SPA
+        run: npm run test.aws.spa

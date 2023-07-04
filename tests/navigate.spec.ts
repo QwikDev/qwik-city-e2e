@@ -16,7 +16,7 @@ test("navigate to /app/endpoints/", async ({ page }, { config }) => {
   await expect(new URL(page.url()).pathname).toEqual("/app/endpoints/");
 });
 
-test("navigate to /app/endpoints (no trailing)", async ({ page }, {
+test("navigate to /app/endpoints (no trailing) @trailingSlash", async ({ page }, {
   config,
 }) => {
   await page.goto("/app/");

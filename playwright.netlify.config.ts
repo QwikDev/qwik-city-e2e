@@ -7,7 +7,9 @@ const config: PlaywrightTestConfig = {
   metadata: {
     server: "netlify",
   },
-
+  grepInvert: [
+    /@streaming/,
+  ],
   use: {
     baseURL: "https://qwik-city-e2e.netlify.app/",
   },

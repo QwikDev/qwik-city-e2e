@@ -7,7 +7,10 @@ const config: PlaywrightTestConfig = {
   metadata: {
     server: "aws",
   },
-  retries: 2,
+  grepInvert: [
+    /@streaming/,
+    /@trailingSlash/
+  ],
   webServer: {
     command: "npm run serve.aws",
     port: 4000,

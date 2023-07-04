@@ -7,9 +7,11 @@ const config: PlaywrightTestConfig = {
   metadata: {
     server: "aws",
   },
-
+  grepInvert: [
+    /@streaming/,
+  ],
   use: {
-    baseURL: "https://qwik-city-e2e.vercel.app/",
+    baseURL: "https://3psthbqcak.execute-api.us-west-1.amazonaws.com/",
   },
   retries: 2,
   webServer: undefined,

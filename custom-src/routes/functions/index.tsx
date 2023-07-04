@@ -39,23 +39,6 @@ export default component$(() => {
         Increment {counter.value} {counterDoubled.value}
       </button>
 
-      <button
-        id="save"
-        onClick$={server$(() => {
-          globalDB.count = counter.value;
-          console.log("Current count is", counter.value);
-        })}
-      >
-        SAVE
-      </button>
-      <button
-        id="load"
-        onClick$={async () => {
-          message.value = `Stuff is: ${await getstuff(counter.value)}`;
-        }}
-      >
-        LOAD
-      </button>
       <p id="result">{message.value}</p>
       <button
         onClick$={async () => {

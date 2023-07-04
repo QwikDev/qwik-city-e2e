@@ -29,12 +29,20 @@ const { router, notFound, staticFile } = createQwikCity({
   static: {
     cacheControl: "public, max-age=31557600",
   },
+  getOrigin(req) {
+    if (process.env.IS_OFFLINE) {
+      return `http://${req.headers.host}`;
+    }
+    return null;
+  },
 });
 
 export const qwikApp = serverless(
   {
     handle: (req: any, res: any) => {
-      req.url = fixPath(req.url);
+      if (process.env.IS_OFFLINE) {
+        req.url = fixPath(req.url);
+      }
       staticFile(req, res, () => {
         router(req, res, () => {
           notFound(req, res, () => {});
@@ -47,14 +55,16 @@ export const qwikApp = serverless(
   }
 );
 
-function fixPath(url: string) {
+function fixPath(path: string) {
+  console.log(path);
   if (qwikCityPlan.trailingSlash) {
-    if (url.slice(url.lastIndexOf("/")).includes(".")) {
-      return url;
+    const url = new URL(path, "http://aws-qwik.local");
+    if (url.pathname.includes(".", url.pathname.lastIndexOf("/"))) {
+      return path;
     }
-    if (!url.endsWith("/")) {
-      return url + "/";
+    if (!url.pathname.endsWith("/")) {
+      return url.pathname + "/" + url.search;
     }
   }
-  return url;
+  return path;
 }

@@ -21,7 +21,7 @@ test("navigate to /app/functions/ and run test", async ({
   }
 });
 
-test("streaming", async ({ page, javaScriptEnabled }) => {
+test("streaming @streaming", async ({ page, javaScriptEnabled }) => {
   await page.goto("/app/functions/");
   if (javaScriptEnabled) {
     const logs = page.locator(".server-streaming");
@@ -44,36 +44,14 @@ test("streaming", async ({ page, javaScriptEnabled }) => {
 
 async function functionsTest(page: Page) {
   const increment = page.locator("#increment");
-  const save = page.locator("#save");
-  const load = page.locator("#load");
-  const result = page.locator("#result");
-
-  await save.click();
-  await page.waitForTimeout(100);
-  await load.click();
-  await page.waitForTimeout(100);
 
   await expect(increment).toHaveText("Increment 0 0");
-  await expect(result).toHaveText("Stuff is: 0");
 
   await increment.click();
   await expect(increment).toHaveText("Increment 1 2");
-  await save.click();
-  await page.waitForTimeout(100);
-  await load.click();
-  await page.waitForTimeout(100);
-  await expect(result).toHaveText("Stuff is: 2");
 
   await increment.click();
   await expect(increment).toHaveText("Increment 2 4");
   await increment.click();
   await expect(increment).toHaveText("Increment 3 6");
-  await load.click();
-  await page.waitForTimeout(100);
-  await expect(result).toHaveText("Stuff is: 4");
-  await save.click();
-  await page.waitForTimeout(100);
-  await load.click();
-  await page.waitForTimeout(100);
-  await expect(result).toHaveText("Stuff is: 6");
 }

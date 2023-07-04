@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("no trailing slash should redirect to have a trailing slash", async ({
+test("no trailing slash should redirect to have a trailing slash @trailingSlash", async ({
   page,
 }) => {
   const rsp = (await page.goto("/app/endpoints"))!;
