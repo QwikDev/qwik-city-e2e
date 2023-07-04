@@ -8,7 +8,7 @@ jobs:
   test:
     strategy:
       matrix:
-        platform: [ubuntu-latest]
+        platform: [ubuntu-latest, macos-latest, windows-latest]
 
     name: Test Azure ${{ matrix.platform }}
     runs-on: ${{ matrix.platform }}
