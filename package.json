@@ -18,6 +18,7 @@
     "build.static.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js build -c adapters/static/vite.config.ts",
     "build.types": "tsc --incremental --noEmit",
     "build.vercel-edge": "pnpm run build.client && vite build -c adapters/vercel-edge/vite.config.ts",
+    "build.vercel-serverless": "pnpm run build.client && vite build -c adapters/vercel-serverless/vite.config.ts",
     "build.node-dev": "vite build --mode development && vite build --ssr --mode development -c adapters/node/vite.config.ts",
     "clean.dist": "rimraf dist",
     "deploy.aws": "serverless deploy ",
