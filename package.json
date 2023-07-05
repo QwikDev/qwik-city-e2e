@@ -77,7 +77,7 @@
     "test.vercel-serverless.mpa": "cross-env APP=mpa playwright test tests --config playwright.vercel-serverless.config.ts",
     "test.vercel-serverless.spa": "cross-env APP=spa playwright test tests --config playwright.vercel-serverless.config.ts",
     "qwik": "qwik",
-    "postinstall": "pnpm prebuild.pandacss"
+    "postinstall": "npm run prebuild.pandacss"
   },
   "devDependencies": {
     "@azure/static-web-apps-cli": "^1.1.3",
