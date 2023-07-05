@@ -74,7 +74,7 @@
     "test.vercel.mpa": "cross-env APP=mpa playwright test tests --config playwright.vercel.config.ts",
     "test.vercel.spa": "cross-env APP=spa playwright test tests --config playwright.vercel.config.ts",
     "qwik": "qwik",
-    "postinstall": "prebuild.pandacss"
+    "postinstall": "pnpm prebuild.pandacss"
   },
   "devDependencies": {
     "@azure/static-web-apps-cli": "^1.1.3",
