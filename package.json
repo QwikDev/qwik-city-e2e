@@ -18,6 +18,7 @@
     "build.static.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js build -c adapters/static/vite.config.ts",
     "build.types": "tsc --incremental --noEmit",
     "build.vercel": "pnpm run build.client && vite build -c adapters/vercel-edge/vite.config.ts",
+    "build.node-dev": "vite build --mode development && vite build --ssr --mode development -c adapters/node/vite.config.ts",
     "clean.dist": "rimraf dist",
     "deploy.aws": "serverless deploy ",
     "deploy.azure": "swa deploy ./dist --api-location ./azure-functions --env production",
@@ -72,7 +73,8 @@
     "test.unit.ui": "vitest --ui components",
     "test.vercel.mpa": "cross-env APP=mpa playwright test tests --config playwright.vercel.config.ts",
     "test.vercel.spa": "cross-env APP=spa playwright test tests --config playwright.vercel.config.ts",
-    "qwik": "qwik"
+    "qwik": "qwik",
+    "postinstall": "prebuild.pandacss"
   },
   "devDependencies": {
     "@azure/static-web-apps-cli": "^1.1.3",
