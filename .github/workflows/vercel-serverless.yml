@@ -25,7 +25,7 @@ jobs:
         run: npm install
 
       - name: Deploy to Vercel Serverless
-        run: npm run deploy.vercel --token=${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
+        run: npm run deploy.vercel -- --token=${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_SERVERLESS_PROJECT_ID }}
