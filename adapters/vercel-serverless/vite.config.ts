@@ -1,4 +1,4 @@
-import { vercelEdgeAdapter } from "@builder.io/qwik-city/adapters/vercel-edge/vite";
+import { vercelServerlessAdapter } from "@builder.io/qwik-city/adapters/vercel-serverless/vite";
 import { extendConfig } from "@builder.io/qwik-city/vite";
 import baseConfig from "../../vite.config";
 
@@ -7,17 +7,17 @@ export default extendConfig(baseConfig, () => {
     build: {
       ssr: true,
       rollupOptions: {
-        input: ["custom-src/entry.vercel-edge.tsx", "@qwik-city-plan"],
+        input: ["custom-src/entry.vercel-serverless.tsx", "@qwik-city-plan"],
       },
       outDir: ".vercel/output/functions/_qwik-city.func",
       minify: false,
     },
     plugins: [
-      vercelEdgeAdapter({
+      vercelServerlessAdapter({
         ssg: {
           include: ["/static/*"],
           maxWorkers: 2,
-          origin: "https://qwik-city-e2e.vercel.app",
+          origin: "https://qwik-city-build-serverless.vercel.app",
         },
       }),
     ],
