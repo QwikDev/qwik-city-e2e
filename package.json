@@ -74,6 +74,8 @@
     "test.unit.ui": "vitest --ui components",
     "test.vercel-edge.mpa": "cross-env APP=mpa playwright test tests --config playwright.vercel-edge.config.ts",
     "test.vercel-edge.spa": "cross-env APP=spa playwright test tests --config playwright.vercel-edge.config.ts",
+    "test.vercel-serverless.mpa": "cross-env APP=mpa playwright test tests --config playwright.vercel-serverless.config.ts",
+    "test.vercel-serverless.spa": "cross-env APP=spa playwright test tests --config playwright.vercel-serverless.config.ts",
     "qwik": "qwik",
     "postinstall": "pnpm prebuild.pandacss"
   },
