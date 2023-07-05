@@ -24,6 +24,10 @@ https://qwik-city-e2e.netlify.app/app/
 
 https://qwik-city-e2e.vercel.app/app/
 
+### Vercel Serverless
+
+https://qwik-city-build-serverless.vercel.app/app/
+
 ## Node Servers
 
 ### Dev

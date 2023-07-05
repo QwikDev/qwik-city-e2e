@@ -168,7 +168,7 @@ test("static origin", async ({ page }, { config }) => {
     return;
   }
 
-  if (config.metadata.server === "vercel") {
+  if (config.metadata.server === "vercel-edge") {
     await expect(page.locator("[data-origin]")).toContainText(
       "https://qwik-city-e2e.vercel.app"
     );
@@ -176,7 +176,7 @@ test("static origin", async ({ page }, { config }) => {
   }
 });
 
-test("Static Link navigate", async ({ page }, { config }) => {
+test("Static Link navigate", async ({ page }) => {
   await page.goto("/app/static/");
   const link = page.locator(`a[data-test="static-docs"]`);
   await link.click();
