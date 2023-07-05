@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import { qwikVite } from "@builder.io/qwik/optimizer";
 import { qwikCity } from "@builder.io/qwik-city/vite";
 import { qwikReact } from "@builder.io/qwik-react/vite";
+import { macroPlugin } from "@builder.io/vite-plugin-macro";
 
 export default defineConfig(() => {
   return {
@@ -10,6 +11,7 @@ export default defineConfig(() => {
       include: ["@mui/material"],
     },
     plugins: [
+      macroPlugin({ preset: "pandacss" }),
       qwikCity({
         routesDir: "custom-src/routes",
       }),

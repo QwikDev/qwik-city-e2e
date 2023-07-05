@@ -19,5 +19,5 @@
     "types": ["node", "vite/client"]
   },
   "files": ["./.eslintrc.cjs"],
-  "include": ["custom-src", "*.ts"]
+  "include": ["custom-src", "tests", "*.ts"]
 }

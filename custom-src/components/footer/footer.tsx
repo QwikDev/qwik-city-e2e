@@ -41,6 +41,9 @@ export const Footer = component$(() => {
         </li>
         <li>
           <Link href="/app/react/">Qwik React</Link>
+        <li>
+          <Link href="/app/styling">Styling</Link>
+        </li>
         </li>
         <li>
           <Link href="/app/">Homepage</Link>

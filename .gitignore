@@ -60,3 +60,6 @@ lerna-debug.log*
 .vercel
 .serverless
 .node
+
+# Panda CSS
+custom-src/styled-system
