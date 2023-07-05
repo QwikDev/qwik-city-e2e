@@ -1,4 +1,4 @@
-name: Vercel Edge
+name: Vercel Serverless
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    name: Test Vercel Edge
+    name: Test Vercel Serverless
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,17 +24,17 @@ jobs:
       - name: Install pnpm Dependencies
         run: pnpm install
 
-      - name: Deploy to Vercel Edge
+      - name: Deploy to Vercel Serverless
         run: pnpm run deploy.vercel --token=${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_EDGE_PROJECT_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_SERVERLESS_PROJECT_ID }}
 
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
 
-      - name: Test Vercel Edge MPA
-        run: pnpm run test.vercel-edge.mpa
+      - name: Test Vercel Serverless MPA
+        run: pnpm run test.vercel-serverless.mpa
 
-      - name: Test Vercel Edge SPA
-        run: pnpm run test.vercel-edge.spa
+      - name: Test Vercel Serverless SPA
+        run: pnpm run test.vercel-serverless.spa
