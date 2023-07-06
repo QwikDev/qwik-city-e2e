@@ -24,4 +24,7 @@ server.on("request", (req, res) => {
   });
 });
 
+/* eslint-disable */
+console.log(`Server starter: http://localhost:${PORT}/app/`);
+
 server.listen(PORT);

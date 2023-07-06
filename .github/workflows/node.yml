@@ -82,6 +82,18 @@ jobs:
       - name: Clear dist dir
         run: pnpm run clean.dist
 
+      - name: Build Node Server
+        run: pnpm run build.node-dev
+
+      - name: Test Node Server MPA
+        run: pnpm run test.node.mpa
+
+      - name: Test Node Server SPA
+        run: pnpm run test.node.spa
+
+      - name: Clear dist dir
+        run: pnpm run clean.dist
+
       - name: Build Static Server
         run: pnpm run build.static
 
