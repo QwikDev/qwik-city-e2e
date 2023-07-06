@@ -11,7 +11,7 @@ test("index", async ({ page }, { config }) => {
   await expect(page.locator("#env-value-platform")).toHaveText(
     config.metadata.server
   );
-  if (config.metadata.server === "dev") {
+  if (config.metadata.dev) {
     await expect(page.locator("#env-value-importMetaEnv")).toHaveText(
       "foo dev"
     );

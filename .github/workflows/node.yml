@@ -82,14 +82,14 @@ jobs:
       - name: Clear dist dir
         run: pnpm run clean.dist
 
-      - name: Build Node Server
+      - name: Build Node Server (development)
         run: pnpm run build.node-dev
 
-      - name: Test Node Server MPA
-        run: pnpm run test.node.mpa
+      - name: Test Node Server (development) MPA
+        run: pnpm run test.node-dev.mpa
 
-      - name: Test Node Server SPA
-        run: pnpm run test.node.spa
+      - name: Test Node Server (development) SPA
+        run: pnpm run test.node-dev.spa
 
       - name: Clear dist dir
         run: pnpm run clean.dist

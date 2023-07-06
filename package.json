@@ -66,6 +66,8 @@
     "test.netlify.spa": "cross-env APP=spa playwright test tests --config playwright.netlify.config.ts",
     "test.node.mpa": "cross-env APP=mpa playwright test tests --config playwright.node.config.ts",
     "test.node.spa": "cross-env APP=spa playwright test tests --config playwright.node.config.ts",
+    "test.node-dev.mpa": "cross-env APP=mpa playwright test tests --config playwright.node-dev.config.ts",
+    "test.node-dev.spa": "cross-env APP=spa playwright test tests --config playwright.node-dev.config.ts",
     "test.preview.mpa": "cross-env APP=mpa playwright test tests --config playwright.preview.config.ts",
     "test.preview.spa": "cross-env APP=spa playwright test tests --config playwright.preview.config.ts",
     "test.static.mpa": "cross-env APP=mpa playwright test tests/static.spec.ts --config playwright.static.config.ts",

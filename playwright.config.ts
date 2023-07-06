@@ -23,6 +23,7 @@ const config: PlaywrightTestConfig = {
   ],
   metadata: {
     server: "dev",
+    dev: true,
   },
   webServer: {
     command: "pnpm run dev --port 3005",
