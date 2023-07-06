@@ -19,13 +19,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: "npm"
+          cache: "pnpm"
 
       - name: Install pnpm Dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Deploy to Vercel Serverless
-        run: npm run deploy.vercel -- --token=${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
+        run: pnpm run deploy.vercel --token=${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_SERVERLESS_PROJECT_ID }}
@@ -34,7 +34,7 @@ jobs:
         run: npx playwright install chromium --with-deps
 
       - name: Test Vercel Serverless MPA
-        run: npm run test.vercel-serverless.mpa
+        run: pnpm run test.vercel-serverless.mpa
 
       - name: Test Vercel Serverless SPA
-        run: npm run test.vercel-serverless.spa
+        run: pnpm run test.vercel-serverless.spa
