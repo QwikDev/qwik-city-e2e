@@ -23,7 +23,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install pnpm Dependencies
-        run: pnpm install
+        run: pnpm install && pnpm upgrade @builder.io/qwik @builder.io/qwik-city
 
       - name: Deploy to Netlify
         run: pnpm run deploy.netlify

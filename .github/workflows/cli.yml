@@ -22,7 +22,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install pnpm Dependencies
-        run: pnpm install
+        run: pnpm install && pnpm upgrade @builder.io/qwik @builder.io/qwik-city
 
       - name: Run Create Qwik CLI
         run: node ./tests/cli.js
