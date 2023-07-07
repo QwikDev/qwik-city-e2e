@@ -22,7 +22,7 @@ jobs:
           cache: "pnpm"
 
       - name: Install pnpm Dependencies
-        run: pnpm install && pnpm upgrade @builder.io/qwik @builder.io/qwik-city
+        run: pnpm install && pnpm upgrade "@builder.io/qwik" "@builder.io/qwik-city"
 
       - name: Deploy to Vercel Edge
         run: pnpm run deploy.vercel --token=${{ secrets.VERCEL_QWIK_CITY_E2E_TOKEN }}
