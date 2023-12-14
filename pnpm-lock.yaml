@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -29,6 +29,12 @@ devDependencies:
   '@fastify/static':
     specifier: ^6.10.2
     version: 6.10.2
+  '@fastly/compute-js-static-publish':
+    specifier: ^5.2.1
+    version: 5.2.1(@fastly/js-compute@3.7.3)
+  '@fastly/js-compute':
+    specifier: ^3.7.3
+    version: 3.7.3
   '@mui/material':
     specifier: 5.13.7
     version: 5.13.7(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
@@ -95,6 +101,9 @@ devDependencies:
   fastify-plugin:
     specifier: ^4.5.0
     version: 4.5.0
+  fastly:
+    specifier: ^6.1.1
+    version: 6.2.2
   netlify-cli:
     specifier: ^15.8.1
     version: 15.8.1(@types/express@4.17.17)(@types/node@20.4.0)
@@ -1312,6 +1321,7 @@ packages:
   /@babel/plugin-proposal-unicode-property-regex@7.18.6(@babel/core@7.22.8):
     resolution: {integrity: sha512-2BShG/d5yoZyXZfVePH91urL5wTG6ASZU9M4o03lKK8u8UW1y08OMttBSOADTcJrnPMpvDXRG3G8fyLh4ovs8w==}
     engines: {node: '>=4'}
+    deprecated: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-unicode-property-regex instead.
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
@@ -2344,6 +2354,90 @@ packages:
       - terser
     dev: true
 
+  /@bytecodealliance/jco@0.10.3:
+    resolution: {integrity: sha512-phIs2tkH6Ru74Rw1faCU24uOYZTexlM466cP4QPSaPl3Ls6uNRYptgoof2QQWYTfu1QM9nW6YupySKAkm0zWYA==}
+    hasBin: true
+    dependencies:
+      '@bytecodealliance/preview2-shim': 0.0.12
+      binaryen: 111.0.0
+      chalk-template: 0.4.0
+      commander: 9.5.0
+      mkdirp: 1.0.4
+      ora: 6.3.1
+      terser: 5.26.0
+    dev: true
+
+  /@bytecodealliance/preview2-shim@0.0.12:
+    resolution: {integrity: sha512-X+KpYrNB2LKKLzP7XcgNfu0zN3Gr3yTw4RGcj0k8k1MMUuwQdc/Mg+lzD6mEBHOLmVgvH5L1323Jy/+CHpnjKg==}
+    dev: true
+
+  /@bytecodealliance/wizer-darwin-arm64@3.0.1:
+    resolution: {integrity: sha512-/8KYSajyhO9koAE3qQhYfC6belZheJw9X3XqW7hrizTpj6n4z4OJFhhqwJmiYFUUsPtC7OxcXMFFPbTuSQPBcw==}
+    cpu: [arm64]
+    os: [darwin]
+    hasBin: true
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@bytecodealliance/wizer-darwin-x64@3.0.1:
+    resolution: {integrity: sha512-bMReultN/r+W/BRXV0F+28U5dZwbQT/ZO0k4icZlhUhrv5/wpQJix7Z/ZvBnVQ+/JHb0QDUpFk2/zCtgkRXP6Q==}
+    cpu: [x64]
+    os: [darwin]
+    hasBin: true
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@bytecodealliance/wizer-linux-arm64@3.0.1:
+    resolution: {integrity: sha512-35ZhAeYxWK3bTqqgwysbBWlGlrlMNKNng3ZITQV2PAtafpE7aCeqywl7VAS4lLRG5eTb7wxNgN7zf8d3wiIFTQ==}
+    cpu: [arm64]
+    os: [linux]
+    hasBin: true
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@bytecodealliance/wizer-linux-s390x@3.0.1:
+    resolution: {integrity: sha512-Smvy9mguEMtX0lupDLTPshXUzAHeOhgscr1bhGNjeCCLD1sd8rIjBvWV19Wtra0BL1zTuU2EPOHjR/4k8WoyDg==}
+    cpu: [s390x]
+    os: [linux]
+    hasBin: true
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@bytecodealliance/wizer-linux-x64@3.0.1:
+    resolution: {integrity: sha512-uUue78xl7iwndsGgTsagHLTLyLBVHhwzuywiwHt1xw8y0X0O8REKRLBoB7+LdM+pttDPdFtKJgbTFL4UPAA7Yw==}
+    cpu: [x64]
+    os: [linux]
+    hasBin: true
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@bytecodealliance/wizer-win32-x64@3.0.1:
+    resolution: {integrity: sha512-ycd38sx1UTZpHZwh8IfH/4N3n0OQUB8awxkUSLXf9PolEd088YbxoPB3noHy4E+L2oYN7KZMrg9517pX0z2RhQ==}
+    cpu: [x64]
+    os: [win32]
+    hasBin: true
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@bytecodealliance/wizer@3.0.1:
+    resolution: {integrity: sha512-f0NBiBHCNBkbFHTPRbA7aKf/t4KyNhi2KvSqw3QzCgi8wFF/uLZ0dhejj93rbiKO/iwWbmU7v9K3SVkW81mcjQ==}
+    engines: {node: '>=16'}
+    hasBin: true
+    optionalDependencies:
+      '@bytecodealliance/wizer-darwin-arm64': 3.0.1
+      '@bytecodealliance/wizer-darwin-x64': 3.0.1
+      '@bytecodealliance/wizer-linux-arm64': 3.0.1
+      '@bytecodealliance/wizer-linux-s390x': 3.0.1
+      '@bytecodealliance/wizer-linux-x64': 3.0.1
+      '@bytecodealliance/wizer-win32-x64': 3.0.1
+    dev: true
+
   /@cloudflare/kv-asset-handler@0.2.0:
     resolution: {integrity: sha512-MVbXLbTcAotOPUj0pAMhVtJ+3/kFkwJqc5qNOleOZTv6QkZZABDMS21dSrSlVswEHwrpWC03e4fWytjqKvuE2A==}
     dependencies:
@@ -3292,6 +3386,32 @@ packages:
       readable-stream: 4.4.2
     dev: true
 
+  /@fastly/compute-js-static-publish@5.2.1(@fastly/js-compute@3.7.3):
+    resolution: {integrity: sha512-nzgU3BdXMPFPEv4W4W3sijeMmpRyVvEBO2Ot4Gn9tSpspioN48b8js0OLGWCIJmcipTeTHRzVCQfvyyDrRHeyg==}
+    engines: {node: '>=18'}
+    hasBin: true
+    peerDependencies:
+      '@fastly/js-compute': ^2.0.0 || ^3.0.0
+    dependencies:
+      '@fastly/js-compute': 3.7.3
+      command-line-args: 5.2.1
+      glob-to-regexp: 0.4.1
+    dev: true
+
+  /@fastly/js-compute@3.7.3:
+    resolution: {integrity: sha512-FboSzi8Ft6SYZ2/j//p0Je21LsJhLt4B3MGbrtHKHNKvqQRhWaqCU+rIN1JYnvG3niyRWMnuEA3gDfrYO593vg==}
+    engines: {node: 16 - 20, npm: ^8 || ^9}
+    hasBin: true
+    dependencies:
+      '@bytecodealliance/jco': 0.10.3
+      '@bytecodealliance/wizer': 3.0.1
+      acorn: 8.10.0
+      acorn-walk: 8.2.0
+      esbuild: 0.17.19
+      magic-string: 0.30.1
+      regexpu-core: 5.3.2
+    dev: true
+
   /@floating-ui/core@1.3.1:
     resolution: {integrity: sha512-Bu+AMaXNjrpjh41znzHqaz3r2Nr8hHuHZT6V2LBKMhyMl0FgKA62PNYbqnfgmzOhoWZj70Zecisbo4H1rotP5g==}
     dev: true
@@ -3678,6 +3798,13 @@ packages:
   /@jridgewell/set-array@1.1.2:
     resolution: {integrity: sha512-xnkseuNADM0gt2bs+BvhO0p78Mk762YnZdsuzFV018NoG1Sj1SCQvpSqa7XUaTam5vAGasABV9qXASMKnFMwMw==}
     engines: {node: '>=6.0.0'}
+    dev: true
+
+  /@jridgewell/source-map@0.3.5:
+    resolution: {integrity: sha512-UTYAUj/wviwdsMfzoSJspJxbkH5o1snzwX0//0ENX1u/55kkZZkcTZP6u9bwKGkv+dkk9at4m1Cpt0uY80kcpQ==}
+    dependencies:
+      '@jridgewell/gen-mapping': 0.3.3
+      '@jridgewell/trace-mapping': 0.3.18
     dev: true
 
   /@jridgewell/sourcemap-codec@1.4.14:
@@ -8211,6 +8338,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /array-back@3.1.0:
+    resolution: {integrity: sha512-TkuxA4UCOvxuDK6NZYXCalszEzj+TLszyASooky+i742l9TqsOdYCMJJupxRic61hwquNtppB3hgcuq9SVSH1Q==}
+    engines: {node: '>=6'}
+    dev: true
+
   /array-buffer-byte-length@1.0.0:
     resolution: {integrity: sha512-LPuwb2P+NrQw3XhxGc36+XSvuBPopovXYTR9Ew++Du9Yb/bx5AzBfrIsBoj0EZUifjQU+sHL21sseZ3jerWO/A==}
     dependencies:
@@ -8732,6 +8864,11 @@ packages:
       chainsaw: 0.1.0
     dev: true
 
+  /binaryen@111.0.0:
+    resolution: {integrity: sha512-PEXOSHFO85aj1aP4t+KGzvxQ00qXbjCysWlsDjlGkP1e9owNiYdpEkLej21Ax8LDD7xJ01rEmJDqZ/JPoW2GXw==}
+    hasBin: true
+    dev: true
+
   /bindings@1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
     dependencies:
@@ -9205,6 +9342,13 @@ packages:
       traverse: 0.3.9
     dev: true
 
+  /chalk-template@0.4.0:
+    resolution: {integrity: sha512-/ghrgmhfY8RaSdeo43hNXxpoHAtxdbskUHjPpfqUWGttFgycUhYPGx3YZBCnUCvOa7Doivn1IZec3DEGFoMgLg==}
+    engines: {node: '>=12'}
+    dependencies:
+      chalk: 4.1.2
+    dev: true
+
   /chalk@1.1.3:
     resolution: {integrity: sha512-U3lRVLMSlsCfjqYPbLyVv11M9CPW4I728d6TCKMAOJueEeB9/8o+eSsMnxPJD+Q+K909sdESg7C+tIkoH6on1A==}
     engines: {node: '>=0.10.0'}
@@ -9576,6 +9720,16 @@ packages:
 
   /command-exists@1.2.9:
     resolution: {integrity: sha512-LTQ/SGc+s0Xc0Fu5WaKnR0YiygZkm9eKFvyS+fRsU7/ZWFF8ykFM6Pc9aCVf1+xasOOZpO3BAVgVrKvsqKHV7w==}
+    dev: true
+
+  /command-line-args@5.2.1:
+    resolution: {integrity: sha512-H4UfQhZyakIjC74I9d34fGYDwk3XpSr17QhEd0Q3I9Xq1CETHo4Hcuo87WyWHpAF1aSLjLRf5lD9ZGX2qStUvg==}
+    engines: {node: '>=4.0.0'}
+    dependencies:
+      array-back: 3.1.0
+      find-replace: 3.0.0
+      lodash.camelcase: 4.3.0
+      typical: 4.0.0
     dev: true
 
   /commander@10.0.1:
@@ -11784,6 +11938,14 @@ packages:
       - supports-color
     dev: true
 
+  /fastly@6.2.2:
+    resolution: {integrity: sha512-ljW2w73fAB2ZkASiKryt9V7swMv1Qt3uyf0WCr8LTHvx0j0dfkC2lplXO+Oqb5r9ryIRJht6keMsyxKC0CIhDQ==}
+    dependencies:
+      superagent: 6.1.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /fastq@1.15.0:
     resolution: {integrity: sha512-wBrocU2LCXXa+lWBt8RoIRD89Fi8OdABODa/kEnyeyjS5aZO5/GNvI5sEINADqP/h8M29UHTHUb53sUu5Ihqdw==}
     dependencies:
@@ -12018,6 +12180,13 @@ packages:
       safe-regex2: 2.0.0
     dev: true
 
+  /find-replace@3.0.0:
+    resolution: {integrity: sha512-6Tb2myMioCAgv5kfvP5/PkZZ/ntTpVK39fHY7WkWBgvbeE+VHd/tZuZ4mrC+bxh4cfOZeYKVPaJIZtZXV7GNCQ==}
+    engines: {node: '>=4.0.0'}
+    dependencies:
+      array-back: 3.1.0
+    dev: true
+
   /find-requires@1.0.0:
     resolution: {integrity: sha512-UME7hNwBfzeISSFQcBEDemEEskpOjI/shPrpJM5PI4DSdn6hX0dmz+2dL70blZER2z8tSnTRL+2rfzlYgtbBoQ==}
     hasBin: true
@@ -12165,6 +12334,11 @@ packages:
     engines: {node: '>=12.20.0'}
     dependencies:
       fetch-blob: 3.2.0
+    dev: true
+
+  /formidable@1.2.6:
+    resolution: {integrity: sha512-KcpbcpuLNOwrEjnbpMC0gS+X8ciDoZE1kkqzat4a8vrprf+s9pKNQ/QIwWfbfs4ltgmFl3MD177SNTkve3BwGQ==}
+    deprecated: 'Please upgrade to latest, formidable@v2 or formidable@v3! Check these notes: https://bit.ly/2ZEqIau'
     dev: true
 
   /formidable@2.1.2:
@@ -15700,6 +15874,7 @@ packages:
 
   /nan@2.17.0:
     resolution: {integrity: sha512-2ZTgtl0nJsO0KQCjEpxcIr5D+Yv90plTitZt9JBfQvVJDS5seMl3FOvsh3+9CoYWXf/1l5OaZzzF6nDm4cagaQ==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -15960,6 +16135,7 @@ packages:
 
   /node-addon-api@1.7.2:
     resolution: {integrity: sha512-ibPK3iA+vaY1eEjESkQkM0BbCqFOaZMiXRTtdB0u7b4djtY6JnsjvPdUHVMg6xQt3B8fpTTWHI9A+ADjM9frzg==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -19196,6 +19372,26 @@ packages:
       s.color: 0.0.15
     dev: true
 
+  /superagent@6.1.0:
+    resolution: {integrity: sha512-OUDHEssirmplo3F+1HWKUrUjvnQuA+nZI6i/JJBdXb5eq9IyEQwPyPpqND+SSsxf6TygpBEkUjISVRN4/VOpeg==}
+    engines: {node: '>= 7.0.0'}
+    deprecated: Please upgrade to v7.0.2+ of superagent.  We have fixed numerous issues with streams, form-data, attach(), filesystem errors not bubbling up (ENOENT on attach()), and all tests are now passing.  See the releases tab for more information at <https://github.com/visionmedia/superagent/releases>.
+    dependencies:
+      component-emitter: 1.3.0
+      cookiejar: 2.1.4
+      debug: 4.3.4(supports-color@8.1.1)
+      fast-safe-stringify: 2.1.1
+      form-data: 3.0.1
+      formidable: 1.2.6
+      methods: 1.1.2
+      mime: 2.6.0
+      qs: 6.11.2
+      readable-stream: 3.6.2
+      semver: 7.5.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /superagent@7.1.6(supports-color@8.1.1):
     resolution: {integrity: sha512-gZkVCQR1gy/oUXr+kxJMLDjla434KmSOKbx5iGD30Ql+AkJQ/YlPKECJy2nhqOsHLjGHzoDTXNSjhnvWhzKk7g==}
     engines: {node: '>=6.4.0 <13 || >=14'}
@@ -19395,6 +19591,17 @@ packages:
     dependencies:
       ansi-escapes: 5.0.0
       supports-hyperlinks: 2.3.0
+    dev: true
+
+  /terser@5.26.0:
+    resolution: {integrity: sha512-dytTGoE2oHgbNV9nTzgBEPaqAWvcJNl66VZ0BkJqlvp71IjO8CxdBx/ykCNb47cLnCmCvRZ6ZR0tLkqvZCdVBQ==}
+    engines: {node: '>=10'}
+    hasBin: true
+    dependencies:
+      '@jridgewell/source-map': 0.3.5
+      acorn: 8.10.0
+      commander: 2.20.3
+      source-map-support: 0.5.21
     dev: true
 
   /text-hex@1.0.0:
@@ -19892,6 +20099,11 @@ packages:
     resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
     engines: {node: '>=14.17'}
     hasBin: true
+    dev: true
+
+  /typical@4.0.0:
+    resolution: {integrity: sha512-VAH4IvQ7BDFYglMd7BPRDfLgxZZX4O4TFcRDA6EN5X7erNJJq+McIEp8np9aVtxrCJ6qx4GTYVfOWNjcqwZgRw==}
+    engines: {node: '>=8'}
     dev: true
 
   /ufo@1.1.2:

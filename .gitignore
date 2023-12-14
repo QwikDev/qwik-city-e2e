@@ -6,6 +6,12 @@
 /server
 functions/**/*.js
 
+# Fastly
+.publish-id
+/bin
+/pkg
+/src
+
 # Deno
 .deno
 
@@ -63,3 +69,4 @@ lerna-debug.log*
 
 # Panda CSS
 custom-src/styled-system
+

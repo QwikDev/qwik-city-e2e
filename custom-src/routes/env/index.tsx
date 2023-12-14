@@ -4,7 +4,7 @@ import { routeLoader$ } from "@builder.io/qwik-city";
 
 export const useGetEnv = routeLoader$(({ env }) => {
   return {
-    platform: env.get("PLATFORM_NAME"),
+    platform: env.get("FASTLY_HOSTNAME"),
     importMetaEnv: import.meta.env.VITE_HELLO_WORLD,
   };
 });

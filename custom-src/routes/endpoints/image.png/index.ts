@@ -9,7 +9,9 @@ export const onGet: RequestHandler = async ({
   // image from this repo's README.md
   const url =
     "https://user-images.githubusercontent.com/452425/215131129-0ae8d7d8-3612-4fca-bdba-42137d8da75c.png";
-  const req = await fetch(url);
+
+  // TODO: Fastly requires a backend to be specified manually before it can successfully fetch
+  const req = await fetch(url, { backend: 'user-images' });
 
   if (!req.ok) {
     text(req.status, `${req.status}`);

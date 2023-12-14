@@ -1,0 +1,23 @@
+# This file describes a Fastly Compute@Edge package. To learn more visit:
+# https://developer.fastly.com/reference/fastly-toml/
+
+authors = ["you@example.com"]
+description = ""
+language = "javascript"
+manifest_version = 2
+name = "fastly-adapter"
+service_id = "WsI3ucyZwnMaVIRJkDdlt2"
+
+[scripts]
+  build = "pnpm run build.fastly"
+
+# Ensure this backend is registered through the Fastly dashboard or CLI
+[local_server]
+  [local_server.backends]
+    [local_server.backends.user-images]
+      url = "https://user-images.githubusercontent.com/"
+
+[setup]
+  [setup.backends]
+    [setup.backends.user-images]
+      url = "https://user-images.githubusercontent.com/"
