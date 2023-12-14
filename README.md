@@ -16,6 +16,10 @@ https://blue-smoke-0a7cdfe10.2.azurestaticapps.net/app/
 
 https://qwik-city-e2e.pages.dev/app/
 
+### Fastly
+
+https://qwik-city-e2e.edgecompute.app/app/
+
 ### Netlify Edge
 
 https://qwik-city-e2e.netlify.app/app/
@@ -32,17 +36,33 @@ https://qwik-city-build-serverless.vercel.app/app/
 
 ### Dev
 
-    pnpm run dev
+    pnpm dev
     http://127.0.0.1:3000/app/
 
 ### Preview
 
-    pnpm run build.preview
-    pnpm run serve.preview
+    pnpm build.preview
+    pnpm serve.preview
     http://127.0.0.1:3001/app/
 
 ### Express
 
-    pnpm run build.express
-    pnpm run serve.express
+    pnpm build.express
+    pnpm serve.express
     http://127.0.0.1:3002/app/
+
+## Fastly JS Compute
+
+Fastly's [CLI](https://github.com/fastly/cli) can be used to preview a production build locally. To start a local server, run:
+
+```
+pnpm serve
+```
+
+Then visit [http://localhost:7676/](http://localhost:7676/)
+
+### Deployments
+
+[Fastly's JS Compute](https://js-compute-reference-docs.edgecompute.app/) projects are deployable through their [CLI](https://github.com/fastly/cli).
+
+If you don't already have an account, then [create a Fastly account here](https://www.fastly.com/signup/). Next go to your dashboard and follow the [Fastly deployment guide](https://developer.fastly.com/learning/compute#deploy-to-a-fastly-service).

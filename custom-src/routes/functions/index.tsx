@@ -57,6 +57,7 @@ export default component$(() => {
 
         <button
           id="server-streaming-button"
+          // TODO: Streaming fails. Unknown reason other than the Fastly runtime is missing a signal API
           onClick$={async () => {
             for await (const nu of await streamingFunc()) {
               streamingLogs.value += nu;
