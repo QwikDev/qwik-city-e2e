@@ -3,11 +3,11 @@ import {
   Slot,
   useVisibleTask$,
   useStyles$,
-} from "@builder.io/qwik";
-import type { RequestHandler } from "@builder.io/qwik-city";
-import { routeLoader$ } from "@builder.io/qwik-city";
-import { Footer } from "../components/footer/footer";
-import { isUserAuthenticated } from "../auth/auth";
+} from '@builder.io/qwik';
+import type { RequestHandler } from '@builder.io/qwik-city';
+import { routeLoader$ } from '@builder.io/qwik-city';
+import { Footer } from '../components/footer/footer';
+import { isUserAuthenticated } from '../auth/auth';
 
 export const useRootLoader = routeLoader$(({ url }) => {
   return {
@@ -58,8 +58,9 @@ export default component$(() => {
     }
   `);
 
+  // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(() => {
-    document.documentElement.dataset.app = "spa";
+    document.documentElement.dataset.app = 'spa';
   });
 
   return (
@@ -71,5 +72,5 @@ export default component$(() => {
 });
 
 export const onRequest: RequestHandler = ({ headers }) => {
-  headers.set("x-robots-tag", "noindex, nofollow");
+  headers.set('x-robots-tag', 'noindex, nofollow');
 };
