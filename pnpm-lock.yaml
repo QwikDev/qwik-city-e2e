@@ -12,14 +12,14 @@ devDependencies:
     specifier: ^1.1.7
     version: 1.1.7
   '@builder.io/qwik':
-    specifier: github:BuilderIo/qwik-build#main
-    version: github.com/BuilderIo/qwik-build/7ff62674cdd6af40d1d2870743ec0dda53edd83b(@types/node@20.11.30)(undici@6.10.1)
+    specifier: github:QwikDev/qwik-build#main
+    version: github.com/QwikDev/qwik-build/70a7f5ae9f6c31837f37a838e7030a8bad71e26f(@types/node@20.11.30)(undici@6.10.1)
   '@builder.io/qwik-city':
-    specifier: github:BuilderIo/qwik-city-build#main
-    version: github.com/BuilderIo/qwik-city-build/94471dbff00d640030be35eecf57bcd1283e41fb(@types/node@20.11.30)
+    specifier: github:QwikDev/qwik-city-build#main
+    version: github.com/QwikDev/qwik-city-build/f683814dccfde3986886ba799624a8caf9072bbd(@types/node@20.11.30)
   '@builder.io/qwik-react':
     specifier: 0.5.4
-    version: 0.5.4(@builder.io/qwik@1.5.1-dev20240322190151)(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0)(react@18.2.0)
+    version: 0.5.4(@builder.io/qwik@1.5.2-dev20240424223831)(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0)(react@18.2.0)
   '@builder.io/vite-plugin-macro':
     specifier: ~0.0.7
     version: 0.0.7(@types/node@20.11.30)
@@ -78,8 +78,8 @@ devDependencies:
     specifier: ^1.7.4
     version: 1.7.4
   create-qwik:
-    specifier: github:BuilderIO/qwik-create-cli-build#main
-    version: github.com/BuilderIO/qwik-create-cli-build/9c0bcf5dc7bdf21fa76954769f59ea03b5585080
+    specifier: github:QwikDev/qwik-create-cli-build#main
+    version: github.com/QwikDev/qwik-create-cli-build/c7f7eb8d9faec794d601cbbf4c20edde5b848365
   cross-env:
     specifier: ^7.0.3
     version: 7.0.3
@@ -1345,7 +1345,7 @@ packages:
     resolution: {integrity: sha512-htzFO1Zc57S8kgdRK9mLcPVTW1BY2ijfH7Dk2CeZmspTWKdKqSo1iwmqrq2WtRjFlo8aRZYgLX0wFrDXF/9DLA==}
     dev: true
 
-  /@builder.io/qwik-react@0.5.4(@builder.io/qwik@1.5.1-dev20240322190151)(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0)(react@18.2.0):
+  /@builder.io/qwik-react@0.5.4(@builder.io/qwik@1.5.2-dev20240424223831)(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-tc5T9YcSTHSLIUu4ZGO6Y0XfJsmZ4vTqaiJPZ6TR3EjNZb5nQFlmbaA5ZbYzyAfCpcJO2y/kqR7d/Nr4fNKUqg==}
     engines: {node: '>=16.8.0 <18.0.0 || >=18.11'}
     peerDependencies:
@@ -1355,7 +1355,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0
     dependencies:
-      '@builder.io/qwik': github.com/BuilderIo/qwik-build/7ff62674cdd6af40d1d2870743ec0dda53edd83b(@types/node@20.11.30)(undici@6.10.1)
+      '@builder.io/qwik': github.com/QwikDev/qwik-build/70a7f5ae9f6c31837f37a838e7030a8bad71e26f(@types/node@20.11.30)(undici@6.10.1)
       '@types/react': 18.2.69
       '@types/react-dom': 18.2.22
       react: 18.2.0
@@ -3195,7 +3195,7 @@ packages:
       '@types/estree': 1.0.5
       '@types/estree-jsx': 1.0.0
       '@types/hast': 3.0.4
-      '@types/mdx': 2.0.12
+      '@types/mdx': 2.0.13
       collapse-white-space: 2.1.0
       devlop: 1.1.0
       estree-util-build-jsx: 3.0.1
@@ -4335,6 +4335,7 @@ packages:
     dependencies:
       is-glob: 4.0.3
       micromatch: 4.0.5
+      napi-wasm: 1.1.0
     dev: true
     bundledDependencies:
       - napi-wasm
@@ -5365,8 +5366,8 @@ packages:
       '@types/unist': 3.0.0
     dev: true
 
-  /@types/mdx@2.0.12:
-    resolution: {integrity: sha512-H9VZ9YqE+H28FQVchC83RCs5xQ2J7mAAv6qdDEaWmXEVl3OpdH+xfrSUzQ1lp7U7oSTRZ0RvW08ASPJsYBi7Cw==}
+  /@types/mdx@2.0.13:
+    resolution: {integrity: sha512-+OWZQfAYyio6YkJb3HLxDrvnx6SWWDbC0zVPfBRzUk0/nqoDyf6dNxQi3eArPe8rJ473nobTMQ/8Zk+LxJ+Yuw==}
     dev: true
 
   /@types/mime@1.3.2:
@@ -6052,7 +6053,7 @@ packages:
       '@vue/shared': 3.4.19
       estree-walker: 2.0.2
       magic-string: 0.30.8
-      postcss: 8.4.35
+      postcss: 8.4.38
       source-map-js: 1.2.0
     dev: true
 
@@ -13380,6 +13381,10 @@ packages:
     resolution: {integrity: sha512-ONmRUqK7zj7DWX0D9ADe03wbwOBZxNAfF20PlGfCWQcD3+/MakShIHrMqx9YwPTfxDdF1zLeL+RGZiR9kGMLdg==}
     dev: true
 
+  /napi-wasm@1.1.0:
+    resolution: {integrity: sha512-lHwIAJbmLSjF9VDRm9GoVOy9AGp3aIvkjv+Kvz9h16QR3uSVYH78PNQUnT2U4X53mhlnV2M7wrhibQ3GHicDmg==}
+    dev: true
+
   /native-promise-only@0.8.1:
     resolution: {integrity: sha512-zkVhZUA3y8mbz652WrL5x0fB0ehrBkulWT3TomAQ9iDtyXZvzKeEA6GPxAItBYeNYl5yngKRX612qHOhvMkDeg==}
     dev: true
@@ -17693,6 +17698,42 @@ packages:
       fsevents: 2.3.3
     dev: true
 
+  /vite@5.2.10(@types/node@20.11.30):
+    resolution: {integrity: sha512-PAzgUZbP7msvQvqdSD+ErD5qGnSFiGOoWmV5yAKUEI0kdhjbH6nMWVyZQC/hSc4aXwc0oJ9aEdIiF9Oje0JFCw==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^18.0.0 || >=20.0.0
+      less: '*'
+      lightningcss: ^1.21.0
+      sass: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+    dependencies:
+      '@types/node': 20.11.30
+      esbuild: 0.20.2
+      postcss: 8.4.38
+      rollup: 4.13.0
+    optionalDependencies:
+      fsevents: 2.3.3
+    dev: true
+
   /vite@5.2.3(@types/node@20.11.30):
     resolution: {integrity: sha512-+i1oagbvkVIhEy9TnEV+fgXsng13nZM90JQbrcPrf6DvW2mXARlz+DK7DLiDP+qeKoD1FCVx/1SpFL1CLq9Mhw==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -18260,19 +18301,11 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: true
 
-  github.com/BuilderIO/qwik-create-cli-build/9c0bcf5dc7bdf21fa76954769f59ea03b5585080:
-    resolution: {tarball: https://codeload.github.com/BuilderIO/qwik-create-cli-build/tar.gz/9c0bcf5dc7bdf21fa76954769f59ea03b5585080}
-    name: create-qwik
-    version: 1.5.1
-    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0, npm: '>=10.0.0', pnpm: '>=8.0.0', yarn: '>=3.0.0'}
-    hasBin: true
-    dev: true
-
-  github.com/BuilderIo/qwik-build/7ff62674cdd6af40d1d2870743ec0dda53edd83b(@types/node@20.11.30)(undici@6.10.1):
-    resolution: {tarball: https://codeload.github.com/BuilderIo/qwik-build/tar.gz/7ff62674cdd6af40d1d2870743ec0dda53edd83b}
-    id: github.com/BuilderIo/qwik-build/7ff62674cdd6af40d1d2870743ec0dda53edd83b
+  github.com/QwikDev/qwik-build/70a7f5ae9f6c31837f37a838e7030a8bad71e26f(@types/node@20.11.30)(undici@6.10.1):
+    resolution: {tarball: https://codeload.github.com/QwikDev/qwik-build/tar.gz/70a7f5ae9f6c31837f37a838e7030a8bad71e26f}
+    id: github.com/QwikDev/qwik-build/70a7f5ae9f6c31837f37a838e7030a8bad71e26f
     name: '@builder.io/qwik'
-    version: 1.5.1-dev20240322190151
+    version: 1.5.2-dev20240424223831
     engines: {node: '>=16.8.0 <18.0.0 || >=18.11'}
     hasBin: true
     peerDependencies:
@@ -18280,7 +18313,7 @@ packages:
     dependencies:
       csstype: 3.1.3
       undici: 6.10.1
-      vite: 5.2.3(@types/node@20.11.30)
+      vite: 5.2.10(@types/node@20.11.30)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -18291,20 +18324,20 @@ packages:
       - terser
     dev: true
 
-  github.com/BuilderIo/qwik-city-build/94471dbff00d640030be35eecf57bcd1283e41fb(@types/node@20.11.30):
-    resolution: {tarball: https://codeload.github.com/BuilderIo/qwik-city-build/tar.gz/94471dbff00d640030be35eecf57bcd1283e41fb}
-    id: github.com/BuilderIo/qwik-city-build/94471dbff00d640030be35eecf57bcd1283e41fb
+  github.com/QwikDev/qwik-city-build/f683814dccfde3986886ba799624a8caf9072bbd(@types/node@20.11.30):
+    resolution: {tarball: https://codeload.github.com/QwikDev/qwik-city-build/tar.gz/f683814dccfde3986886ba799624a8caf9072bbd}
+    id: github.com/QwikDev/qwik-city-build/f683814dccfde3986886ba799624a8caf9072bbd
     name: '@builder.io/qwik-city'
-    version: 1.5.1-dev20240322190900
+    version: 1.5.2-dev20240424224859
     engines: {node: '>=16.8.0 <18.0.0 || >=18.11'}
     dependencies:
       '@mdx-js/mdx': 3.0.1
-      '@types/mdx': 2.0.12
+      '@types/mdx': 2.0.13
       source-map: 0.7.4
       svgo: 3.2.0
       undici: 6.10.1
       vfile: 6.0.1
-      vite: 5.2.3(@types/node@20.11.30)
+      vite: 5.2.10(@types/node@20.11.30)
       vite-imagetools: 6.2.9
       zod: 3.22.4
     transitivePeerDependencies:
@@ -18317,4 +18350,12 @@ packages:
       - sugarss
       - supports-color
       - terser
+    dev: true
+
+  github.com/QwikDev/qwik-create-cli-build/c7f7eb8d9faec794d601cbbf4c20edde5b848365:
+    resolution: {tarball: https://codeload.github.com/QwikDev/qwik-create-cli-build/tar.gz/c7f7eb8d9faec794d601cbbf4c20edde5b848365}
+    name: create-qwik
+    version: 1.5.2
+    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0, npm: '>=10.0.0', pnpm: '>=8.0.0', yarn: '>=3.0.0'}
+    hasBin: true
     dev: true
