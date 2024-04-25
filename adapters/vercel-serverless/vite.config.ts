@@ -17,7 +17,7 @@ export default extendConfig(baseConfig, () => {
         ssg: {
           include: ["/static/*"],
           maxWorkers: 2,
-          origin: "https://qwik-city-build-serverless.vercel.app",
+          origin: "https://qwik-vercel-serverless-for-e2e.vercel.app",
         },
       }),
     ],

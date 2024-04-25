@@ -170,7 +170,7 @@ test("static origin", async ({ page }, { config }) => {
 
   if (config.metadata.server === "vercel-edge") {
     await expect(page.locator("[data-origin]")).toContainText(
-      "https://qwik-city-e2e.vercel.app"
+      "https://qwik-vercel-edge-for-e2e.vercel.app"
     );
     return;
   }

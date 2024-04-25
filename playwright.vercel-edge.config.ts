@@ -9,7 +9,7 @@ const config: PlaywrightTestConfig = {
   },
 
   use: {
-    baseURL: "https://qwik-city-e2e.vercel.app/",
+    baseURL: "https://qwik-vercel-edge-for-e2e.vercel.app/",
   },
   retries: 2,
   webServer: undefined,

@@ -22,11 +22,11 @@ https://qwik-city-e2e.netlify.app/app/
 
 ### Vercel Edge
 
-https://qwik-city-e2e.vercel.app/app/
+https://qwik-vercel-edge-for-e2e.vercel.app/app/
 
 ### Vercel Serverless
 
-https://qwik-city-build-serverless.vercel.app/app/
+https://qwik-vercel-serverless-for-e2e.vercel.app/app/
 
 ## Node Servers
 
