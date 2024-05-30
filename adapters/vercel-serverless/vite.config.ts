@@ -1,4 +1,7 @@
-import { vercelServerlessAdapter } from "@builder.io/qwik-city/adapters/vercel-serverless/vite";
+import {
+  vercelServerlessAdapter,
+  FUNCTION_DIRECTORY,
+} from "./middleware";
 import { extendConfig } from "@builder.io/qwik-city/vite";
 import baseConfig from "../../vite.config";
 
@@ -9,7 +12,7 @@ export default extendConfig(baseConfig, () => {
       rollupOptions: {
         input: ["custom-src/entry.vercel-serverless.tsx", "@qwik-city-plan"],
       },
-      outDir: ".vercel/output/functions/_qwik-city.func",
+      outDir: `.vercel/output/functions/${FUNCTION_DIRECTORY}.func`,
       minify: false,
     },
     plugins: [
