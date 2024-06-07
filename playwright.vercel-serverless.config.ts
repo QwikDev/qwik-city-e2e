@@ -5,7 +5,7 @@ const config: PlaywrightTestConfig = {
   ...commonConfig,
 
   metadata: {
-    server: "vercel-serverless",
+    server: "vercel-serverless", 
   },
 
   use: {
