@@ -143,7 +143,7 @@ export function viteAdapter(opts: ViteAdapterPluginOptions) {
               ssgOrigin = `https://yoursite.qwik.dev`;
             }
 
-            const staticGenerate = await import('../../../static');
+            const staticGenerate = await import('@builder.io/qwik-city/static');
             const generateOpts: StaticGenerateOptions = {
               maxWorkers: opts.maxWorkers,
               basePathname,
